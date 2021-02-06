@@ -1,0 +1,16 @@
+- platform: microsoft_face_identify
+  scan_interval: 10000
+  group: family
+  source:
+    - entity_id: camera.kitchen_tablet_camera
+      name: kitchen_identity_camera
+    - entity_id: camera.bedroom_camera
+      name: bedroom_identity_camera
+
+- platform: microsoft_face_detect
+  scan_interval: 10000
+  source:
+    - entity_id: camera.kitchen_tablet_camera
+      name: kitchen_face_camera
+    - entity_id: camera.bedroom_camera
+      name: bedroom_face_camera

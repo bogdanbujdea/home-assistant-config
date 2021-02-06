@@ -1,0 +1,11 @@
+open_the_gate:
+  url: !secret gate_url
+  headers:
+    colinatoken: !secret gate_token
+    User-Agent: !secret gate_user_agent
+turn_on_focus_mode:
+  method: POST
+  url: !secret focus_mode_on_url
+turn_off_focus_mode:
+  method: POST
+  url: !secret focus_mode_off_url

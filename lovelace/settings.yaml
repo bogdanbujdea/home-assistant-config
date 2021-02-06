@@ -1,0 +1,45 @@
+path: settings
+title: Settings
+icon: mdi:variable
+cards:
+  - cards:
+    - type: entities
+      entities:
+      - input_boolean.alexa_global_whisper
+      - input_boolean.sleep_mode
+      - input_boolean.guest_mode
+      - input_boolean.fridge_notification
+      - input_boolean.alexa_notifications
+      show_header_toggle: false
+      title: Alexa
+    type: vertical-stack
+  - cards:
+    - type: entities
+      entities:
+      - input_boolean.front_door_state_notifications
+      - input_boolean.office_door_state_notifications
+      - input_boolean.windows_state_notifications
+      - input_boolean.doors_state_notifications
+      - input_boolean.notification_for_bedroom_motion
+      - input_boolean.notify_family_status
+      show_header_toggle: true
+      title: Doors and windows
+    type: vertical-stack
+  - cards:
+    - type: entities
+      entities:
+      - input_select.living_tv_auto_shutdown_timer
+      - input_boolean.living_tv_auto_shutdown
+      - input_boolean.bedroom_climate
+      - input_select.bogdan_location_dropdown
+      - input_select.bogdan_status_dropdown
+      - input_number.living_tv_max_volume
+      - input_boolean.phone_call_notifications_bogdan
+      - input_boolean.garage_door_opened
+      - switch.garage_door_switch
+      - switch.garage_remote
+      - sensor.productivity_score
+      - sensor.productivity_score_work_hours
+      show_header_toggle: true
+      title: Devices
+    type: vertical-stack

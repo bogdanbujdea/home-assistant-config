@@ -1,0 +1,30 @@
+type: entities
+entities:
+  - sensor.shelly_current_consumption
+  - sensor.apartment_power_adjusted
+  - sensor.power_consumption_summed
+
+  - sensor.um_apartment_power_hourly
+  - sensor.um_apartment_power_daily
+  - sensor.um_apartment_power_monthly
+
+  - sensor.gas_cost
+  - sensor.monthly_gas_cost
+  - sensor.daily_gas_cost
+  - sensor.um_daily_gas_meter
+  - sensor.daily_gas_usage
+  - sensor.monthly_gas_usage
+  - scene.living_room_power_saving
+  - scene.living_room_power_on
+
+  - type: custom:battery-entity
+    entity: sensor.galaxy_s9_battery_level
+    name: Galaxy S9
+  - type: custom:battery-entity
+    entity: sensor.firehd_battery_level
+    name: Fire HD
+  - type: custom:battery-entity
+    entity: sensor.elenas_iphone_mobile_app_battery_level
+    name: iPhone 7
+title: Meters
+show_header_toggle: false

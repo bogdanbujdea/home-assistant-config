@@ -1,0 +1,10 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+homeassistant:
+  packages: !include_dir_named integrations
+  customize: !include customize.yaml
+  time_zone: Europe/Bucharest
+
+
+
+

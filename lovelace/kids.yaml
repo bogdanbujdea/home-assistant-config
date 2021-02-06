@@ -1,0 +1,5 @@
+  type: entities
+  entities:
+    - light.sonoff_kids_light
+    - binary_sensor.kids_room_motion_sensor
+  title: Kids

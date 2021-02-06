@@ -1,0 +1,452 @@
+- id: '1567289422720'
+  alias: Turn kitchen lights off when there's no movement
+  trigger:
+  - entity_id: group.kitchen_motion
+    for: 0:05:00
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: light.kitchen_light, light.kitchen_lightstrip
+    service: homeassistant.turn_off
+  mode: single
+- id: '1567300664723'
+  alias: Turn on bedroom light when it's off and movement is detected
+  trigger:
+  - entity_id: binary_sensor.bedroom_motion_sensor
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: light.bedroom_lightstrip
+    state: 'off'
+  - after: '12:00'
+    before: '22:00'
+    condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - data:
+      brightness: 255
+      effects:
+      rgb_color:
+      - 255
+      - 255
+      - 255
+    entity_id: light.bedroom_lightstrip
+    service: light.turn_on
+  mode: single
+- id: '1568550564022'
+  alias: Open the gate
+  trigger:
+  - event_data: {}
+    event_type: ifttt_webhook_received
+    platform: event
+  condition: []
+  action:
+  - service: rest_command.open_the_gate
+- id: '1570324760268'
+  alias: Turn off bedroom lightstrip
+  trigger:
+  - entity_id: binary_sensor.bedroom_motion_sensor
+    for: 00:30:00
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: media_player.bedroom_tv
+    state: 'off'
+  action:
+  - data:
+      entity_id: light.bedroom_light_strip
+    service: light.turn_off
+- id: '1570328298655'
+  alias: Clean the bedroom
+  trigger:
+  - entity_id: automation.clean_the_bedroom
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone:
+      - - 19089
+        - 20790
+        - 23789
+        - 23990
+    service: xiaomi_miio.vacuum_clean_zone
+  - data:
+      entity_id: automation.clean_the_bedroom
+    service: automation.turn_off
+- id: '1570358213190'
+  alias: Clean the small bedroom
+  trigger:
+  - entity_id: automation.clean_the_small_bedroom
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone:
+      - - 18997
+        - 24020
+        - 22947
+        - 26820
+    service: xiaomi_miio.vacuum_clean_zone
+  - data:
+      entity_id: automation.clean_the_small_bedroom
+    service: automation.turn_off
+- id: '1571593269645'
+  alias: Clean the hallway
+  description: Clean the hallway
+  trigger:
+  - entity_id: automation.clean_the_hallway
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone:
+      - - 26142
+        - 24168
+        - 28092
+        - 26868
+    service: xiaomi_miio.vacuum_clean_zone
+  - data:
+      entity_id: automation.clean_the_hallway
+    service: automation.turn_off
+- id: '1572226198480'
+  alias: Clean the air
+  description: ''
+  trigger:
+  - platform: template
+    value_template: '{{ state_attr(''fan.xiaomi_miio_device'', ''aqi'') > 20 }}'
+  condition: []
+  action:
+  - data:
+      entity_id: fan.xiaomi_miio_device
+    service: fan.turn_on
+  - data:
+      message: Cleaning the air
+      title: Air purifier
+    service: notify.notifier_name
+- id: '1572227095028'
+  alias: Stop cleaning the air
+  description: ''
+  trigger:
+  - platform: template
+    value_template: '{{ state_attr(''fan.xiaomi_miio_device'', ''aqi'') < 10}}'
+  condition:
+  - condition: state
+    entity_id: fan.xiaomi_miio_device
+    state: 'on'
+  action:
+  - data:
+      entity_id: fan.xiaomi_miio_device
+    service: fan.turn_off
+  - data:
+      message: Stopped cleaning the air
+      title: Air purifier
+    service: notify.notifier_name
+  mode: single
+- id: turn_on_office_lightstrip_with_hue_dimmer
+  alias: Turn on office lightstrip on 2nd button press
+  trigger:
+  - entity_id: sensor.hallway_remote_2
+    platform: state
+    to: up-press
+  condition: []
+  action:
+  - data: {}
+    entity_id:
+    - light.office_lightstrip
+    service: light.turn_on
+  initial_state: true
+- id: turn_on_office_lights_with_hue_dimmer
+  alias: Turn on all office lights on 2nd button hold
+  trigger:
+  - entity_id: sensor.hallway_remote_2
+    platform: state
+    to: up-hold
+  condition: []
+  action:
+  - data: {}
+    entity_id:
+    - light.office_lightstrip
+    - light.sonoffofficelight
+    service: light.turn_on
+  initial_state: true
+- id: turn_off_office_lights_with_hue_dimmer
+  alias: Turn off all office lights on 3rd button press
+  trigger:
+  - entity_id: sensor.hallway_remote_2
+    platform: state
+    to: down-press
+  condition: []
+  action:
+  - data: {}
+    entity_id:
+    - light.office_lightstrip
+    - light.sonoffofficelight
+    service: light.turn_off
+  initial_state: true
+- alias: Occupancy On
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.home_occupancy_confidence
+    above: 10
+  action:
+  - service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.occupancy
+  id: 52860eac50504ba58772ee37722ef112
+- alias: Occupancy Off
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.home_occupancy_confidence
+    below: 10
+  action:
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.occupancy
+  id: 907bf99dbb624815895f6945ec6d1cda
+- id: '1585235953471'
+  alias: Focus session started
+  trigger:
+  - event_data:
+      action: call_service
+    event_type: ifttt_webhook_received
+    platform: event
+  condition: []
+  action:
+  - data_template:
+      entity_id: '{{ trigger.event.data.entity_id }}'
+    service_template: '{{ trigger.event.data.service }}'
+- id: '1585935657242'
+  alias: Notify when there's high CO2
+  description: ''
+  trigger:
+  - above: '1000'
+    entity_id: sensor.netatmo_home_weather_indoor_co2
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      message: The CO2 levels are too high
+      title: CO2 alert
+    service: notify.mobile_app_galaxy_s9
+- id: '1590191419164'
+  alias: Turn off hallway lights when there's no movement
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.hallway_motion_sensor
+    for: 0:02:00
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data: {}
+    entity_id: group.hallway_lights
+    service: light.turn_off
+- id: '1590191501920'
+  alias: Turn off living room lights when there's no movement
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.living_room_motion_sensor
+    for: 0:25:00
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data: {}
+    entity_id: light.living_room_dining_table, light.living_room_couch_light
+    service: light.turn_off
+  mode: single
+- id: '1591491635756'
+  alias: Turn on cooling
+  description: ''
+  trigger:
+  - event: sunrise
+    platform: sun
+  condition: []
+  action:
+  - event: test
+    event_data: {}
+- id: '1591796134613'
+  alias: Turn on bedroom cooling
+  description: ''
+  trigger:
+  - event: sunrise
+    platform: sun
+  condition: []
+  action:
+  - event: bedroom-cooling
+    event_data: {}
+- id: '1591796164041'
+  alias: Turn on living room cooling
+  description: ''
+  trigger:
+  - event: sunrise
+    platform: sun
+  condition: []
+  action:
+  - event: living-room-cooling
+    event_data: {}
+- id: '1591803178990'
+  alias: Turn off cooling when temperature is below 23 degrees
+  description: ''
+  trigger:
+  - below: '23'
+    entity_id: sensor.average_temperature
+    platform: numeric_state
+  condition: []
+  action:
+  - data: {}
+    entity_id: climate.living_room_ac, climate.bedroom_ac
+    service: climate.turn_off
+- id: '1591835253097'
+  alias: Turn off bedroom cooling when temperature is below 23
+  description: ''
+  trigger:
+  - below: '23'
+    entity_id: sensor.bedroom_temperature
+    platform: numeric_state
+  condition:
+  - condition: state
+    entity_id: climate.bedroom_ac
+    state: 'on'
+  action:
+  - data: {}
+    entity_id: climate.bedroom_ac
+    service: climate.turn_off
+- id: '1591998397306'
+  alias: Bedroom camera motion
+  description: ''
+  trigger:
+  - platform: webhook
+    webhook_id: bedroom-motion
+  condition: []
+  action:
+  - data:
+      flash: short
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      transition: '1'
+    entity_id: light.office_lightstrip
+    service: light.turn_on
+- alias: Office CO2 too high
+  trigger:
+  - entity_id: sensor.netatmo_indoor_co2
+    for: 00:01:00
+    platform: numeric_state
+    below: '2000'
+  action:
+  - service: script.activate_alexa_actionable_notification
+    data_template:
+      text: Welcome back home, would you like me to give you a status?
+      event_id: actionable_notification_welcome_home_status
+      alexa_device: media_player.hallway_echo_dot
+  id: ffc31db11cf645f5a638f83ecfa555ee
+- alias: Turn on lights when CO2 is high
+  trigger:
+    platform: event
+    event_type: alexa_actionable_notification
+    event_data:
+      event_id: actionable_notification_welcome_home_status
+      event_response_type: ResponseYes
+  action:
+  - service: light.toggle
+    entity_id: light.office_lightstrip
+  id: f8956699007d4f73ace9fc528d868027
+- id: '1593180043144'
+  alias: Turn on cooling when temperature is above 25 degrees
+  description: ''
+  trigger:
+  - above: '25'
+    entity_id: sensor.average_temperature
+    platform: numeric_state
+  condition:
+  - condition: state
+    entity_id: group.family
+    state: not_home
+  action:
+  - data: {}
+    service: script.apartment_cooling_on
+- id: '1598910059807'
+  alias: Turn on energy saving
+  description: ''
+  trigger:
+  - entity_id: group.family
+    platform: state
+    to: not_home
+  - entity_id: input_select.bujdea_family
+    platform: state
+    to: Sleeping
+  condition:
+  - condition: state
+    entity_id: input_boolean.guest_mode
+    state: 'off'
+  action:
+  - scene: scene.living_room_power_saving
+  mode: single
+- id: '1598969842878'
+  alias: Turn off energy saving
+  description: ''
+  trigger:
+  - entity_id: group.family
+    from: not_home
+    platform: state
+    to: home
+  - entity_id: input_select.bujdea_family
+    platform: state
+    to: Home
+  condition:
+  - condition: state
+    entity_id: input_select.bujdea_family
+    state: Home
+  action:
+  - scene: scene.living_room_power_on
+  mode: single
+- id: '1602347565849'
+  alias: Tag Bedroom cleanup is scanned
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: a937d2a9-aa51-47d1-a7e9-44fdfd062764
+  condition: []
+  action:
+  - service: notify.mobile_app_galaxy_s9
+    data:
+      title: bedroom
+      message:
+  mode: single
+- id: '1602722543718'
+  alias: Turn off office USB ports
+  description: ''
+  trigger:
+  - platform: time
+    at: input_datetime.office_switch_turn_off
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.office_motion_sensor
+      state: 'on'
+  action:
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.office_switch_usb,switch.office_desk_usb_ports
+  mode: single

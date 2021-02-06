@@ -1,0 +1,48 @@
+
+  type: entities
+  show_header_toggle: false
+  title: Raspberry
+  entities:
+    - sensor.raspberry_cpu_temperature
+    - sensor.disk_use_percent
+    - sensor.memory_use_percent    
+    
+    - type: custom:mini-graph-card
+      show:
+        labels: true
+      hours_to_show: 24
+      aggregate_func: avg
+      name: Total power consumption
+      points_per_hour: 1
+      icon: mdi:power
+      entities:
+      - entity: sensor.power_consumption_summed
+        name: Total power consumption
+      - entity: sensor.power_1
+        name: Power 1
+      - entity: sensor.power_2
+        name: Power 2
+      - entity: sensor.power_3
+        name: Power 3
+    - switch.power_1
+    - switch.power_2
+    - switch.power_3
+    - sensor.power_1
+    - sensor.power_2
+    - sensor.power_3
+    - sensor.current_power_consumption
+    - type: custom:xiaomi-vacuum-card
+      entity: vacuum.xiaomi_vacuum_cleaner
+      name: false
+    - type: custom:battery-entity
+      entity: sensor.galaxy_s9_battery_level
+      name: Bogdan
+    - media_player.bedroom_chromecast
+    - media_player.living_tv  
+    - automation.turn_on_cooling
+    - automation.turn_on_bedroom_cooling
+    - automation.turn_on_living_room_cooling
+    - climate.bedroom_ac   
+    - climate.living_room_ac    
+    - media_player.apartment
+    

@@ -1,0 +1,1 @@
+rest_command: !include ../customize/rest_command.yaml

@@ -1,0 +1,10 @@
+prefix: "browser_mod_"
+devices:
+  feb4fd07-ef20bfe7:
+    name: office-touchscreen
+  6a6a2d4e-ac43e3ec:
+    name: msi-browser
+  192ac8f2-1cc250d1:
+    name: fire-hd-tablet
+  b84b9cd3-c608ebd7:
+    name: galaxy-s9

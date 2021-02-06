@@ -1,0 +1,15 @@
+  type: entities
+  entities:
+    - entity: input_text.announcement_text
+      type: 'custom:text-input-row'
+    - action_name: Announce It...
+      icon: 'mdi:bell'
+      name: ' '
+      service: script.send_announcement
+      type: call-service
+    - entity: input_select.announce_to
+    - entity: input_number.alexa_announce_vol
+    - entity: input_boolean.alexa_whisper
+    - entity: input_boolean.alexa_broadcast
+  show_header_toggle: false
+  title: Broadcast

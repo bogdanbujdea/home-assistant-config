@@ -1,0 +1,9 @@
+
+office_switch_turn_off:
+  name: Office switch turn off
+  has_date: false
+  has_time: true
+last_meal:
+  name: Last meal
+  has_date: true
+  has_time: true

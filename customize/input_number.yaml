@@ -1,0 +1,28 @@
+alexa_announce_vol:
+  name: "Volume"
+  min: 0
+  max: 1
+  step: 0.1
+  initial: 0.5
+
+living_tv_max_volume:
+  name: "Maximum TV Volume"
+  icon: mdi:volume-low
+  min: 1
+  max: 60
+  step: 1
+  initial: 15
+  
+productivity_score:
+  name: "Productivity score"
+  icon: mdi:worker
+  min: 1
+  max: 100
+  step: 1  
+
+productivity_score_work_hours:
+  name: "Work productivity score"
+  icon: mdi:worker
+  min: 1
+  max: 100
+  step: 1  

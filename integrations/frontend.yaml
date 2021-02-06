@@ -1,0 +1,1 @@
+frontend: !include ../customize/frontend.yaml

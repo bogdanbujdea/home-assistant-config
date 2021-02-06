@@ -1,0 +1,10 @@
+  type: entities
+  entities:
+    - light.kitchen_light
+    - sensor.kitchen_temperature
+    - sensor.kitchen_light_level
+    - binary_sensor.kitchen_motion_sensor
+    - binary_sensor.kitchen_table_motion_sensor  
+    #- image_processing.kitchen_identity_camera
+    #- image_processing.kitchen_face_camera
+  title: Kitchen

@@ -1,0 +1,2 @@
+resources: !include ../lovelace/resources/resources.yaml
+mode: yaml

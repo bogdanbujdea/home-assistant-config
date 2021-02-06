@@ -1,0 +1,152 @@
+path: Devices
+title: Devices
+icon: mdi:monitor-cellphone 
+cards:
+  - cards:
+    - type: glance
+      title: Switches
+      show_state: false
+      entities:
+      - type: entity-button
+        tap_action:
+          action: toggle
+        icon: mdi:garage
+        entity: switch.garage_remote 
+      - type: entity-button
+        tap_action:
+          action: call-service
+          service: rest_command.open_the_gate
+        icon: mdi:gate
+        entity: switch.colina_gate   
+      - type: entity-button
+        tap_action:
+          action: toggle
+        icon: mdi:fan
+        entity: switch.living_room_cooling   
+      - type: entity-button
+        tap_action:
+          action: toggle
+        icon: mdi:fan
+        entity: switch.bedroom_cooling   
+      - type: entity-button
+        tap_action:
+          action: call_service
+        entity: script.turn_on_power_saver  
+      - type: entity-button
+        tap_action:
+          action: call_service
+        entity: script.turn_off_power_saver 
+    - !include climate.yaml
+    - type: custom:auto-entities
+      card:
+        type: entities
+        title: Opened windows
+        show_header_toggle: false
+      entities:
+      filter:
+        include:
+          - name: /window/   
+            state: "on"
+
+      show_empty: false
+    - !include cleaning.yaml
+    type: vertical-stack
+  - cards:
+    - type: glance
+      title: Lights
+      show_state: false
+      entities:
+      - type: entity-button
+        tap_action:
+          action: toggle
+        icon: mdi:ceiling-light
+        entity: light.sonoffofficelight    
+      - type: entity-button
+        tap_action:
+          action: toggle
+        entity: light.office_lightstrip
+        icon: mdi:led-strip
+      - type: entity-button
+        tap_action:
+          action: toggle
+        entity: light.kitchen_light    
+      - type: entity-button
+        tap_action:
+          action: toggle
+        icon: mdi:ceiling-light
+        entity: light.bathroom_ceiling_light    
+      - type: entity-button
+        tap_action:
+          action: toggle
+        entity: light.front_hallway     
+      - type: entity-button
+        tap_action:
+          action: toggle
+        entity: light.back_hallway    
+      - type: entity-button
+        tap_action:
+          action: toggle
+        entity: light.bedroom_lightstrip    
+        icon: mdi:led-strip
+      - type: entity-button
+        tap_action:
+          action: toggle
+        icon: mdi:ceiling-light
+        entity: light.bedroom_light    
+      - type: entity-button
+        tap_action:
+          action: toggle
+        entity: light.living_room_dining_table   
+        icon: mdi:ceiling-light
+      - type: entity-button
+        tap_action:
+          action: toggle
+        icon: mdi:ceiling-light
+        entity: light.living_room_couch_light
+      - type: entity-button
+        tap_action:
+          action: toggle
+        icon: mdi:ceiling-light
+        entity: light.sonoff_kids_light
+    - !include alexa.yaml
+    - type: glance
+      title: Media
+      show_state: false
+      entities:
+        - media_player.bathroom_echo_dot
+        - media_player.bedroom_echo_dot
+        - media_player.office_echo_dot
+        - media_player.hallway_echo_dot
+        - media_player.kitchen_echo_dot
+        - media_player.living_room_echo_dot
+        - media_player.bedroom_chromecast
+        - media_player.living_tv
+    type: vertical-stack
+  - cards:
+    - type: glance
+      title: Power
+      show_state: false
+      entities:
+        - switch.power_1
+        - switch.power_2
+        - switch.power_3
+        - switch.office_switch_1
+        - switch.office_switch_2
+        - switch.office_switch_3
+        - switch.office_switch_usb
+        - switch.laptop_power_switch
+        - switch.office_power
+        - switch.living_room_power_1
+        - switch.living_room_power_2
+    - type: entities
+      entities:
+        - cover.bedroom_curtain
+        - type: button
+          name: Open the gate
+          show_state: false
+          tap_action:
+            action: call-service
+            service: rest_command.open_the_gate
+    - !include lights.yaml
+
+    type: vertical-stack

@@ -1,0 +1,55 @@
+alexa_whisper:
+  name: Whisper?
+  icon: mdi:volume-medium
+alexa_broadcast:
+  name: Broadcast?
+  icon: mdi:microphone
+alexa_global_whisper:
+  name: Whisper
+  icon: mdi:volume-medium
+sleep_mode:
+  name: Sleep mode
+  icon: mdi:sleep
+guest_mode:
+  name: Guest mode
+  icon: mdi:human-male-female
+fridge_notification:
+  name: Fridge open/close notification
+  icon: mdi:fridge
+alexa_notifications:
+  name: Alexa notifications
+  icon: mdi:newspaper
+auto_temperature:
+  name: Maintain avg temperature around 25
+  icon: mdi:thermometer
+front_door_state_notifications:
+  name: Front door notifications
+  icon: mdi:door
+office_door_state_notifications:
+  name: Office door notifications
+  icon: mdi:door
+
+windows_state_notifications:
+  name: Windows notifications
+  icon: mdi:microsoft-windows
+doors_state_notifications:
+  name: Doors notifications
+  icon: mdi:door
+bedroom_climate:
+  name: Bedroom climate
+  icon: mdi:air-conditioner
+phone_call_notifications_bogdan:
+  name: Bogdan call notifications
+  icon: mdi:phone
+
+notification_for_bedroom_motion:
+  name: Notification for bedroom motion
+  icon: mdi:baby
+
+notify_family_status:
+  name: Family status notifications
+  icon: mdi:account-multiple
+
+living_tv_auto_shutdown:
+  name: Living TV auto shutdown
+  icon: mdi:youtube-tv

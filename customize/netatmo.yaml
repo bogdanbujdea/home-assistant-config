@@ -1,0 +1,2 @@
+client_id: !secret netatmo_api_key
+client_secret: !secret netatmo_secret_key

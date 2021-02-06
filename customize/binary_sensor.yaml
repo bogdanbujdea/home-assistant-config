@@ -1,0 +1,33 @@
+- platform: ping
+  host: 192.168.1.101
+  name: 'Garage Home Assistant Internal IP'
+  scan_interval: 300
+
+- platform: ping
+  host: bbchome.duckdns.org
+  name: 'Garage Home Assistant Public Access'
+  scan_interval: 300
+
+- platform: template
+  sensors:
+    heating:
+      friendly_name: 'Thermostats'
+      value_template: >-
+        {{ states.sensor.power_1.state | float > 70 }}
+      icon_template: >-
+        {% if states.sensor.power_1.state| float > 70 %}
+          mdi:fire
+        {% else %}
+          mdi:power-sleep
+        {% endif %}
+
+    office_presence:
+      friendly_name: "Office presence"
+      value_template: >-
+        {{ states.binary_sensor.office_chair.state == 'off' or states.binary_sensor.office_motion_sensor.state == 'on' }}        
+      icon_template: >-
+        {% if states.binary_sensor.office_chair.state == 'off' or states.binary_sensor.office_motion_sensor.state == 'on' %}
+          mdi:run-fast
+        {% else %}
+          mdi:exit-run
+        {% endif %}

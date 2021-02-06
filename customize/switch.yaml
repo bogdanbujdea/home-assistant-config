@@ -1,0 +1,234 @@
+- platform: wake_on_lan
+  name: 'MSI Laptop'
+  mac: '30-9C-23-91-FF-D1'
+  host: 192.168.1.74
+- platform: broadlink
+  mac: 'C8:F7:42:83:22:91'  
+  switches:
+    office_fan:
+      friendly_name: "Office fan"
+      command_on: 'JgDaACMOKQ0OKSkOKg4NKA8oDygPKA8nECcr5ysMKg0PJysMKwwPJxAnDygPKA8oDycr5ysMKg0PJysMKwwPKA8nECcPKA8oDycr6CoMKwwPKCoMKwwPKA8nECcPKA8oDycr5ysMKwwPKCoMKwwPKA8oDycPKA8oDygq5ysMKwwPKCoNKgwPKA8oDycQJw8oDygq6CoMKwwPKCoNKgwPKA8oDygPJxAnDygq6CoNKgwPKCoNKgwQJw8oDygPJxAnDygr5yoNKgwPKCkOKQ4NKQ4pDikOKQwqDSooAA0FAAAAAAAAAAAAAAAAAAA='
+      command_off: 'JgDaACMOKQ0OKSkOKg4NKA8oDygPKA8nECcr5ysMKg0PJysMKwwPJxAnDygPKA8oDycr5ysMKg0PJysMKwwPKA8nECcPKA8oDycr6CoMKwwPKCoMKwwPKA8nECcPKA8oDycr5ysMKwwPKCoMKwwPKA8oDycPKA8oDygq5ysMKwwPKCoNKgwPKA8oDycQJw8oDygq6CoMKwwPKCoNKgwPKA8oDygPJxAnDygq6CoNKgwPKCoNKgwQJw8oDygPJxAnDygr5yoNKgwPKCkOKQ4NKQ4pDikOKQwqDSooAA0FAAAAAAAAAAAAAAAAAAA='
+    office_fan_swing:
+      friendly_name: "Office fan swing"
+      command_on: 'JgDQACIPKA8NKSgPKA8MKg0qKA8NKgwrDCoOAAEEKA8oDwwqKA8oDw0qDSkoDw0qDSoNKQ4AAQQoDygPDCopDigPDSoNKSgPDSoNKg0pDQABBSgPKA8MKygOKA8NKgwqKg0PKA8oDigPAAEEKQ0qDQ4oKA8oDw4pDCooDw0qDSoMKg0AAQUoDygPDCopDigPDSoMKigPDSoNKgwqDQABBSgPKA8MKigPKA8NKgwqKA8NKg0qDCoNAAEFKA8oDw0pKA8oDw0qDCooDw0qDSoMKwwADQUAAAAAAAAAAA=='
+      command_off: 'JgDQACIPKA8NKSgPKA8MKg0qKA8NKgwrDCoOAAEEKA8oDwwqKA8oDw0qDSkoDw0qDSoNKQ4AAQQoDygPDCopDigPDSoNKSgPDSoNKg0pDQABBSgPKA8MKygOKA8NKgwqKg0PKA8oDigPAAEEKQ0qDQ4oKA8oDw4pDCooDw0qDSoMKg0AAQUoDygPDCopDigPDSoMKigPDSoNKgwqDQABBSgPKA8MKigPKA8NKgwqKA8NKg0qDCoNAAEFKA8oDw0pKA8oDw0qDCooDw0qDSoMKwwADQUAAAAAAAAAAA=='
+    office_fan_cooling:
+      friendly_name: "Office fan cooling"
+      command_on: 'JgC2ACQNKg0OKSoMKg0PKCoMDygPKA4pDigPAAEDKg0qDQ4pKQ0qDQ4pKQ0PKA8oDikOKA8AAQMqDSoNDikqDCoNDygqDQ4oDygPKA8oDgABAysMKg0PKCgOKA8NKigPDSkOKQ4pDSoNAAEFKA4oDw0qKA4pDg0qKA8MKg4pDSoOKQ0AAQUoDigPDSooDygODSooDwwqDikOKQ4pDQABBSgOKQ4NKigPKA4NKigPDSoNKQ4pDikOAA0FAAA='
+      command_off: 'JgC2ACQNKg0OKSoMKg0PKCoMDygPKA4pDigPAAEDKg0qDQ4pKQ0qDQ4pKQ0PKA8oDikOKA8AAQMqDSoNDikqDCoNDygqDQ4oDygPKA8oDgABAysMKg0PKCgOKA8NKigPDSkOKQ4pDSoNAAEFKA4oDw0qKA4pDg0qKA8MKg4pDSoOKQ0AAQUoDigPDSooDygODSooDwwqDikOKQ4pDQABBSgOKQ4NKigPKA4NKigPDSoNKQ4pDikOAA0FAAA='
+    office_fan_speed:
+      friendly_name: "Office fan speed"
+      command_on: 'JgC2ACUMKg0PKCoNKQ0PKA0qDCsMKg0qKA8NAAEFKA8oDg0qKA8oDg0qDSoNKgwqDSooDw0AAQUoDygODSooDygODSoNKg0rDCoMKygODQABBSgPKA4NKigPKA8MKg0qDSoNKgwqKA8NAAEFKA8oDg0qKA8oDwwqDSoNKg0qDCsoDwwAAQUpDikODigrDCoNDygPJxAnDygPKCoNDwABAisMKwwPKCoMKwwPKA8oDycPKA8oKg0PAA0FAAA='
+      command_off: 'JgC2ACUMKg0PKCoNKQ0PKA0qDCsMKg0qKA8NAAEFKA8oDg0qKA8oDg0qDSoNKgwqDSooDw0AAQUoDygODSooDygODSoNKg0rDCoMKygODQABBSgPKA4NKigPKA8MKg0qDSoNKgwqKA8NAAEFKA8oDg0qKA8oDwwqDSoNKg0qDCsoDwwAAQUpDikODigrDCoNDygPJxAnDygPKCoNDwABAisMKwwPKCoMKwwPKA8oDycPKA8oKg0PAA0FAAA='
+    bedroom_ac_switch:
+      friendly_name: "Bedroom AC Switch"
+      command_on: 'JgCSAAABIZMVNxQTFRMUNxU3FTcUExUTFBMVExQTFRMVEhUTFBMVExQTFRMUExUTFDcVNxQ3FRMUExUTFBMVExQ3FhIUOBQTFRMUNxUTFAACkBQTFRMUExUTFBMVExQTFRMUExUTFBMVExQTFRMUNxUTFBMVExQTFRMUExUTFBMVExQTFRMUExUTFDgUNxU3FBMVAA0FAAAAAAAA'
+      command_off: 'JgCSAAABIZMUOBQTFBQUExU3FDcVFBQTFRMUExYSFBMVExUSFRMUExYSFBMWEhQTFTcUNxUTFBMWEhQTFRMUExU3FBMWNhUTFRIVNxQTFgACjhUTFBMVExQTFRMUExQUFBMVExQTFRMVEhUTFBMUOBUSFRMUExYSFBMUFBQTFRMUExUTFhEVExUSFjYVNhU3FDcVAA0FAAAAAAAA'
+    bedroom_ac_wifi_switch:
+      friendly_name: "Bedroom AC Wifi"
+      command_on:  'JgCSAAABI5EVNxUTFBMVExQ3FTcUExUTFBMVExQTFRMUExUTFBMVExQTFRMUExUTFDgUNxUTFBMVExQTFRMUExU3FBMVNxQTFRMUNxUTFAACkBUSFRMUExUTFBMVExQTFRMUExUTFBMVExUTFBMVNxQTFRMUExUTFBMVExQTFRMUExUTFBMVExQTFTcUNxU3FDgUAA0FAAAAAAAA'
+      command_off: 'JgCSAAABH5QVNxQTFRMUExU3FDcVExQTFRMUExUTFBMVExQTFRMUExUTFBMVExQTFTcUOBQTFRMUExUTFBMVExQ3FRMUNxUTFBMVNxUSFQACjxUTFBMVExQTFRMUExUTFBQUExQUFBMUFBQTFRMUExUTFBMVExQTFRMUExUTFBMVExQTFRMUExUTFDcVNxQTFTcUAA0FAAAAAAAA'
+    bedroom_tv_switch:
+      friendly_name: "Bedroom TV"
+      command_on:  'JgBUAFEeDh8OEA4RLCwOEA4QDxAPDw4QDxAQDg8PDREOEQ4QHQ8OHw0RDgAK2VYeDh8NEQ0RKi8RDQ4RDhAPDw8PDREOEQ8PDRENEQ4RHBAOHw4QDwANBQAAAAA='
+      command_off: 'JgBUAFEeDh8OEA4RLCwOEA4QDxAPDw4QDxAQDg8PDREOEQ4QHQ8OHw0RDgAK2VYeDh8NEQ0RKi8RDQ4RDhAPDw8PDREOEQ8PDRENEQ4RHBAOHw4QDwANBQAAAAA='
+    bedroom_tv_volume_up:
+      friendly_name: "Bedroom TV volume up"
+      command_on:  'JgBYAFIeDR8OEQ4QDh4eDw4QDhENEQ4QDhANEQ4RDhANEQ0RHh4OEA0RDREOAArYVh8NHw0SDREOHh0QDREOEQ4QDRENEQ4RDREOEA0RDREdHw4QDREOEQ4ADQU='
+      command_off: 'JgBUAFQcDR8OEA8QEBwcEQ4REA4NEQ0QDxAQDg4QDhEQDg0QHR8OEA4QHQAK51kcDh8NEQ0RDh8cEA4QDhEQDg0RDREOEA8PDhAOERAOHB8PEBAOHAANBQAAAAA='
+    bedroom_tv_volume_down:
+      friendly_name: "Bedroom TV volume down"
+      command_on:  'JgBUAFQcDR8OEA8QEBwcEQ4REA4NEQ0QDxAQDg4QDhEQDg0QHR8OEA4QHQAK51kcDh8NEQ0RDh8cEA4QDhEQDg0RDREOEA8PDhAOERAOHB8PEBAOHAANBQAAAAA='
+      command_off: 'JgBYAFIeDR8OEQ4QDh4eDw4QDhENEQ4QDhANEQ4RDhANEQ0RHh4OEA0RDREOAArYVh8NHw0SDREOHh0QDREOEQ4QDRENEQ4RDREOEA0RDREdHw4QDREOEQ4ADQU='
+    bedroom_tv_mute:
+      friendly_name: "Bedroom TV mute"
+      command_on:  'JgBUAFEeDx4OEA4QDx8cEA4QDxAOEA4RDw8NEQ4QDw8OEA4QDxAdDw4fHQAK51UfDh8NEQ0RDh8cEQ0RDRAPEA8PDhAOEQ8PDREOEA8PDhAdEA8eHAANBQAAAAA='
+    bedroom_tv_source:
+      friendly_name: "Bedroom TV source"
+      command_on:  'JgBYAFEfDR8OEA4QDSAdEQ4QDg8PDw8PDhAOEA8QDw8PDx0PDw8OHw4QDRENAArYVx8OHw0RDg8PHhwRDRENEQ0RDRENEA8QDw8PDw8PHBEOEA0fDhAOEA4ADQU='
+      command_off: ''
+    bedroom_tv_left:
+      friendly_name: "Bedroom TV left"
+      command_on:  'JgBTAFEeDh8ODw8QDx0dEA4QDw8OEA4RDg8OEA4RDg8dHx4PDh8cHw4ACthWHw0fDxAPDg4fHRAPDw4QDhAPDw4QDhAPDw4QHR8cEA8eHx0OAArYAA0FAAAAAAA='
+      command_off: ''
+    bedroom_tv_up:
+      friendly_name: "Bedroom TV up"
+      command_on:  'JgBUAFMeDCANEQ8PDx4cEA4QDxAOEA8PDw8PEA0QDw8eHhwRDh4NEQ4QDwAK11YfDx4OEA8PDSAdDw8QDw8NEA8QDhAPDw8PDREcHxwRDx8OEQ4QDQANBQAAAAA='
+      command_off: ''
+    bedroom_tv_right:
+      friendly_name: "Bedroom TV right"
+      command_on:  'JgBQAFIeDx4QDw4QDR8dEA4QDxAOEA4QDhAPEA4QDhAcHx0QDx4eDw4ACudYHQ8dDhAOEA8eHg8OEA4QDxAOEA4QDhAOEA8QHB8cEQ4fHg4OAA0FAAAAAAAAAAA='
+      command_off: ''
+    bedroom_tv_down:
+      friendly_name: "Bedroom TV down"
+      command_on:  'JgBQAFIfDR8PEA8PDx4bEQ8PDxAOEA8PDREOEA8PDxAdHxwRDx4MERwACulWHg0gDREPDw8eGxEOEA8QDw8PDw8PDREPEA4QHR4cEg8eDBEcAA0FAAAAAAAAAAA='
+    bedroom_tv_ok:
+      friendly_name: "Bedroom TV OK"
+      command_on:  'JgBUAFMeDR8PEA4QDx4cEA4RDw8NEQ4QDw8OEA4QDhEdHx4ODxAPHQ4QDwAK2VUeDh8OEA4QDh8cEQ8PDREOEA8PDhAPEA8PDREdHxwQDhAPHg4QDgANBQAAAAA='
+    bedroom_tv_channel_up:
+      friendly_name: "Bedroom TV channel up"
+      command_on:  'JgBUAFIfDR8PDw4RDx0dEA4RDw8NEQ4RDg8OEA8QDw8cIA8QHQ8OIA0RDgAK11cfDR8OEA4RDx0cEQ0RDhEOEA0RDhAQDw4QDhEdHg0RHBEOHw0RDQANBQAAAAA='
+    bedroom_tv_channel_down:
+      friendly_name: "Bedroom TV channel down"
+      command_on:  'JgBQAFMeDh8NEQ4RDh4cEQ4RDREOEQ4PDhAOEA8QDw8dHw4QHREPHh0ACuZYHQ8eDREOEQ4fHREODw4QDxAPDw0RDhENEQ4RHR4NERwRDR8dAA0FAAAAAAAAAAA='
+    bedroom_tv_home:
+      friendly_name: "Bedroom TV home"
+      command_on:  'JgB4AFEdEBwRDg4PDx4cDg4QDg8PDw4QDg8PDw4PDw8dHh0eHR0PDw4ACsVRHQ8dDw8OEA8dHA4RDg4PDw8OEA4PDhAODw8PHR4dHR0eEA4OAArCVR0PHg4PDw8OHhwOEA4RDg4PDw8OEA4QDg8OEB0dHRwdHg4QDgANBQ='
+    bedroom_tv_return:
+      friendly_name: "Bedroom TV return"
+      command_on:  'JgBUAFEeDx8PDg4QDx8dEA0RDhAPEA0QDhAOEA4QDxANEA4RDRAdHx0fDQAK2FkdDh8OEA8QDh4eDw4QDxANEA8QDRAOEA8QDw4PEA0QDhAdIBwgDgANBQAAAAA'
+- platform: command_line
+  switches:
+    office_pi_screensaver:
+      friendly_name: Office PI screensaver
+      command_on: "ssh -i /config/id_rsa -o StrictHostKeyChecking=no pi@192.168.1.133 -t 'xscreensaver-command -activate'"
+      command_off: "ssh -i /config/id_rsa -o StrictHostKeyChecking=no pi@192.168.1.133 -t 'xscreensaver-command -deactivate'"
+    
+- platform: template
+  switches:
+    colina_gate:
+      friendly_name: "Gate"
+      turn_on:
+        service: script.open_gate
+      turn_off:
+        service: script.open_gate
+      icon_template: "mdi:gate"
+    living_room_cooling:
+      friendly_name: "Living room cooling"
+      value_template: "{{ is_state('climate.living_room_ac', 'cool') }}"
+      turn_on:
+        service: script.living_room_cooling
+        data:
+          entity_id: climate.living_room_ac
+      turn_off:
+        service: climate.turn_off
+        data:
+          entity_id: climate.living_room_ac
+      icon_template: "mdi:air-conditioner"
+    bedroom_cooling:
+      friendly_name: "Bedroom cooling"
+      value_template: "{{ is_state('climate.bedroom_ac', 'cool') }}"
+      turn_on:
+        service: script.bedroom_cooling
+        data:
+          entity_id: climate.bedroom_ac
+      turn_off:
+        service: climate.turn_off
+        data:
+          entity_id: climate.bedroom_ac
+      icon_template: "mdi:air-conditioner"
+    apartment_cooling:
+      friendly_name: "Apartment cooling"
+      value_template: "{{ is_state('climate.bedroom_ac', 'cool') or is_state('climate.living_room_ac', 'cool') }}"
+      turn_on:
+        service: script.apartment_cooling_on
+      turn_off:
+        service: script.apartment_ac_off
+      icon_template: "mdi:air-conditioner"
+    living_room_ventilation:
+      friendly_name: "Living room ventilation"
+      value_template: "{{ is_state('climate.living_room_ac', 'fan_only') }}"
+      turn_on:
+        service: script.living_room_ventilation
+        data:
+          entity_id: climate.living_room_ac
+      turn_off:
+        service: climate.turn_off
+        data:
+          entity_id: climate.living_room_ac
+      icon_template: "mdi:air-conditioner"
+    bedroom_ventilation:
+      friendly_name: "Bedroom ventilation"
+      value_template: "{{ is_state('climate.bedroom_ac', 'fan_only') }}"
+      turn_on:
+        service: script.bedroom_ventilation
+        data:
+          entity_id: climate.bedroom_ac
+      turn_off:
+        service: climate.turn_off
+        data:
+          entity_id: climate.bedroom_ac
+      icon_template: "mdi:air-conditioner"
+    apartment_ventilation:
+      friendly_name: "Apartment ventilation"
+      value_template: "{{ is_state('climate.bedroom_ac', 'fan_only') or is_state('climate.living_room_ac', 'fan_only') }}"
+      turn_on:
+        service: script.apartment_ventilation_on
+      turn_off:
+        service: script.apartment_ac_off
+      icon_template: "mdi:air-conditioner"
+    # Xiaomi Air Purifier 2S
+    xiaomi_airpurifier_led:
+      friendly_name: "LED"
+      value_template: "{{ is_state_attr('fan.xiaomi_miio_device', 'led', true) }}"
+      turn_on:
+        service: fan.xiaomi_miio_set_led_on
+        data:
+          entity_id: fan.xiaomi_miio_device
+      turn_off:
+        service: fan.xiaomi_miio_set_led_off
+        data:
+          entity_id: fan.xiaomi_miio_device
+      icon_template: "mdi:lightbulb-outline"
+    xiaomi_airpurifier_child_lock:
+      friendly_name: "Child lock"
+      value_template: "{{ is_state_attr('fan.xiaomi_miio_device', 'child_lock', true) }}"
+      turn_on:
+        service: fan.xiaomi_miio_set_child_lock_on
+        data:
+          entity_id: fan.xiaomi_miio_device
+      turn_off:
+        service: fan.xiaomi_miio_set_child_lock_off
+        data:
+          entity_id: fan.xiaomi_miio_device
+      icon_template: "mdi:lock-outline"
+    xiaomi_airpurifier_buzzer:
+      friendly_name: "Buzzer"
+      value_template: "{{ is_state_attr('fan.xiaomi_miio_device', 'buzzer', true) }}"
+      turn_on:
+        service: fan.xiaomi_miio_set_buzzer_on
+        data:
+          entity_id: fan.xiaomi_miio_device
+      turn_off:
+        service: fan.xiaomi_miio_set_buzzer_off
+        data:
+          entity_id: fan.xiaomi_miio_device
+      icon_template: "mdi:volume-high"
+    garage_door_switch:
+      friendly_name: "Garage door"
+      value_template: "{{ is_state('binary_sensor.garage_door_shelly', 'on') }}"
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.garage_remote
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.garage_remote
+      icon_template: "mdi:garage"
+    fasting:
+      unique_id: fasting_switch
+      friendly_name: "Fasting"
+      turn_on:
+        service: var.set
+        data:
+          entity_id: var.fasting
+          value: 'on'
+      turn_off:
+        service: var.set
+        data:
+          entity_id: var.fasting
+          value: 'off'
+    focus_mode:
+      friendly_name: "Focus mode"
+      value_template: "{{ is_state('var.focus_mode', 'on') }}"
+      turn_on:
+        service: script.turn_on_focus_mode
+      turn_off:
+        service: script.turn_off_focus_mode        
+      icon_template: "mdi:worker"
+
+- platform: switchbot
+  mac: 'D4:20:02:BA:9A:FF'
+  name: 'SwitchBot'

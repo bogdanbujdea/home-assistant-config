@@ -1,0 +1,10 @@
+
+- platform: mjpeg
+  mjpeg_url: !secret bedroom_camera_snapshot
+  name: Bedroom Camera
+- platform: mjpeg
+  mjpeg_url: !secret kitchen_camera_url
+  name: Kitchen Tablet Camera
+- platform: mjpeg
+  mjpeg_url: !secret office_camera_url
+  name: Office Camera

@@ -1,0 +1,1 @@
+remote_homeassistant: !include ../customize/remote_homeassistant.yaml

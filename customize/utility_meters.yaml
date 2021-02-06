@@ -1,0 +1,93 @@
+# Heating
+um_power_heating_monthly:
+  source: sensor.heating_power
+  cycle: monthly
+
+# Washer
+um_power_washer_daily:
+  source: sensor.washer_power
+  cycle: daily
+um_power_washer_monthly:
+  source: sensor.washer_power
+  cycle: monthly
+
+# Office
+um_office_hourly:
+  source: sensor.office_power_sensor
+  cycle: hourly
+um_office_daily:
+  source: sensor.office_power_sensor
+  cycle: daily
+um_office_monthly:
+  source: sensor.office_power_sensor
+  cycle: monthly
+
+um_fridge_daily_power:
+  source: sensor.fridge_power_sensor
+  cycle: daily
+um_fridge_monthly_power:
+  source: sensor.fridge_power_sensor
+  cycle: monthly
+
+# Living room
+um_living_room_hourly:
+  source: sensor.living_room_power_sensor
+  cycle: hourly
+um_living_room_daily:
+  source: sensor.living_room_power_sensor
+  cycle: daily
+um_living_room_monthly:
+  source: sensor.living_room_power_sensor
+  cycle: monthly
+
+# Apartment
+um_apartment_power_hourly:
+  source: sensor.apartment_power_total
+  cycle: hourly
+um_apartment_power_daily:
+  source: sensor.apartment_power_total
+  cycle: daily
+um_apartment_power_monthly:
+  source: sensor.apartment_power_total
+  cycle: monthly
+
+# Apartment
+
+um_daily_steps:
+  source: sensor.galaxy_s9_steps_sensor
+  cycle: daily
+
+um_daily_todoist_tasks:
+  source: var.completed_tasks_today
+  cycle: daily
+
+um_monthly_todoist_tasks:
+  source: var.completed_tasks_today
+  cycle: monthly
+
+um_daily_sitting_down:
+  source: sensor.sitting_on_chair_this_month
+  cycle: daily
+
+um_monthly_sitting_down:
+  source: sensor.sitting_on_chair_this_month
+  cycle: daily
+
+um_daily_standing_up:
+  source: sensor.standing_up_today
+  cycle: daily
+um_monthly_standing_up:
+  source: sensor.standing_up_today
+  cycle: monthly
+
+um_daily_card_expenses:
+  source: var.card_expenses
+  cycle: daily
+
+um_monthly_card_expenses:
+  source: var.card_expenses
+  cycle: monthly
+
+um_daily_gas_meter:
+  source: sensor.daily_gas_usage
+  cycle: daily

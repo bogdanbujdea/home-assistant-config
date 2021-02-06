@@ -1,0 +1,103 @@
+sensor.temperature_average:
+  friendly_name: Average temperature
+person.bogdan_bujdea:
+  entity_picture: /local/bogdan.png
+person.elena_bujdea:
+  entity_picture: /local/elena.png
+sensor.bogdan_status:
+  entity_picture: /local/bogdan.png
+sensor.elena_status:
+  entity_picture: /local/elena.png
+light.office:
+  hidden: true
+light.office_2:
+  hidden: true
+light.bedroom_lightstrip:
+  supported_features: 63
+sensor.um_apartment_power_monthly:
+  friendly_name: Monthly power usage
+  last_reset: '2020-12-01T00:00:00.045027+02:00'
+  last_period: '314'
+sensor.um_apartment_power_daily:
+  friendly_name: Daily power usage
+  last_period: '10'
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+sensor.um_apartment_power_hourly:
+  friendly_name: Hourly power usage
+sensor.um_fridge_hourly_power:
+  friendly_name: Fridge hourly kWh
+sensor.um_fridge_monthly_power:
+  friendly_name: Fridge monthly kWh
+  last_period: '32.7'
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+sensor.um_living_room_daily:
+  friendly_name: Living room daily kWh
+  last_period: '1.46'
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+sensor.um_living_room_hourly:
+  friendly_name: Living room hourly kWh
+sensor.um_living_room_monthly:
+  friendly_name: Living room monthly kWh
+  last_period: '36.3'
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+sensor.um_office_daily:
+  friendly_name: Office daily kWh
+  last_reset: '2020-12-01T00:00:00.041475+02:00'
+sensor.um_office_hourly:
+  friendly_name: Office hourly kWh
+sensor.um_office_monthly:
+  friendly_name: Office monthly kWh
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+  last_period: '45'
+sensor.um_plugs_monthly:
+  friendly_name: Plugs monthly kWh
+sensor.um_power_ac_monthly:
+  friendly_name: AC monthly kWh
+sensor.um_power_washer_daily:
+  friendly_name: Washer daily kWh
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+  last_period: '0.243'
+sensor.um_power_washer_monthly:
+  friendly_name: Washer monthly kWh
+  last_period: '15.4'
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+sensor.um_fridge_daily_power:
+  friendly_name: Fridge daily kWh
+  last_period: '1'
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+sensor.average_temperature:
+  friendly_name: Apartment temperature
+sensor.um_all_plugs_monthly:
+  friendly_name: All plugs kWh
+device_tracker.bedroom_ac:
+  entity_id: living_room_ac
+group.all_lights:
+  friendly_name: All lights
+sensor.um_daily_steps:
+  friendly_name: Steps
+sensor.um_monthly_sitting_down:
+  last_period: '496.6'
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+sensor.um_power_heating_monthly:
+  last_period: '7'
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+sensor.um_power_heating_daily:
+  last_period: '0.29'
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+sensor.um_monthly_todoist_tasks:
+  last_period: 207
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+sensor.um_daily_standing_up:
+  last_period: '10.39'
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+  friendly_name: Standing up daily
+sensor.um_daily_sitting_down:
+  last_period: '496.61'
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+  friendly_name: Sitting down daily
+sensor.um_daily_todoist_tasks:
+  last_period: '18'
+  last_reset: '2020-12-01T00:00:00.062597+02:00'
+  friendly_name: Todoist tasks/day
+light.fire_hd_tablet:
+  friendly_name: Fire HD screen

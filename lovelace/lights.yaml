@@ -1,0 +1,34 @@
+type: entities
+entities:
+  - group.all_lights
+  #- light.kitchen_light_strip
+  - type: custom:slider-entity-row
+    entity: light.kitchen_light
+    toggle: true
+  - light.sonoffofficelight  
+  - type: custom:slider-entity-row
+    entity: light.office_lightstrip
+    toggle: true
+  - type: custom:slider-entity-row
+    entity: light.bathroom_ceiling_light
+    toggle: true
+  - type: custom:slider-entity-row
+    entity: light.front_hallway
+    toggle: true
+  - type: custom:slider-entity-row
+    entity: light.back_hallway
+    toggle: true
+  - type: custom:slider-entity-row
+    entity: light.bedroom_lightstrip
+    toggle: true
+  - type: custom:slider-entity-row
+    entity: light.bedroom_light
+    toggle: true
+  - type: custom:slider-entity-row
+    entity: light.living_room_dining_table
+    toggle: true
+  - type: custom:slider-entity-row
+    entity: light.living_room_couch_light
+    toggle: true
+  - light.sonoff_kids_light  
+title: All Lights

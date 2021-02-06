@@ -1,0 +1,15 @@
+type: entities
+entities:
+  - entity: input_text.bogdan_weight
+  - entity: input_text.bogdan_fat
+  - entity: input_text.bogdan_water
+  - entity: input_text.bogdan_muscle
+  - entity: input_text.bogdan_bmr
+  - entity: input_text.bogdan_waist
+  - action_name: Save
+    icon: 'mdi:bell'
+    name: ' '
+    service: script.save_bogdan_status
+    type: call-service
+show_header_toggle: false
+title: Bogdan

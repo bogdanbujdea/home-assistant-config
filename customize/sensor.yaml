@@ -1,0 +1,816 @@
+- platform: imap_email_content
+  name: curve_email
+  server: imap.gmail.com
+  port: 993
+  username: !secret gmail_email
+  password: !secret gmail_password
+  folder: Receipts
+  senders:
+    - support@imaginecurve.com
+- platform: my_unifi
+  name: "WiFi connected devices"
+  region: "default"
+  username: !secret unifi_account
+  password: !secret unifi_password
+  url: !secret unifi_url
+- platform: template
+  sensors:
+    
+    extra_steps_for_each_day:
+      icon_template: mdi:walk
+      unit_of_measurement: steps
+      friendly_name: "Extra steps for each day"
+      value_template: >-
+        {{ (((float(states.sensor.average_steps_for_the_past_week.state) - float(states.sensor.predicted_steps_for_current_week.state)) * 7) / (7 - now().weekday() )) | int }}
+    predicted_steps_for_current_week:
+      icon_template: mdi:run
+      friendly_name: "Predicted steps for this week"
+      unit_of_measurement: steps
+      value_template: >-
+        {% set steps = states.sensor.average_steps_for_the_current_week.state | int %}
+        {% set days = now().weekday() + 1 %}
+        {% set totalSteps = steps * days%}
+        {% set total = (7 - days) * 6000 + totalSteps %}
+        {{ (total / 7) | round(0) }}
+    galaxy_s9_current_page:
+      icon_template: mdi:search-web
+      friendly_name: "Galaxy S9 Current Page"
+      value_template: >-
+        {{ states.sensor.galaxy_s9.attributes.path }}
+    msi_browser_current_page:
+      icon_template: mdi:search-web
+      friendly_name: "MSI browser Current Page"
+      value_template: >-
+        {{ states.sensor.msi_browser.attributes.path }}
+    fasting_time:
+      icon_template: mdi:food-off
+      unit_of_measurement: h
+      friendly_name: "Fasting time"
+      value_template: >-
+        {{ (float(as_timestamp(now()) - as_timestamp(states.input_datetime.last_meal.state)) /3600) | round(2)  }}
+      
+    last_expense:
+      friendly_name: Last expense
+      unit_of_measurement: RON
+      value_template: >
+        {% if is_state('sensor.curve_email','unknown') %}
+            {{ states('sensor.last_expense') }}
+        {% else %}
+          {{ state_attr('sensor.curve_email','subject') | regex_findall_index("\d+\.?\d+. RON") | replace(" RON","") | replace(" RON","") }}
+        {% endif %}
+      attribute_templates:
+        seller: >
+          {% if is_state('sensor.curve_email','unknown') %}
+              {{ states.sensor.last_expense.attributes.seller }}
+          {% else %}
+            {{ state_attr('sensor.curve_email','subject')[27:1000] | regex_findall_index(".* on") | replace(" on","")}}
+          {% endif %}
+        date: >
+          {% if is_state('sensor.curve_email','unknown') %}
+              {{ states.sensor.last_expense.attributes.date }}
+          {% else %}
+            {{ state_attr('sensor.curve_email','date')}}
+          {% endif %}
+    gas_cost:
+      icon_template: mdi:cash
+      unit_of_measurement: RON
+      friendly_name: "Current gas cost"
+      value_template: >-
+        {{ ((float(states.var.gas_index.state) - 939.2 ) * 1.8 )| round(2) }}
+    daily_gas_usage:
+      icon_template: mdi:thermometer-lines
+      unit_of_measurement: mc
+      friendly_name: "Daily gas usage"
+      value_template: >-
+        {{ (states.sensor.heating_on_today.state | float * 1.114 ) | round(2) }}
+    monthly_gas_usage:
+      icon_template: mdi:thermometer-lines
+      unit_of_measurement: mc
+      friendly_name: "Monthly gas cost"
+      value_template: >-
+        {{ (states.sensor.heating_on_this_Month.state | float * 1.114 ) | round(2) }}
+    daily_gas_cost:
+      icon_template: mdi:thermometer-lines
+      unit_of_measurement: RON
+      friendly_name: "Daily gas cost"
+      value_template: >-
+        {{ (states.sensor.heating_on_today.state | float * 1.114 * 1.8) | round(2) }}
+    monthly_gas_cost:
+      icon_template: mdi:thermometer-lines
+      unit_of_measurement: RON
+      friendly_name: "Monthly gas usage"
+      value_template: >-
+        {{ (states.sensor.heating_on_this_month.state | float * 1.114 * 1.8 ) | round(2) }}
+    power_cost:
+      icon_template: mdi:cash
+      unit_of_measurement: RON
+      friendly_name: "Current power cost"
+      value_template: >-
+        {{ (float(states.sensor.um_apartment_power_monthly.state) * 0.64 )| round(2) }}
+    estimated_power_cost_per_day:
+      icon_template: mdi:cash
+      unit_of_measurement: RON
+      friendly_name: "Power cost/day"
+      value_template: >-
+        {{ (((float(states.sensor.apartment_power_adjusted.state) / 1000) | round(2)) * 0.64 * 24 | round(2)) }}
+    estimated_power_cost_per_month:
+      icon_template: mdi:cash
+      unit_of_measurement: RON
+      friendly_name: "Power cost/month"
+      value_template: >-
+        {{ (((float(states.sensor.apartment_power_adjusted.state) / 1000) | round(2)) * 0.64 * 24 * 30) | round(2) }}
+    apartment_power_adjusted:
+      icon_template: mdi:flash
+      unit_of_measurement: W
+      friendly_name: "Apartment power"
+      value_template: >-
+        {{ (float(states.sensor.shelly_current_consumption.state) * 1.08) | round(0) }}
+    garage_temperature:
+      icon_template: mdi:temperature
+      friendly_name: "Garage temperature"
+      value_template: >-
+        {{ state_attr('binary_sensor.garage_door_shelly', 'temperature') }}
+    garage_light_level:
+      icon_template: mdi:light
+      friendly_name: "Garage light"
+      value_template: >-
+        {{ state_attr('binary_sensor.garage_door_shelly', 'illuminance') }}
+    hallway_motion:
+      icon_template: mdi:walk
+      friendly_name: "Hallway"
+      value_template: >-
+        {{  relative_time(states.binary_sensor.hallway_motion_sensor.last_changed) }} ago
+    bedroom_motion:
+      icon_template: mdi:walk
+      friendly_name: "Bedroom"
+      value_template: >-
+        {{  relative_time(states.binary_sensor.bedroom_motion_sensor.last_changed) }} ago
+    bathroom_motion:
+      icon_template: mdi:walk
+      friendly_name: "Bathroom"
+      value_template: >-
+        {{  relative_time(states.binary_sensor.bathroom_motion_sensor.last_changed) }} ago
+    kitchen_motion:
+      icon_template: mdi:walk
+      friendly_name: "Kitchen"
+      value_template: >-
+        {{  relative_time(states.binary_sensor.kitchen_motion_sensor.last_changed) }} ago
+    office_motion:
+      icon_template: mdi:walk
+      friendly_name: "Office"
+      value_template: >-
+        {{  relative_time(states.binary_sensor.office_motion_sensor.last_changed) }} ago
+    living_room_motion:
+      icon_template: mdi:walk
+      friendly_name: "Living room"
+      value_template: >-
+        {{  relative_time(states.binary_sensor.living_room_motion_sensor.last_changed) }} ago
+    kitchen_table_motion:
+      icon_template: mdi:walk
+      friendly_name: "Kitchen table"
+      value_template: >-
+        {{  relative_time(states.binary_sensor.kitchen_table_motion_sensor.last_changed) }} ago
+
+- platform: mqtt
+  name: "Tariff Energy"
+  state_topic: "shellies/shellyem-C7F86E/emeter/0/energy"
+  value_template: "{{ value|float / 60000 }}" # Fix for Watt-minutes
+  qos: 1
+  unit_of_measurement: "kWh"
+  icon: mdi:chart-bar
+
+- platform: mqtt
+  name: "Garage door sensor"
+  state_topic: "zigbee2mqtt/zigbee_garage_door_sensor"
+  value_template: "{{ trigger.payload_json['contact'] == true }}" # Fix for Watt-minutes
+  qos: 1
+  icon: mdi:garage
+- platform: integration
+  name: apartment_power_total
+  source: sensor.apartment_power_adjusted
+  unit_prefix: k
+  round: 3
+- platform: integration
+  name: apartment_power_original
+  source: sensor.shelly_current_consumption
+  unit_prefix: k
+  round: 3
+- platform: integration
+  name: living_room_power_sensor
+  source: sensor.living_room_power
+  unit_prefix: k
+  round: 3
+- platform: integration
+  name: office_power_sensor
+  source: sensor.gosund_office_energy_power
+  unit_prefix: k
+  round: 3
+- platform: integration
+  name: office_desk_power_sensor
+  source: sensor.office_desk_plug_energy_power
+  unit_prefix: k
+  round: 3
+- platform: integration
+  name: fridge_power_sensor
+  source: sensor.power_3
+  unit_prefix: k
+  round: 3
+- platform: integration
+  name: heating_power
+  source: sensor.power_1
+  unit_prefix: k
+  round: 3
+- platform: integration
+  name: washer_power
+  source: sensor.power_2
+  unit_prefix: k
+  round: 3
+- platform: integration
+  name: unmeasured_power_sensor
+  source: sensor.unmeasured_power
+  unit_prefix: k
+  round: 3
+- platform: template
+  sensors:
+    power_1:
+      friendly_name: "Broadlink Power 1"
+      value_template: "{{ states.switch.power_1.attributes.current_power_w }}"
+      unit_of_measurement: "W"
+- platform: template
+  sensors:
+    power_2:
+      friendly_name: "Broadlink Power 2"
+      value_template: "{{ states.switch.power_2.attributes.current_power_w }}"
+      unit_of_measurement: "W"
+- platform: template
+  sensors:
+    power_3:
+      friendly_name: "Broadlink Power 3"
+      value_template: "{{ states.switch.power_3.attributes.current_power_w }}"
+      unit_of_measurement: "W"
+- platform: template
+  sensors:
+    power_consumption_summed:
+      value_template: "{{ ((states('sensor.office_desk_plug_energy_power') | float) + (states('sensor.power_1') | float) + (states('sensor.power_2') | float) + (states('sensor.gosund_office_energy_power') | float) + (states('sensor.living_room_power') | float) + (states('sensor.power_3') | float)) | round(2) }}"
+      friendly_name: "Plugs power usage"
+      unit_of_measurement: "W"
+- platform: systemmonitor
+  resources:
+    - type: memory_use_percent
+    - type: disk_use_percent
+      arg: /
+    - type: last_boot
+
+- platform: command_line
+  name: Bedroom camera Temperature
+  command: "ssh -i /config/id_rsa -o StrictHostKeyChecking=no root@192.168.1.244 -t 'cat /sys/class/thermal/thermal_zone0/temp'"
+  unit_of_measurement: "°C"
+  scan_interval: 300
+  value_template: "{{ (value | multiply(0.001)) | round(1) }}"
+
+- platform: command_line
+  name: Garage HA Temperature
+  command: "ssh -i /config/id_rsa -o StrictHostKeyChecking=no pi@192.168.1.101 -t 'cat /sys/class/thermal/thermal_zone0/temp'"
+  unit_of_measurement: "°C"
+  scan_interval: 300
+  value_template: "{{ (value | multiply(0.001)) | round(1) }}"
+
+- platform: command_line
+  name: Host CPU Temperature
+  command: "ssh -i /config/id_rsa -o StrictHostKeyChecking=no root@192.168.1.200 -t 'cat /sys/class/thermal/thermal_zone0/temp'"
+  unit_of_measurement: "°C"
+  scan_interval: 300
+  value_template: "{{ (value | multiply(0.001)) | round(1) }}"
+- platform: command_line
+  name: Raspberry CPU Temperature
+  command: "ssh -i /config/id_rsa -o StrictHostKeyChecking=no pi@192.168.1.133 -t 'cat /sys/class/thermal/thermal_zone0/temp'"
+  unit_of_measurement: "°C"
+  scan_interval: 300
+  value_template: "{{ (value | multiply(0.001)) | round(1) }}"
+- platform: template
+  sensors:
+    bogdan_location:
+      value_template: "{{ states.input_select.bogdan_status_dropdown.state }}"
+      friendly_name: "Bogdan"
+    bogdan_status:
+      value_template: "{{ states.input_select.bogdan_location_dropdown.state }}"
+      friendly_name: "Bogdan"
+    elena_status:
+      value_template: "{{ states.input_select.elena_status_dropdown.state }}"
+      friendly_name: "Elena"
+- platform: min_max
+  name: average_light
+  type: mean
+  round_digits: 1
+  entity_ids:
+    - sensor.bedroom_light_level
+    - sensor.kitchen_light_level
+    - sensor.bathroom_sensor_light_level
+    - sensor.hallway_light_level
+- platform: template
+  sensors:
+    unmeasured_power:
+      value_template: "{{ ((states('sensor.shelly_current_consumption') | float) - (states('sensor.power_consumption_summed') | float)) | round(4) }}"
+      friendly_name: "Unmeasured power"
+      unit_of_measurement: "W"
+- platform: min_max
+  name: average_temperature
+  type: mean
+  round_digits: 1
+  entity_ids:
+    - sensor.kids_room_temperature
+    - sensor.living_room_temperature
+    - sensor.bedroom_temperature
+    - sensor.kitchen_temperature
+    - sensor.bathroom_temperature
+    - sensor.hallway_temperature
+- platform: template
+  sensors:
+    xiaomi_airpurifier_temp:
+      friendly_name: "Temperature"
+      value_template: "{{ state_attr('fan.xiaomi_miio_device', 'temperature') }}"
+      unit_of_measurement: "°C"
+      device_class: "temperature"
+    xiaomi_airpurifier_humidity:
+      friendly_name: "Humidity"
+      value_template: "{{ state_attr('fan.xiaomi_miio_device', 'humidity') }}"
+      unit_of_measurement: "%"
+      device_class: "humidity"
+    xiaomi_airpurifier_air_quality_pm25:
+      friendly_name: "Air quality"
+      value_template: "{{ state_attr('fan.xiaomi_miio_device', 'aqi') }}"
+      unit_of_measurement: "μg/m³"
+      icon_template: "mdi:weather-fog"
+    xiaomi_airpurifier_speed:
+      friendly_name: "Fan speed"
+      value_template: "{{ state_attr('fan.xiaomi_miio_device', 'motor_speed') }}"
+      unit_of_measurement: "rpm"
+      icon_template: "mdi:speedometer"
+    xiaomi_airpurifier_filter_remaining:
+      friendly_name: "Filter remaining"
+      value_template: "{{ state_attr('fan.xiaomi_miio_device', 'filter_life_remaining') }}"
+      unit_of_measurement: "%"
+      icon_template: "mdi:heart-outline"
+
+    # Productivity
+    productivity_score:
+      friendly_name: "Productivity score"
+      unit_of_measurement: "%"
+      value_template: "{{ states.input_number.productivity_score.state}}"
+      icon_template: "mdi:worker"
+
+    productivity_score_work_hours:
+      friendly_name: "Work productivity score"
+      unit_of_measurement: "%"
+      value_template: "{{ states.input_number.productivity_score_work_hours.state}}"
+      icon_template: "mdi:worker"
+    all_completed_tasks:
+      friendly_name: "All completed tasks for today"
+      unit_of_measurement: "tasks"
+      value_template: "{{ (float(states.var.completed_tasks_for_today.state) + (float(states.var.initial_recurrent_tasks.state) - float(states.var.recurrent_tasks_for_today.state))) }}"
+      icon_template: mdi:gauge
+    all_initial_tasks:
+      friendly_name: "Initial tasks for today"
+      unit_of_measurement: "tasks"
+      value_template: "{{ float(states.var.tasks_for_today.state) + float(states.var.completed_tasks_for_today.state) + (float(states.var.initial_recurrent_tasks.state) - float(states.var.recurrent_tasks_for_today.state)) }}"
+      icon_template: mdi:gauge
+
+    todoist_tasks_completion_percentage:
+      friendly_name: "Daily % of tasks completed"
+      unit_of_measurement: "%"
+      value_template: "{{ ((float(states.sensor.all_completed_tasks.state) / float(states.sensor.all_initial_tasks.state)) * 100) | round(0) }}"
+      icon_template: >-
+        {% if ((float(states.sensor.all_completed_tasks.state) / float(states.sensor.all_initial_tasks.state)) * 100) | round(0) < 10 %}
+          mdi:gauge-empty
+        {%- elif ((float(states.sensor.all_completed_tasks.state) / float(states.sensor.all_initial_tasks.state)) * 100) | round(0)  < 25 -%}
+          mdi:gauge-low
+        {%- elif ((float(states.sensor.all_completed_tasks.state) / float(states.sensor.all_initial_tasks.state)) * 100) | round(0) < 75 -%}
+          mdi:gauge
+        {% else %}
+          mdi:gauge-full
+        {% endif %}
+
+    todoist_tasks_recurrent_completion_percentage:
+      friendly_name: "Daily % of recurrent tasks completed"
+      unit_of_measurement: "%"
+      value_template: "{{ ((float(states.var.initial_recurrent_tasks.state) - float(states.var.recurrent_tasks_for_today.state)) / (float(states.var.initial_recurrent_tasks.state)) * 100) | round(0) }}"
+      icon_template: >-
+        {% if ((float(states.var.initial_recurrent_tasks.state) - float(states.var.recurrent_tasks_for_today.state)) / (float(states.var.initial_recurrent_tasks.state)) * 100) | round(0) < 10 %}
+          mdi:gauge-empty
+        {%- elif ((float(states.var.initial_recurrent_tasks.state) - float(states.var.recurrent_tasks_for_today.state)) / (float(states.var.initial_recurrent_tasks.state)) * 100) | round(0) < 25 -%}
+          mdi:gauge-low
+        {%- elif ((float(states.var.initial_recurrent_tasks.state) - float(states.var.recurrent_tasks_for_today.state)) / (float(states.var.initial_recurrent_tasks.state)) * 100) | round(0) < 75 -%}
+          mdi:gauge
+        {% else %}
+          mdi:gauge-full
+        {% endif %}
+
+    todoist_tasks_important_completion_percentage:
+      friendly_name: "Daily % of important tasks completed"
+      unit_of_measurement: "%"
+      value_template: "{{ (float(states.var.completed_tasks_for_today.state) / (float(states.var.completed_tasks_for_today.state) + (float(states.var.tasks_for_today.state))) * 100) | round(0) }} "
+      icon_template: >-
+        {% if (float(states.var.completed_tasks_for_today.state) / (float(states.var.completed_tasks_for_today.state) + (float(states.var.tasks_for_today.state))) * 100) | round(0) < 10 %}
+          mdi:gauge-empty
+        {%- elif (float(states.var.completed_tasks_for_today.state) / (float(states.var.completed_tasks_for_today.state) + (float(states.var.tasks_for_today.state))) * 100) | round(0) < 25 -%}
+          mdi:gauge-low
+        {%- elif (float(states.var.completed_tasks_for_today.state) / (float(states.var.completed_tasks_for_today.state) + (float(states.var.tasks_for_today.state))) * 100) | round(0) < 75 -%}
+          mdi:gauge
+        {% else %}
+          mdi:gauge-full
+        {% endif %}
+
+    # Motion
+    kids_room_motion_last_detected:
+      friendly_name: "Kids room motion"
+      value_template: >-
+        {% if states.binary_sensor.kids_room_motion_sensor.state == 'on' %}
+          Detected {{ relative_time(strptime(states.sensor.kids_room_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago
+        {% else %}
+          Cleared {{ relative_time(strptime(states.sensor.kids_room_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago 
+        {% endif %}
+      icon_template: >-
+        {% if states.binary_sensor.kids_room_motion_sensor.state == 'off' %}
+          mdi:sleep
+        {%- elif as_timestamp(now()) - as_timestamp(states.sensor.kids_room_motion_query.state) <= 30-%}
+          mdi:run-fast
+        {%- elif as_timestamp(now()) - as_timestamp(states.sensor.kids_room_motion_query.state) <= 60 -%}
+          mdi:run
+        {% else %}
+          mdi:walk
+        {% endif %}
+      attribute_templates:
+        timestamp: "{{ as_timestamp(states.sensor.kids_room_motion_query.state) }}"
+        status: "{{ states.binary_sensor.kids_room_motion_sensor.state }}"
+        order: "{{ states.binary_sensor.kids_room_motion_sensor.state }}-{{ as_timestamp(states.sensor.kids_room_motion_query.state) }}"
+    office_motion_last_detected:
+      friendly_name: "Office motion"
+      value_template: >-
+        {% if states.binary_sensor.office_motion_sensor.state == 'on' %}
+          Detected {{ relative_time(strptime(states.sensor.office_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago
+        {% else %}
+          Cleared {{ relative_time(strptime(states.sensor.office_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago 
+        {% endif %}
+      icon_template: >-
+        {% if states.binary_sensor.office_motion_sensor.state == 'off' %}
+          mdi:sleep
+        {%- elif as_timestamp(now()) - as_timestamp(states.sensor.office_motion_query.state) <= 30-%}
+          mdi:run-fast
+        {%- elif as_timestamp(now()) - as_timestamp(states.sensor.office_motion_query.state) <= 60 -%}
+          mdi:run
+        {% else %}
+          mdi:walk
+        {% endif %}
+      attribute_templates:
+        timestamp: "{{ as_timestamp(states.sensor.office_motion_query.state) }}"
+        status: "{{ states.binary_sensor.office_motion_sensor.state }}"
+        order: "{{ states.binary_sensor.office_motion_sensor.state }}-{{ as_timestamp(states.sensor.office_motion_query.state) }}"
+    hallway_motion_last_detected:
+      friendly_name: "Hallway motion"
+      value_template: >-
+        {% if states.binary_sensor.hallway_motion_sensor.state == 'on' %}
+          Detected {{ relative_time(strptime(states.sensor.hallway_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago
+        {% else %}
+          Cleared {{ relative_time(strptime(states.sensor.hallway_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago 
+        {% endif %}
+      icon_template: >-
+        {% if states.binary_sensor.hallway_motion_sensor.state == 'off' %}
+          mdi:sleep
+        {%- elif as_timestamp(now()) -  as_timestamp(states.sensor.hallway_motion_query.state) <= 30-%}
+          mdi:run-fast
+        {%- elif as_timestamp(now()) - as_timestamp(states.sensor.hallway_motion_query.state) <= 60 -%}
+          mdi:run
+        {% else %}
+          mdi:walk
+        {% endif %}
+      attribute_templates:
+        timestamp: "{{ as_timestamp(states.sensor.hallway_motion_query.state) }}"
+        status: "{{ states.binary_sensor.hallway_motion_query.state }}"
+        order: "{{ states.binary_sensor.hallway_motion_sensor.state }}-{{ as_timestamp(states.sensor.hallway_motion_query.state) }}"
+    living_room_motion_last_detected:
+      friendly_name: "Living room motion"
+      value_template: >-
+        {% if states.binary_sensor.living_room_motion_sensor.state == 'on' %}
+          Detected {{ relative_time(strptime(states.sensor.living_room_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago
+        {% else %}
+          Cleared {{ relative_time(strptime(states.sensor.living_room_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago 
+        {% endif %}
+      icon_template: >-
+        {% if states.binary_sensor.living_room_motion_sensor.state == 'off' %}
+          mdi:sleep
+        {%- elif as_timestamp(now()) - as_timestamp(states.sensor.living_room_motion_query.state) <= 30-%}
+          mdi:run-fast
+        {%- elif as_timestamp(now()) - as_timestamp(states.sensor.living_room_motion_query.state) <= 60 -%}
+          mdi:run
+        {% else %}
+          mdi:walk
+        {% endif %}
+      attribute_templates:
+        timestamp: "{{ as_timestamp(states.sensor.living_room_motion_query.state) }}"
+        status: "{{ states.binary_sensor.living_room_motion_query.state }}"
+        order: "{{ states.binary_sensor.living_room_motion_sensor.state }}-{{ as_timestamp(states.sensor.living_room_motion_query.state) }}"
+    bedroom_motion_last_detected:
+      friendly_name: "Bedroom motion"
+      value_template: >-
+        {% if states.binary_sensor.bedroom_motion_sensor.state == 'on' %}
+          Detected {{ relative_time(strptime(states.sensor.bedroom_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago
+        {% else %}
+          Cleared {{ relative_time(strptime(states.sensor.bedroom_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago 
+        {% endif %}
+      icon_template: >-
+        {% if states.binary_sensor.bedroom_motion_sensor.state == 'off' %}
+          mdi:sleep
+        {%- elif as_timestamp(now()) -  as_timestamp(states.sensor.bedroom_motion_query.state) <= 30-%}
+          mdi:run-fast
+        {%- elif as_timestamp(now()) -  as_timestamp(states.sensor.bedroom_motion_query.state) <= 60 -%}
+          mdi:run
+        {% else %}
+          mdi:walk
+        {% endif %}
+      attribute_templates:
+        timestamp: "{{ as_timestamp(states.sensor.bedroom_motion_query.state) }}"
+        status: "{{ states.binary_sensor.bedroom_motion_query.state }}"
+        order: "{{ states.binary_sensor.bedroom_motion_sensor.state }}-{{ as_timestamp(states.sensor.bedroom_motion_query.state) }}"
+    bathroom_motion_last_detected:
+      friendly_name: "Bathroom motion"
+      value_template: >-
+        {% if states.binary_sensor.bathroom_motion_sensor.state == 'on' %}
+          Detected {{ relative_time(strptime(states.sensor.bathroom_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago
+        {% else %}
+          Cleared {{ relative_time(strptime(states.sensor.bathroom_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago 
+        {% endif %}
+      icon_template: >-
+        {% if states.binary_sensor.bathroom_motion_sensor.state == 'off' %}
+          mdi:sleep
+        {%- elif as_timestamp(now()) - as_timestamp(states.sensor.bathroom_motion_query.state) <= 30-%}
+          mdi:run-fast
+        {%- elif as_timestamp(now()) - as_timestamp(states.sensor.bathroom_motion_query.state) <= 60 -%}
+          mdi:run
+        {% else %}
+          mdi:walk
+        {% endif %}
+      attribute_templates:
+        timestamp: "{{ as_timestamp(states.sensor.bathroom_motion_query.state) }}"
+        status: "{{ states.binary_sensor.bathroom_motion_query.state }}"
+        order: "{{ states.binary_sensor.bathroom_motion_sensor.state }}-{{ as_timestamp(states.sensor.bathroom_motion_query.state) }}"
+    kitchen_hue_motion_last_detected:
+      friendly_name: "Kitchen hue motion"
+      value_template: >-
+        {% if states.binary_sensor.kitchen_motion_sensor.state == 'on' %}
+          Detected {{ relative_time(strptime(states.sensor.kitchen_hue_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago
+        {% else %}
+          Cleared {{ relative_time(strptime(states.sensor.kitchen_hue_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago 
+        {% endif %}
+      icon_template: >-
+        {% if states.binary_sensor.kitchen_motion_sensor.state == 'off' %}
+          mdi:sleep
+        {%- elif as_timestamp(now()) -  as_timestamp(states.sensor.kitchen_hue_motion_query.state) <= 30-%}
+          mdi:run-fast
+        {%- elif as_timestamp(now()) -  as_timestamp(states.sensor.kitchen_hue_motion_query.state) <= 60 -%}
+          mdi:run
+        {% else %}
+          mdi:walk
+        {% endif %}
+      attribute_templates:
+        timestamp: "{{ as_timestamp(states.sensor.kitchen_hue_motion_query.state) }}"
+        status: "{{ states.binary_sensor.kitchen_hue_motion_query.state }}"
+        order: "{{ states.binary_sensor.kitchen_motion_sensor.state }}-{{ as_timestamp(states.sensor.kitchen_hue_motion_query.state) }}"
+    kitchen_tradfri_motion_last_detected:
+      friendly_name: "Kitchen tradfri motion"
+      value_template: >-
+        {% if states.binary_sensor.kitchen_table_motion_sensor.state == 'on' %}
+          Detected {{ relative_time(strptime(states.sensor.kitchen_tradfri_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago
+        {% else %}
+          Cleared {{ relative_time(strptime(states.sensor.kitchen_tradfri_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago 
+        {% endif %}
+      icon_template: >-
+        {% if states.binary_sensor.kitchen_table_motion_sensor.state == 'off' %}
+          mdi:sleep
+        {%- elif as_timestamp(now()) - as_timestamp(states.sensor.kitchen_tradfri_motion_query.state) <= 30-%}
+          mdi:run-fast
+        {%- elif as_timestamp(now()) - as_timestamp(states.sensor.kitchen_tradfri_motion_query.state) <= 60 -%}
+          mdi:run
+        {% else %}
+          mdi:walk
+        {% endif %}
+      attribute_templates:
+        timestamp: "{{ as_timestamp(states.sensor.kitchen_tradfri_motion_query.state) }}"
+        status: "{{ states.binary_sensor.kitchen_tradfri_motion_query.state }}"
+        order: "{{ states.binary_sensor.kitchen_table_motion_sensor.state }}-{{ as_timestamp(states.sensor.kitchen_tradfri_motion_query.state) }}"
+    kitchen_motion_last_detected:
+      friendly_name: "Kitchen motion"
+      value_template: >-
+        {% if states.group.kitchen_motion.state == 'on' %}
+          Detected {{ relative_time(strptime(states.sensor.kitchen_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago
+        {% else %}
+          Cleared {{ relative_time(strptime(states.sensor.kitchen_motion_query.state, '%Y-%m-%d %H:%M:%S')) }} ago 
+        {% endif %}
+      icon_template: >-
+        {% if states.group.kitchen_motion.state == 'off' %}
+          mdi:sleep
+        {%- elif as_timestamp(now()) - as_timestamp(states.sensor.kitchen_motion_query.state) <= 30-%}
+          mdi:run-fast
+        {%- elif as_timestamp(now()) - as_timestamp(states.sensor.kitchen_motion_query.state) <= 60 -%}
+          mdi:run
+        {% else %}
+          mdi:walk
+        {% endif %}
+      attribute_templates:
+        timestamp: "{{ as_timestamp(states.sensor.kitchen_motion_query.state) }}"
+        status: "{{ states.binary_sensor.kitchen_motion_query.state }}"
+        order: "{{ states.group.kitchen_motion.state }}-{{ as_timestamp(states.sensor.kitchen_motion_query.state) }}"
+    office_position:
+      friendly_name: "Office position"
+      value_template: >-
+        {% if states.binary_sensor.office_chair.state == 'on' and states.binary_sensor.office_desk_sensor.state == 'off' and states.var.bogdan_location.state == 'Office'  %}
+          Standing up
+        {%- elif states.binary_sensor.office_chair.state == 'off' -%}
+          Sitting down
+        {% else %}
+          AFK
+        {% endif %}
+      icon_template: >-
+        {% if states.binary_sensor.office_chair.state == 'on' and states.binary_sensor.office_desk_sensor.state == 'off' %}
+          mdi:human-handsup
+        {%- elif states.binary_sensor.office_chair.state == 'off' -%}
+          mdi:seat-recline-normal
+        {% else %}
+          mdi:human-male-boy
+        {% endif %}
+    current_week_vs_last_week_steps:
+      friendly_name: "Weekly avg steps increase"
+      unit_of_measurement: "steps"
+      value_template: >-
+        {{ float(states.sensor.average_steps_for_the_current_week.state) - float(states.sensor.average_steps_for_the_past_week.state)}}
+      icon_template: "mdi:walk"
+    standing_up_time_today:
+      friendly_name: "Standing up today"
+      unit_of_measurement: "%"
+      value_template: >-
+        {{ ((float(states.sensor.standing_up_today.state) / ((float(states.sensor.sitting_on_chair_today.state)) + (float(states.sensor.standing_up_today.state)))) * 100) | round(3)}}
+      icon_template: "mdi:human-handsup"
+    sitting_down_time_today:
+      friendly_name: "Sitting down today"
+      unit_of_measurement: "%"
+      value_template: >-
+        {{ ((float(states.sensor.sitting_on_chair_today.state) / ((float(states.sensor.sitting_on_chair_today.state)) + (float(states.sensor.standing_up_today.state)))) * 100) | round(3)}}
+      icon_template: "mdi:human-handsup"
+
+- platform: sql
+  scan_interval: 120
+  db_url: !secret mariadb_url
+  queries:
+    - name: Kids room motion query
+      query: "SELECT last_changed FROM states where entity_id = 'binary_sensor.kids_room_motion_sensor' and state = 'on' order by last_changed DESC LIMIT 1"
+      column: "last_changed"
+    - name: Office motion query
+      query: "SELECT last_changed FROM states where entity_id = 'binary_sensor.office_motion_sensor' and state = 'on' order by last_changed DESC LIMIT 1"
+      column: "last_changed"
+    - name: Living room motion query
+      query: "SELECT last_changed FROM states where entity_id = 'binary_sensor.living_room_motion_sensor' and state = 'on' order by last_changed DESC LIMIT 1"
+      column: "last_changed"
+    - name: Bathroom motion query
+      query: "SELECT last_changed FROM states where entity_id = 'binary_sensor.bathroom_motion_sensor' and state = 'on' order by last_changed DESC LIMIT 1"
+      column: "last_changed"
+    - name: Hallway motion query
+      query: "SELECT last_changed FROM states where entity_id = 'binary_sensor.hallway_motion_sensor' and state = 'on' order by last_changed DESC LIMIT 1"
+      column: "last_changed"
+    - name: Bedroom motion query
+      query: "SELECT last_changed FROM states where entity_id = 'binary_sensor.bedroom_motion_sensor' and state = 'on' order by last_changed DESC LIMIT 1"
+      column: "last_changed"
+    - name: Kitchen hue motion query
+      query: "SELECT last_changed FROM states where entity_id = 'binary_sensor.kitchen_motion_sensor' and state = 'on' order by last_changed DESC LIMIT 1"
+      column: "last_changed"
+    - name: Kitchen tradfri motion query
+      query: "SELECT last_changed FROM states where entity_id = 'binary_sensor.kitchen_table_motion_sensor' and state = 'on' order by last_changed DESC LIMIT 1"
+      column: "last_changed"
+    - name: Kitchen motion query
+      query: "SELECT last_changed FROM states where entity_id = 'group.kitchen_motion' and state = 'on' order by last_changed DESC LIMIT 1"
+      column: "last_changed"
+
+    - name: Fasting query
+      query: "SELECT state FROM states WHERE entity_id = 'input_datetime.last_meal' ORDER BY last_changed DESC LIMIT 1"
+      column: "state"
+    # Desk and chair
+    - name: Sitting down query
+      query: "SELECT last_changed FROM states where entity_id = 'binary_sensor.office_chair' and state = 'off' order by last_changed DESC LIMIT 1"
+      column: "last_changed"
+    - name: Standing up query
+      query: "SELECT last_changed FROM states where entity_id = 'binary_sensor.office_desk_sensor' and state = 'off' order by last_changed DESC LIMIT 1"
+      column: "last_changed"
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+    - 'date_time'
+    - 'date_time_utc'
+    - 'date_time_iso'
+- platform: sql
+  scan_interval: 60
+  db_url: !secret mariadb_url
+  queries:
+    - name: Database size
+      query: 'SELECT table_schema "database", round(sum(data_length + index_length)/1024/1024) "value" FROM information_schema.TABLES GROUP BY table_schema;'
+      column: "value"
+      unit_of_measurement: Mb
+    - name: Fridge opened count
+      query: "SELECT COUNT(*) as count FROM states where entity_id = 'binary_sensor.fridge_door' and state = 'on' and DATE(last_changed) = CURRENT_DATE;"
+      column: "count"
+    - name: Average steps for the past week
+      query: "SELECT TRUNCATE(AVG(steps), 0) as steps FROM (select DATE, max_steps AS steps FROM (SELECT DATE(CONVERT_TZ(last_changed,'+00:00','+2:00')) AS date, MAX(CAST(state AS INT)) AS max_steps FROM states WHERE entity_id = 'var.bogdan_steps' GROUP BY DATE(CONVERT_TZ(last_changed,'+00:00','+2:00'))) AS weekly WHERE max_steps > 6000 AND DATE >= (SELECT (CURDATE() - interval weekday(CURDATE()) DAY) - interval 7 DAY) ORDER BY DATE LIMIT 7) AS week;"
+      column: "steps"
+    - name: Average steps for the current week
+      query: "SELECT TRUNCATE(AVG(GREATEST(steps, 6000)), 0) as steps FROM (select DATE, max_steps AS steps FROM (SELECT DATE(CONVERT_TZ(last_changed,'+00:00','+2:00')) AS date, MAX(CAST(state AS INT)) AS max_steps FROM states WHERE entity_id = 'var.bogdan_steps' GROUP BY DATE(CONVERT_TZ(last_changed,'+00:00','+2:00'))) AS weekly WHERE  DATE >= (SELECT (CURDATE() - interval weekday(CURDATE()) DAY) ) ORDER BY DATE LIMIT 7) AS week;"
+      column: "steps"
+    - name: Standing up day 1
+      query: "SELECT state FROM states WHERE entity_id = 'sensor.standing_up_time_today' and DATE(CONVERT_TZ(last_changed,'+00:00','+2:00')) >= subdate(CURRENT_DATE, 1) AND CONVERT_TZ(last_changed,'+00:00','+2:00') < SUBDATE(CURRENT_DATE, 0) ORDER BY last_changed DESC LIMIT 1;"
+      column: "state"
+    - name: Standing up day 2
+      query: "SELECT state FROM states WHERE entity_id = 'sensor.standing_up_time_today' and DATE(CONVERT_TZ(last_changed,'+00:00','+2:00')) >= subdate(CURRENT_DATE, 2) AND CONVERT_TZ(last_changed,'+00:00','+2:00') < SUBDATE(CURRENT_DATE, 1) ORDER BY last_changed DESC LIMIT 1;"
+      column: "state"
+    - name: Standing up day 3
+      query: "SELECT state FROM states WHERE entity_id = 'sensor.standing_up_time_today' and DATE(CONVERT_TZ(last_changed,'+00:00','+2:00')) >= subdate(CURRENT_DATE, 3) AND CONVERT_TZ(last_changed,'+00:00','+2:00') < SUBDATE(CURRENT_DATE, 2) ORDER BY last_changed DESC LIMIT 1;"
+      column: "state"
+    - name: Standing up day 4
+      query: "SELECT state FROM states WHERE entity_id = 'sensor.standing_up_time_today' and DATE(CONVERT_TZ(last_changed,'+00:00','+2:00')) >= subdate(CURRENT_DATE, 4) AND CONVERT_TZ(last_changed,'+00:00','+2:00') < SUBDATE(CURRENT_DATE, 3) ORDER BY last_changed DESC LIMIT 1;"
+      column: "state"
+    - name: Standing up day 5
+      query: "SELECT state FROM states WHERE entity_id = 'sensor.standing_up_time_today' and DATE(CONVERT_TZ(last_changed,'+00:00','+2:00')) >= subdate(CURRENT_DATE, 5) AND CONVERT_TZ(last_changed,'+00:00','+2:00') < SUBDATE(CURRENT_DATE, 4) ORDER BY last_changed DESC LIMIT 1;"
+      column: "state"
+    - name: Standing up day 6
+      query: "SELECT state FROM states WHERE entity_id = 'sensor.standing_up_time_today' and DATE(CONVERT_TZ(last_changed,'+00:00','+2:00')) >= subdate(CURRENT_DATE, 6) AND CONVERT_TZ(last_changed,'+00:00','+2:00') < SUBDATE(CURRENT_DATE, 5) ORDER BY last_changed DESC LIMIT 1;"
+      column: "state"
+
+- platform: history_stats
+  name: Office lights on this month
+  entity_id: light.office_lightstrip
+  state: "on"
+  type: time
+  start: "{{ now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0) }}"
+  end: "{{ now() }}"
+- platform: history_stats
+  name: Living Room AC on this month
+  entity_id: climate.living_room_ac
+  state: "cool"
+  type: time
+  start: "{{ now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0) }}"
+  end: "{{ now() }}"
+- platform: history_stats
+  name: Heating on this month
+  entity_id: binary_sensor.heating
+  state: "on"
+  type: time
+  start: "{{ now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0) }}"
+  end: "{{ now() }}"
+- platform: history_stats
+  name: Heating on today
+  entity_id: binary_sensor.heating
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
+  end: "{{ now() }}"
+- platform: history_stats
+  name: Focus mode on today
+  entity_id: var.focus_mode
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
+  end: "{{ now() }}"
+- platform: history_stats
+  name: Sitting on chair today
+  entity_id: sensor.office_position
+  state: "Sitting down"
+  type: time
+  start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
+  end: "{{ now() }}"
+- platform: history_stats
+  name: Sitting on chair this month
+  entity_id: sensor.office_position
+  state: "Sitting down"
+  type: time
+  start: "{{ now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0) }}"
+  end: "{{ now() }}"
+- platform: history_stats
+  name: Standing up today
+  entity_id: sensor.office_position
+  state: "Standing up"
+  type: time
+  start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
+  end: "{{ now() }}"
+- platform: history_stats
+  name: Standing up this month
+  entity_id: sensor.office_desk_sensor
+  state: "Standing up"
+  type: time
+  start: "{{ now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0) }}"
+  end: "{{ now() }}"
+- platform: history_stats
+  name: Bedroom AC on this month
+  entity_id: climate.bedroom_ac
+  state: "cool"
+  type: time
+  start: "{{ now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0) }}"
+  end: "{{ now() }}"
+- platform: uptime
+  name: Time Online
+  unit_of_measurement: hours

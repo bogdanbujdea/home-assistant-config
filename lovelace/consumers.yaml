@@ -1,0 +1,62 @@
+
+  type: conditional
+  conditions:
+  - entity: sensor.apartment_power_total
+    state_not: "off"
+  card:
+    type: vertical-stack
+    cards:
+        - type: custom:auto-entities
+          card:
+            type: entities
+            title: Active consumers
+            show_header_toggle: false
+          entities:
+          filter:
+            template: |
+              sensor.apartment_power_adjusted
+              var.power_index
+              sensor.power_cost
+              sensor.estimated_power_cost_per_day
+              sensor.estimated_power_cost_per_month
+              sensor.power_consumption_summed
+              {% for light in states.light %}
+                {% if light.state == "on" %}
+                  {{ light.entity_id}}
+                {% endif %}
+              {% endfor %}  
+              {% for media_player in states.media_player %}
+                {% if media_player.state != "standby" and media_player.state != 'off' and media_player.state !='unavailable' %}
+                  {{ media_player.entity_id}},
+                {% endif %}
+              {% endfor %}  
+              {% for climate in states.climate %}
+                {% if climate.state != 'off' and climate.state !='unavailable' %}
+                  {{ climate.entity_id}},
+                {% endif %}
+              {% endfor %}  
+        - type: entity-filter
+          entities:
+            - sensor.dryer_2
+            - switch.washer
+          state_filter:
+          - "on"
+          show_empty: false
+          card:
+            type: markdown
+            title: Read-only
+            theme: 'transparent'
+            content: |              
+              {% if is_state("sensor.dryer_2", "on") %}
+                Drier is on
+                - Current state: {{states.sensor.dryer_2.attributes.current_course}}
+                - Remaining time: {{states.sensor.dryer_2.attributes.remain_time}} minutes
+              {% endif %}
+              {% if is_state("switch.washer", "on") %}
+                Washer
+                - Status: {{ states.sensor.washer_job_state.state }}
+                - Power usage: {{ state_attr('switch.power_2', 'current_power_w') }} W
+                - Finishing at: {{ strptime(states('sensor.washer_completion_time'), '%Y-%m-%dT%H:%M:%S.%fZ').hour + 3 }}:{{ strptime(states('sensor.washer_completion_time'), '%Y-%m-%dT%H:%M:%S.%fZ').minute }}
+              {% endif %}
+        
+      

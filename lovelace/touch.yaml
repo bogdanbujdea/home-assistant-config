@@ -1,0 +1,50 @@
+  type: vertical-stack
+  show_header_toggle: true
+  cards:    
+    - type: glance
+      title: Lights
+      show_state: false
+      entities:
+      - type: entity-button
+        tap_action:
+          action: toggle
+        icon: mdi:ceiling-light
+        entity: light.sonoffofficelight    
+      - type: entity-button
+        tap_action:
+          action: toggle
+        entity: light.office_lightstrip
+      - type: entity-button
+        tap_action:
+          action: toggle
+        entity: light.kitchen_light    
+      - type: entity-button
+        tap_action:
+          action: toggle
+        icon: mdi:ceiling-light
+        entity: light.bathroom_ceiling_light    
+      - type: entity-button
+        tap_action:
+          action: toggle
+        entity: light.front_hallway     
+      - type: entity-button
+        tap_action:
+          action: toggle
+        entity: light.back_hallway    
+      - type: entity-button
+        tap_action:
+          action: toggle
+        entity: light.bedroom_light_strip    
+      - type: entity-button
+        tap_action:
+          action: toggle
+        icon: mdi:ceiling-light
+        entity: light.bedroom_light    
+      - type: entity-button
+        tap_action:
+          action: toggle
+        entity: light.living_room_dining_table   
+      - type: entity-button
+        tap_action:
+          action: toggle
+        entity: light.living_room

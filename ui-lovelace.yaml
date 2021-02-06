@@ -1,0 +1,15 @@
+title: Home
+#background: >-
+#  center / cover no-repeat
+#  url("/local/background.jpg")
+#  fixed
+show_in_sidebar: true
+views:
+  - !include lovelace/home.yaml
+  - !include lovelace/dashboard.yaml
+  - !include lovelace/devices.yaml
+  - !include lovelace/floorplan.yaml
+  - !include lovelace/power-dashboard.yaml
+  - !include lovelace/rooms.yaml
+  - !include lovelace/settings.yaml
+  - !include lovelace/pages/cleaning-page.yaml

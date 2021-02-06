@@ -1,0 +1,1 @@
+media_player: !include ../customize/media_player.yaml

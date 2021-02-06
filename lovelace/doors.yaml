@@ -1,0 +1,13 @@
+  type: entities
+  entities:
+    - binary_sensor.apartment_door_sensor
+    - binary_sensor.office_door
+    - binary_sensor.bathroom_door
+    - binary_sensor.fridge_door
+    - binary_sensor.living_room_window
+    - binary_sensor.bedroom_window
+    - binary_sensor.bathroom_window
+    - binary_sensor.kitchen_window
+    - binary_sensor.kids_window
+  show_header_toggle: false
+  title: Doors and windows

@@ -1,0 +1,79 @@
+kitchen:
+  name: Kitchen
+  entities:
+    - light.kitchen_light_strip
+    - light.kitchen_light
+    - binary_sensor.kitchen_motion_sensor
+    - sensor.kitchen_light_level
+    - sensor.kitchen_temperature
+Family:
+  entities:
+    - person.bogdan_bujdea
+    - person.elena_bujdea
+
+all_lights:
+  - light.front_hallway
+  - light.back_hallway
+  - light.bedroom_light
+  - light.bathroom_ceiling_light
+  - light.bedroom_lightstrip
+  - light.kitchen_light
+  - light.kitchen_light_strip
+  - light.office_lightstrip
+  - light.sonoffofficelight
+  - light.living_room_dining_table
+  - light.living_room_couch_light
+  - light.sonoff_kids_light
+
+kitchen_motion:
+  name: Kitchen motion
+  entities:
+    - binary_sensor.kitchen_motion_sensor
+    - binary_sensor.kitchen_table_motion_sensor
+
+all_motion_sensors:
+  name: All motion sensors
+  entities:
+    - binary_sensor.kitchen_motion_sensor
+    - binary_sensor.kitchen_table_motion_sensor
+    - binary_sensor.bathroom_motion_sensor
+    - binary_sensor.bedroom_motion_sensor
+    - binary_sensor.hallway_motion_sensor
+    - binary_sensor.office_motion_sensor
+    - binary_sensor.living_room_motion_sensor
+
+hallway_lights:
+  name: Hallway lights
+  entities:
+    - light.front_hallway
+    - light.back_hallway
+
+bedroom_lights:
+  name: Bedroom lights
+  entities:
+    - light.bedroom_light
+    - light.bedroom_lightstrip
+
+kitchen_lights:
+  name: Kitchen lights
+  entities:
+    - light.kitchen_light
+    - light.kitchen_light_strip
+
+office_lights:
+  name: Office lights
+  entities:
+    - light.office_lightstrip
+    - light.sonoffofficelight
+    
+living_room_lights:
+  name: Living room lights
+  entities:
+    - light.living_room_dining_table
+    - light.living_room_couch_light
+
+living_room_power_plugs:
+  name: Living room power
+  entities:
+    - switch.living_room_power_1
+    - switch.living_room_power_2

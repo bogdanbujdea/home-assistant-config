@@ -1,0 +1,387 @@
+'1567287974504':
+  alias: Kitchen lights on
+  sequence:
+  - data:
+      message: turn on the kitchen lights
+    service: rest_command.ask_alexa
+'1567292255509':
+  alias: Turn off kitchen lights
+  sequence:
+  - data:
+      entity_id: light.kitchen_light_strip
+    service: homeassistant.turn_off
+'1584623199887':
+  alias: Apartment cleanup
+  sequence:
+  - data: {}
+    entity_id: vacuum.xiaomi_vacuum_cleaner
+    service: vacuum.start
+'1584623261613':
+  alias: Send the vacuum home
+  sequence:
+  - data: {}
+    entity_id: vacuum.xiaomi_vacuum_cleaner
+    service: vacuum.return_to_base
+'1584735527658':
+  alias: Hallway cleanup
+  sequence:
+  - data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone:
+      - - 26142
+        - 24168
+        - 28092
+        - 26868
+      - - 22894
+        - 24060
+        - 28144
+        - 25160
+    service: xiaomi_miio.vacuum_clean_zone
+'1584735991442':
+  alias: Bedroom cleanup
+  sequence:
+  - data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone:
+      - - 19089
+        - 20790
+        - 23789
+        - 23990
+    service: xiaomi_miio.vacuum_clean_zone
+'1584736170010':
+  alias: Kids bedroom cleanup
+  sequence:
+  - data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone:
+      - - 18997
+        - 24020
+        - 22947
+        - 26820
+    service: xiaomi_miio.vacuum_clean_zone
+'1584736860542':
+  alias: Living room cleanup
+  sequence:
+  - data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone:
+      - - 28156
+        - 20492
+        - 31456
+        - 26842
+    service: xiaomi_miio.vacuum_clean_zone
+'1584737056612':
+  alias: Bathroom cleanup
+  sequence:
+  - data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone:
+      - - 23884
+        - 20587
+        - 26184
+        - 24087
+    service: xiaomi_miio.vacuum_clean_zone
+'1584737101724':
+  alias: Kitchen cleanup
+  sequence:
+  - data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone:
+      - - 26185
+        - 19178
+        - 28085
+        - 24078
+    service: xiaomi_miio.vacuum_clean_zone
+apartment_ventilation:
+  alias: Apartment ventilation
+  sequence:
+  - data:
+      hvac_mode: fan_only
+    entity_id: climate.living_room_ac, climate.bedroom_ac
+    service: climate.set_hvac_mode
+  - data:
+      fan_mode: high
+    entity_id: climate.living_room_ac, climate.bedroom_ac
+    service: climate.set_fan_mode
+  - data:
+      swing_mode: Swing in full range
+    entity_id: climate.living_room_ac, climate.bedroom_ac
+    service: climate.set_swing_mode
+bedroom_ventilation:
+  alias: Bedroom ventilation
+  sequence:
+  - data:
+      hvac_mode: fan_only
+    entity_id: climate.bedroom_ac
+    service: climate.set_hvac_mode
+  - data:
+      fan_mode: high
+    entity_id: climate.bedroom_ac
+    service: climate.set_fan_mode
+  - data:
+      swing_mode: Swing in full range
+    entity_id: climate.bedroom_ac
+    service: climate.set_swing_mode
+living_room_ventilation:
+  alias: Living room ventilation
+  sequence:
+  - data:
+      hvac_mode: fan_only
+    entity_id: climate.living_room_ac
+    service: climate.set_hvac_mode
+  - data:
+      fan_mode: high
+    entity_id: climate.living_room_ac
+    service: climate.set_fan_mode
+  - data:
+      swing_mode: Swing in full range
+    entity_id: climate.living_room_ac
+    service: climate.set_swing_mode
+living_room_cooling:
+  alias: Living room cooling
+  sequence:
+  - data:
+      hvac_mode: cool
+    entity_id: climate.living_room_ac
+    service: climate.set_hvac_mode
+  - data:
+      fan_mode: Turbo
+    entity_id: climate.living_room_ac
+    service: climate.set_fan_mode
+  - data:
+      swing_mode: Swing in full range
+    entity_id: climate.living_room_ac
+    service: climate.set_swing_mode
+bedroom_cooling:
+  alias: Bedroom cooling
+  sequence:
+  - data:
+      hvac_mode: cool
+    entity_id: climate.bedroom_ac
+    service: climate.set_hvac_mode
+  - data:
+      fan_mode: Turbo
+    entity_id: climate.bedroom_ac
+    service: climate.set_fan_mode
+  - data:
+      swing_mode: Swing in full range
+    entity_id: climate.bedroom_ac
+    service: climate.set_swing_mode
+apartment_cooling_on:
+  alias: Apartment cooling on
+  sequence:
+  - service: script.bedroom_cooling
+  - service: script.living_room_cooling
+apartment_ventilation_on:
+  alias: Apartment ventilation on
+  sequence:
+  - service: script.bedroom_ventilation
+  - service: script.living_room_ventilation
+apartment_ac_off:
+  alias: Apartment AC off
+  sequence:
+  - entity_id: climate.bedroom_ac
+    service: climate.turn_off
+  - entity_id: climate.living_room_ac
+    service: climate.turn_off
+instant_message:
+  sequence:
+  - service: notify.alexa_media
+    data_template:
+      target: '{{ state(''input_select.message_target'') }}'
+      data:
+        type: "{%- if is_state(\"input_boolean.alexa_broadcast\", \"on\") -%}\n  \
+          \  announce\n{%- else -%}\n    tts\n{%- endif -%}\n"
+      message: '{{ state(''input_text.announcement_text'') }}'
+save_bogdan_status:
+  alias: Save Bogdan's status
+  sequence:
+  - service: var.set
+    data_template:
+      entity_id: var.bogdan_weight
+      value: '{{(states.input_text.bogdan_weight.state)|float}}'
+  - service: var.set
+    data_template:
+      entity_id: var.bogdan_fat
+      value: '{{(states.input_text.bogdan_fat.state)|float}}'
+  - service: var.set
+    data_template:
+      entity_id: var.bogdan_water
+      value: '{{(states.input_text.bogdan_water.state)|float}}'
+  - service: var.set
+    data_template:
+      entity_id: var.bogdan_muscle
+      value: '{{(states.input_text.bogdan_muscle.state)|float}}'
+  - service: var.set
+    data_template:
+      entity_id: var.bogdan_bmr
+      value: '{{(states.input_text.bogdan_bmr.state)|float}}'
+  - service: var.set
+    data_template:
+      entity_id: var.bogdan_waist
+      value: '{{(states.input_text.bogdan_waist.state)|float}}'
+send_announcement:
+  alias: Send announcement
+  sequence:
+  - service: media_player.volume_set
+    data_template:
+      entity_id: "{%- if is_state(\"input_select.announce_to\", \"Everywhere\") -%}\n\
+        \  media_player.bedroom_echo_dot, media_player.office_echo_dot, media_player.kitchen_echo_dot,\
+        \ media_player.hallway_echo_dot, media_player.bathroom_echo_dot\n{%- elif\
+        \ is_state(\"input_select.announce_to\", \"Bathoom\") -%}\n  media_player.bathroom_echo_dot\n\
+        {%- elif is_state(\"input_select.announce_to\", \"Bedroom\") -%}\n  media_player.bedroom_echo_dot\n\
+        {%- elif is_state(\"input_select.announce_to\", \"Office\") -%}\n  media_player.office_echo_dot\n\
+        {%- elif is_state(\"input_select.announce_to\", \"Kitchen\") -%}\n  media_player.kitchen_echo_dot\n\
+        {%- elif is_state(\"input_select.announce_to\", \"Hallway\") -%}\n  media_player.hallway_echo_dot\n\
+        {%- endif -%}\n"
+      volume_level: '{{states(''input_number.alexa_announce_vol'')|float}}'
+  - service: notify.alexa_media
+    data_template:
+      target: "{%- if is_state(\"input_select.announce_to\", \"Everywhere\") -%}\n\
+        \  media_player.bedroom_echo_dot, media_player.office_echo_dot, media_player.kitchen_echo_dot,\
+        \ media_player.hallway_echo_dot, media_player.bathroom_echo_dot\n{%- elif\
+        \ is_state(\"input_select.announce_to\", \"Bedroom\") -%}\n  media_player.bedroom_echo_dot\n\
+        {%- elif is_state(\"input_select.announce_to\", \"Bedroom\") -%}\n  media_player.bathroom_echo_dot\n\
+        {%- elif is_state(\"input_select.announce_to\", \"Office\") -%}\n  media_player.office_echo_dot\n\
+        {%- elif is_state(\"input_select.announce_to\", \"Kitchen\") -%}\n  media_player.kitchen_echo_dot\n\
+        {%- elif is_state(\"input_select.announce_to\", \"Hallway\") -%}\n  media_player.hallway_echo_dot\n\
+        {%- endif -%}\n"
+      data:
+        type: "{%- if is_state(\"input_boolean.alexa_broadcast\", \"on\") -%}\n  \
+          \  announce\n{%- else -%}\n    tts\n{%- endif -%}\n"
+      message: "{%- if is_state(\"input_boolean.alexa_whisper\", \"on\") -%}\n  \"\
+        <amazon:effect name='whispered'>{{states('input_text.announcement_text')}}</amazon:effect>\"\
+        \n{%- else -%}\n  {{states('input_text.announcement_text')}}\n{%- endif -%}\n"
+activate_alexa_actionable_notification:
+  description: Activates an actionable notification on a specific echo device
+  fields:
+    text:
+      description: The text you would like alexa to speak.
+      example: Would you like me to turn on the lights?
+    event_id:
+      description: Correlation ID for event responses
+      example: ask_for_temperature
+    alexa_device:
+      description: Alexa device you want to trigger
+      example: media_player.office_echo_dot
+  sequence:
+  - service: input_text.set_value
+    data_template:
+      entity_id: input_text.alexa_actionable_notification
+      value: '{"text": "{{ text }}", "event": "{{ event_id }}"}'
+  - service: media_player.play_media
+    data_template:
+      entity_id: '{{ alexa_device }}'
+      media_content_type: skill
+      media_content_id: amzn1.ask.skill.4b79ead9-6236-46d8-9bd4-453d0e561f74
+open_gate:
+  alias: Open the gate
+  mode: single
+  sequence:
+  - service: rest_command.open_the_gate
+turn_on_power_saver:
+  alias: Turn on power saver
+  mode: single
+  sequence:
+  - scene: scene.living_room_power_saving
+  - data: {}
+    entity_id: group.all_lights
+    service: homeassistant.turn_off
+turn_off_power_saver:
+  alias: Turn off power saver
+  mode: single
+  sequence:
+  - scene: scene.living_room_power_on
+office_cleanup:
+  alias: Office cleanup
+  sequence:
+  - service: xiaomi_miio.vacuum_clean_zone
+    data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone:
+      - - 22843
+        - 25095
+        - 26043
+        - 26845
+  mode: single
+open_garage_door_with_switchbot:
+  alias: Open garage door
+  sequence:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.zigbee_garage_door_sensor_contact
+      state: 'on'
+  - service: switch.toggle
+    data:
+      entity_id: switch.garage_remote
+  mode: single
+close_garage_door_with_switchbot:
+  alias: Close garage door
+  sequence:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.zigbee_garage_door_sensor_contact
+      state: 'off'
+  - service: switch.toggle
+    data: {}
+    entity_id: switch.garage_remote
+  mode: single
+turn_off_bedroom_camera:
+  alias: Turn off bedroom camera
+  sequence:
+  - service: shell_command.shutdown_bedroom_camera
+    data: {}
+  - condition: device
+    type: is_on
+    device_id: af62d7ce1e394ac4b49be0ca5763ae00
+    entity_id: switch.bedroom_usb_ports
+    domain: switch
+  - delay: 00:01:00
+  - type: turn_off
+    device_id: af62d7ce1e394ac4b49be0ca5763ae00
+    entity_id: switch.bedroom_usb_ports
+    domain: switch
+  mode: single
+turn_on_bedroom_camera:
+  alias: Turn on bedroom camera
+  sequence:
+  - type: turn_off
+    device_id: af62d7ce1e394ac4b49be0ca5763ae00
+    entity_id: switch.bedroom_usb_ports
+    domain: switch
+  - type: turn_on
+    device_id: af62d7ce1e394ac4b49be0ca5763ae00
+    entity_id: switch.bedroom_usb_ports
+    domain: switch
+  mode: single
+turn_on_focus_mode:
+  alias: Turn on focus mode
+  sequence:
+  - service: rest_command.turn_on_focus_mode
+    data: {}
+  mode: single
+turn_off_focus_mode:
+  alias: Turn off focus mode
+  sequence:
+  - service: rest_command.turn_off_focus_mode
+    data: {}
+  mode: single
+my_computer_lock:
+  alias: MSI Laptop - Lock
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: iotlink/workgroup/desktop-5rf0t10/commands/notify
+      payload: '{ "title": "My Notification Title", "message": "This is an example
+        of notification using IOT Link", "launchParams": "toast://open/https://iotlink.gitlab.io"
+        }'
+  mode: single

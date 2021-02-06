@@ -1,0 +1,1 @@
+climate: !include ../custom_components/climate/climate.yaml

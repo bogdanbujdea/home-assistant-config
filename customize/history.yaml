@@ -1,0 +1,17 @@
+include:
+  entities:
+    - sensor.office_position
+    - sensor.sitting_on_chair_today
+    - sensor.sitting_on_chair_this_month
+    - sensor.standing_up_today
+    - sensor.standing_up_time_today
+    - sensor.sitting_down_time_today
+  domains:
+    - var
+    - light
+  entity_globs:
+    - binary_sensor.*_door*
+    - binary_sensor.*_window*
+    - binary_sensor.*motion*
+    - sensor.*today*
+    - sensor.*this_month*

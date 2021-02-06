@@ -1,0 +1,127 @@
+path: system
+title: System
+icon: mdi:settings
+cards:
+  - type: vertical-stack
+    cards:
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: sensor.current_version
+            name: Version
+          - entity: sensor.last_boot
+            format: relative
+          - type: custom:multiple-entity-row
+            entity: binary_sensor.updater
+            hide_state: true
+            primary:
+              entity: binary_sensor.updater
+              attribute: newest_version
+              name: false
+          - type: section
+            label: Signal
+          - sensor.netatmo_bedroom_wifi
+          - sensor.netatmo_living_room_radio
+          - sensor.netatmo_outside_radio
+          - type: section
+            label: Network
+          - sensor.ipv4_address_eth0
+          - sensor.myip
+          - sensor.fast_com_download
+          - type: section
+            label: GitHub
+          - type: custom:github-entity-row
+            entity: sensor.home_assistant_config
+          - type: custom:github-entity-row
+            entity: sensor.lovelace_xiaomi_vacuum_card
+          - type: custom:github-entity-row
+            entity: sensor.lovelace_github_entity_row
+          - type: custom:github-entity-row
+            entity: sensor.lovelace_multiple_entity_row
+          - type: custom:github-entity-row
+            entity: sensor.lovelace_attribute_entity_row
+
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.cpu_temperature
+            points_per_hour: 2
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.processor_use
+            line_color: lightgreen
+            points_per_hour: 2
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.load_1m
+            line_color: orange
+            points_per_hour: 2
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.memory_use_percent
+            line_color: yellow
+            points_per_hour: 2
+      - type: horizontal-stack
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.disk_use_percent
+                line_color: lightblue
+                points_per_hour: 2
+              - type: glance
+                entities:
+                  - sensor.disk_use
+                  - sensor.disk_free
+          - type: entities
+            entities:
+              - type: custom:battery-entity
+                entity: sensor.netatmo_living_room_battery_percent
+                name: Stue
+              - type: custom:battery-entity
+                entity: sensor.netatmo_outside_battery_percent
+                name: Ute
+              - type: custom:battery-entity
+                name: Stue (tak)
+                entity: sensor.template_smoke_sensor_livingroom_battery
+              - type: custom:battery-entity
+                entity: sensor.template_flood_sensor_bathroom_battery
+              - type: custom:battery-entity
+                entity: sensor.template_magnet_door_main_battery
+              - type: custom:battery-entity
+                entity: sensor.template_motion_hall_battery
+
+  - type: vertical-stack
+    cards:
+      - type: glance
+        title: Components
+        columns: 3
+        entities:
+          - entity: sensor.count_sensor
+            icon: mdi:blur-linear
+          - entity: sensor.count_switch
+            icon: mdi:toggle-switch
+          - entity: sensor.count_light
+            icon: mdi:lightbulb
+          - entity: sensor.count_automations
+            icon: mdi:home-automation
+          - entity: sensor.count_binary_sensor
+            icon: mdi:blur-radial
+          - entity: sensor.count_media_player
+            icon: mdi:cast
+      - type: entities
+        title: Enheter
+        show_header_toggle: false
+        entities:
+          - entity: device_tracker.8c85903b5cd5
+          - entity: device_tracker.3497f6b6f0b0
+          - entity: device_tracker.galaxy_note9
+          - entity: device_tracker.5c51816404e9
+          - entity: device_tracker.c869cd9e5486
+          - entity: device_tracker.20ee28f3168c

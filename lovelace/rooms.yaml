@@ -1,0 +1,11 @@
+path: rooms
+title: Rooms
+icon: mdi:door    
+cards:
+  - !include bedroom.yaml
+  - !include hallway.yaml
+  - !include kitchen.yaml
+  - !include bathroom.yaml
+  - !include office.yaml
+  - !include livingroom.yaml
+  - !include kids.yaml

@@ -1,0 +1,13 @@
+- platform: template
+  lights:
+    kitchen_lightstrip:
+      friendly_name: "Kitchen lightstrip"
+      value_template: "{{is_state('switch.lidl_plug', 'on')}}"
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.lidl_plug
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.lidl_plug

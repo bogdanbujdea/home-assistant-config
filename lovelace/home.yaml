@@ -1,0 +1,216 @@
+path: default_view
+title: Home
+icon: mdi:home-assistant
+badges:
+  - person.bogdan_bujdea
+  - person.elena_bujdea
+  - input_select.bujdea_family
+  - sensor.average_temperature
+  - sensor.netatmo_outdoor_station_temperature
+  - sensor.netatmo_indoor_co2
+  - sensor.shelly_current_consumption
+  - sensor.um_daily_steps
+  - binary_sensor.heating
+  - switch.heating
+  - sensor.gas_cost
+  - sensor.power_cost
+  - switch.lidl_plug
+  - switch.living_room_power_2
+  #- climate.apartment_thermostat
+cards:
+  - cards:
+      - type: custom:mini-graph-card
+        show:
+        labels: true
+        hours_to_show: 24
+        aggregate_func: avg
+        color_thresholds:
+          - value: 19
+            color: "#4CB4FF"
+          - value: 23
+            color: "#3BFF14"
+          - value: 24
+            color: "#FFDD21"
+          - value: 25
+            color: "#FFA11E"
+          - value: 26
+            color: "#FF732D"
+          - value: 27
+            color: "#FF4F3F"
+          - value: 28
+            color: "#FF0000"
+        name: Average temperature
+        points_per_hour: 0.5
+        icon: mdi:thermometer
+        entities:
+          - entity: sensor.average_temperature
+            name: Average temperature
+          - entity: sensor.bedroom_temperature
+            name: Bedroom
+          - entity: sensor.kitchen_temperature
+            name: Kitchen
+          - entity: sensor.bathroom_temperature
+            name: Bathroom
+          - entity: sensor.hallway_temperature
+            name: Hallway
+          - entity: sensor.office_temperature
+            name: Office
+          - entity: sensor.living_room_temperature
+            name: Living room
+          - entity: sensor.kids_room_temperature
+            name: Kids
+
+      - type: custom:mini-graph-card
+        show:
+        labels: true
+        hours_to_show: 24
+        aggregate_func: avg
+        color_thresholds:
+          - value: 700
+            color: "#00FF00"
+          - value: 1000
+            color: "#FF673D"
+          - value: 2000
+            color: "#FF0000"
+        points_per_hour: 3
+        icon: mdi:molecule-co2
+        entities:
+          - entity: sensor.netatmo_indoor_co2
+            name: CO2
+      - type: entities
+        entities:
+          - sensor.adguard_average_processing_speed
+          - sensor.adguard_dns_queries
+          - sensor.adguard_dns_queries_blocked_ratio
+          - switch.adguard_filtering
+          - sensor.wifi_connected_devices
+          - sensor.database_size
+          - sensor.kids_room_temperature
+          - sensor.living_room_temperature
+          - sensor.office_temperature
+          - sensor.bedroom_temperature
+          - sensor.kitchen_temperature
+          - sensor.bathroom_temperature
+          - sensor.hallway_temperature
+          - sensor.heating_on_today
+          - sensor.heating_on_this_month
+          - sensor.sitting_on_chair_today
+          - sensor.sitting_on_chair_this_month
+        show_header_toggle: false
+        title: Home Assistant
+    type: vertical-stack
+  - cards:
+      - type: custom:mini-graph-card
+        show:
+          labels: true
+        hours_to_show: 24
+        aggregate_func: avg
+        name: Total power consumption
+        points_per_hour: 1
+        icon: mdi:power
+        color_thresholds:
+          - value: 0
+            color: "#FFFFFF"
+          - value: 10
+            color: "#38B2FF"
+          - value: 100
+            color: "#FFEE38"
+          - value: 300
+            color: "#FF4D11"
+          - value: 1000
+            color: "#FF0000"
+        entities:
+          - entity: sensor.shelly_current_consumption
+            name: Total power consumption
+          - entity: sensor.power_consumption_summed
+            name: Plugs
+          - entity: sensor.gosund_office_energy_power
+            name: Office
+          - entity: sensor.living_room_power
+            name: Living room
+          - entity: sensor.power_1
+            name: Heating
+          - entity: sensor.power_2
+            name: Washer
+          - entity: sensor.power_3
+            name: Fridge
+          - entity: sensor.unmeasured_power
+            name: Unmeasured power
+
+      - type: custom:mini-graph-card
+        show:
+        labels: true
+        hours_to_show: 24
+        aggregate_func: avg
+        color_thresholds:
+          - value: 10
+            color: "#00FF00"
+          - value: 15
+            color: "#FFFF00"
+          - value: 20
+            color: "#FF0000"
+          - value: 30
+            color: "#000000"
+        points_per_hour: 6
+        icon: mdi:pine-tree
+        entities:
+          - entity: sensor.xiaomi_airpurifier_air_quality_pm25
+            name: Air quality
+      - !include movement.yaml
+    type: vertical-stack
+  - cards:
+      - type: custom:mini-graph-card
+        show:
+        labels: true
+        hours_to_show: 24
+        aggregate_func: avg
+        points_per_hour: 1
+        icon: mdi:water-percent
+        color_thresholds:
+          - value: 20
+            color: "#0000FF"
+          - value: 40
+            color: "#00FF00"
+          - value: 60
+            color: "#FF0000"
+          - value: 80
+            color: "#000000"
+        name: Humidity
+        entities:
+          - entity: sensor.netatmo_indoor_humidity
+            name: Netatmo
+          - entity: sensor.xiaomi_airpurifier_humidity
+            name: Xiaomi
+          - entity: sensor.kids_room_humidity
+            name: Kids room
+          - entity: sensor.living_room_humidity
+            name: Living room
+          - entity: sensor.office_humidity_sensor
+            name: Office
+
+      - type: custom:mini-graph-card
+        show:
+        labels: true
+        hours_to_show: 24
+        aggregate_func: avg
+        points_per_hour: 1
+        icon: mdi:thermometer
+        color_thresholds:
+          - value: 50
+            color: "#00FF00"
+          - value: 65
+            color: "#FF732D"
+          - value: 75
+            color: "#FF0000"
+        entities:
+          - entity: sensor.raspberry_cpu_temperature
+            name: Raspberry PI temperature
+          - entity: sensor.host_cpu_temperature
+            name: HA host temperature
+          - entity: sensor.garage_ha_temperature
+            name: Garage HA host temperature
+          - entity: sensor.bedroom_camera_temperature
+            name: Bedroom camera temperature
+      - !include doors.yaml
+      - !include consumers.yaml
+    type: vertical-stack

@@ -1,0 +1,13 @@
+type: entities
+entities:
+  - type: custom:slider-entity-row
+    entity: light.front_hallway
+    toggle: true
+  - type: custom:slider-entity-row
+    entity: light.back_hallway
+    toggle: true
+  - sensor.hallway_light_level
+  - binary_sensor.hallway_motion_sensor
+  - sensor.hallway_temperature
+  - fan.xiaomi_miio_device    
+title: Hallway

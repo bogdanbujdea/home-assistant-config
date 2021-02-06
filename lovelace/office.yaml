@@ -1,0 +1,22 @@
+  type: entities
+  entities:
+    - sensor.office_position
+    - binary_sensor.office_desk_sensor
+    - binary_sensor.office_chair
+    - light.office_lightstrip
+    - light.sonoffofficelight  
+    - switch.msi_laptop
+    - switch.office_switch_1
+    - switch.office_switch_2
+    - switch.office_switch_3
+    - switch.office_switch_usb
+    - switch.laptop_power_switch
+    - switch.office_power
+    - switch.office_fan
+    - sensor.netatmo_indoor_co2
+    - sensor.office_remote
+    - binary_sensor.office_motion_sensor
+    - switch.switchbot
+  title: Office
+  show_header_toggle: false
+  

@@ -1,0 +1,1 @@
+switch: !include ../customize/switch.yaml

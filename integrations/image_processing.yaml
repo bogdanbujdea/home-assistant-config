@@ -1,0 +1,1 @@
+image_processing: !include ../customize/image_processing.yaml

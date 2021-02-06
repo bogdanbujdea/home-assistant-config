@@ -1,0 +1,58 @@
+announce_to:
+  name: "Where would you like to send the announcement?"
+  options:
+    - Everywhere
+    - Bedroom
+    - Office
+    - Kitchen
+    - Hallway
+  initial: Everywhere
+bogdan_status_dropdown:
+  name: 'Bogdan'
+  options:
+    - Unknown
+    - Working
+    - In a meeting
+    - Sleeping
+bogdan_location_dropdown:
+  name: 'Bogdan'
+  options:
+    - Unknown
+    - Office
+    - Home
+    - Work
+
+bujdea_family:
+  name: 'Bujdea Family'
+  options:
+    - Unknown
+    - Home
+    - Away
+    - Vacation
+    - Sleeping
+
+
+heating_timer:
+  name: 'Heating timer'
+  options:
+    - 'Off'
+    - 30 minutes
+    - 1 hour
+    - 1.5 hours
+    - 2 hours
+
+
+living_tv_auto_shutdown_timer:
+  name: 'Living TV Auto Shutdown Timer'
+  options:
+    - 'On'
+    - 1 minutes
+    - 2 minutes
+    - 5 minutes
+    - 15 minutes
+    - 30 minutes
+    - 1 hour
+    - 1.5 hours
+    - 2 hours
+    - 3 hours
+    - 4 hours

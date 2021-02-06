@@ -1,0 +1,14 @@
+description: Turn off office lights from hallway remote
+alias: turn_off_office_lights_from_hallway_remote
+id: bfce2dfd-34c1-4b54-a9c2-63fe5bec3aa2
+initial_state: 'on'
+trigger:
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: hallway_back_remote
+      event: 3002
+action:
+  - service: light.turn_off
+    data:
+      entity_id: group.office_lights

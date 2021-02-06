@@ -1,0 +1,1 @@
+input_select: !include ../customize/input_select.yaml

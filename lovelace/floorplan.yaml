@@ -1,0 +1,257 @@
+path: plan
+title: Floor plan
+icon: mdi:floor-plan    
+panel: true
+hide_app_toolbar: true
+
+cards:
+  - type: picture-elements
+    image: /local/floorplan/floor3D.png
+    style: 
+      height: 500px
+    elements:
+      #Bedroom            
+      - type: image
+        entity: light.bedroom_lightstrip
+        tap_action: none
+        hold_action: none
+        state_image:
+          "on": /local/floorplan/bedroom-lightstrip-on.png
+          "off": /local/floorplan/bedroom-lightstrip-off.png
+        style:
+          top: 57.5%
+          left: 23.8%
+          width: 14%
+      - type: image
+        entity: light.bedroom_light_strip
+        tap_action:
+          action: toggle
+        image: /local/floorplan/square.png
+        style:
+          top: 60%
+          left: 24%
+          width: 10%
+          height: 18%     
+      - type: state-badge
+        entity: sensor.bedroom_temperature
+        style:
+          top: 50%
+          left: 11%
+          font-size: 14px
+          transform: scale(0.75, 0.75)
+          color: rgba(0,0,0,0)
+      - type: state-icon
+        entity: light.bedroom_light
+        tap_action:
+          action: toggle
+        style:
+          top: 44%
+          left: 25%
+          --iron-icon-height: 30px
+          --iron-icon-width: 30px
+      - type: state-icon
+        entity: binary_sensor.bedroom_motion_sensor
+        icon: 'mdi:run'
+        style:
+          top: 56%
+          left: 24%
+          --iron-icon-stroke-color: "#969696"
+          border-radius: 50%
+          text-align: center
+          background-color: "rgba(255, 255, 255, 0.3)"
+      #Bathroom
+      - type: state-badge
+        entity: sensor.bathroom_temperature
+        style:
+          top: 68%
+          left: 39%
+          font-size: 14px
+          color: rgba(0,0,0,0)
+      - type: state-icon
+        entity: light.bathroom_ceiling_light
+        title: Bathroom light
+        tap_action:
+          action: toggle
+        style:
+          top: 44%
+          left: 45%
+          --iron-icon-height: 30px
+          --iron-icon-width: 30px
+      - type: state-icon
+        entity: binary_sensor.bathroom_motion_sensor
+        icon: 'mdi:run'
+        style:
+          top: 62%
+          left: 45%
+          --iron-icon-stroke-color: "#969696"
+          border-radius: 50%
+          text-align: center
+          background-color: "rgba(255, 255, 255, 0.3)"
+      #Office
+      - type: state-icon
+        entity: light.sonoffofficelight
+        title: Office ceiling light
+        tap_action:
+          action: toggle
+        style:
+          top: 16%
+          left: 48%
+          --iron-icon-height: 30px
+          --iron-icon-width: 30px
+      - type: image
+        entity: light.office_lightstrip
+        tap_action: none
+        hold_action: none
+        state_image:
+          "on": /local/floorplan/light_on.png
+          "off": /local/floorplan/light_off.png
+        style:
+          top: 12%
+          left: 39.5%
+          width: 11.5%
+      - type: image
+        entity: light.office_lightstrip
+        tap_action:
+          action: toggle
+        image: /local/floorplan/square.png
+        style:
+          top: 12%
+          left: 38%
+          width: 8%
+          height: 6%
+      #Hallway
+      - type: state-icon
+        entity: binary_sensor.hallway_motion_sensor
+        icon: 'mdi:run'
+        style:
+          top: 28%
+          left: 68%
+          --iron-icon-stroke-color: "#969696"
+          border-radius: 50%
+          text-align: center
+          background-color: "rgba(255, 255, 255, 0.3)"
+      - type: state-badge
+        entity: sensor.hallway_temperature
+        title: Hallway temperature
+        style:
+          top: 24%
+          left: 50%
+          font-size: 14px 
+          color: rgba(0,0,0,0)
+          transform: scale(0.75, 0.75)
+
+      - type: state-icon
+        entity: light.back_hallway
+        title: Hallway back light
+        tap_action:
+          action: toggle
+        style:
+          top: 29%
+          left: 41%
+          --iron-icon-height: 30px
+          --iron-icon-width: 30px
+      - type: state-icon
+        entity: light.front_hallway
+        title: Hallway front light
+        tap_action:
+          action: toggle
+        style:
+          top: 20%
+          left: 62%
+          --iron-icon-height: 30px
+          --iron-icon-width: 30px
+      #Living room
+      - type: image
+        entity: media_player.living_tv
+        tap_action: none
+        hold_action: none
+        state_image:
+          "on": /local/floorplan/living-tv-on.png
+          "off": /local/floorplan/living-tv-off.png
+        style:
+          top: 49%
+          left: 73%
+          width: 2%
+      - type: image
+        entity: media_player.living_tv
+        tap_action:
+          action: toggle
+        hold_action: more-info
+        image: /local/floorplan/square.png
+        style:
+          top: 49%
+          left: 73%
+          height: 8%   
+
+      - type: state-icon
+        entity: light.living_room_dining_table
+        title: Living room dining table
+        tap_action:
+          action: toggle
+        style:
+          top: 17%
+          left: 79%
+          --iron-icon-height: 30px
+          --iron-icon-width: 30px
+      - type: state-icon
+        entity: light.living_room_couch_light
+        title: Living room TV light
+        tap_action:
+          action: toggle
+        style:
+          top: 43%
+          left: 79%
+          --iron-icon-height: 30px
+          --iron-icon-width: 30px
+
+      #Kitchen
+      - type: state-icon
+        entity: light.kitchen_light
+        title: Kitchen ceiling light
+        tap_action:
+          action: toggle
+        style:
+          top: 43%
+          left: 61%
+          --iron-icon-height: 30px
+          --iron-icon-width: 30px
+      
+      - type: state-badge
+        entity: sensor.kitchen_temperature
+        style:
+          top: 82%
+          left: 62%
+          font-size: 14px
+          color: rgba(0,0,0,0)
+      - type: state-icon
+        entity: binary_sensor.kitchen_motion_sensor
+        icon: 'mdi:run'
+        style:
+          top: 65%
+          left: 62%
+          --iron-icon-stroke-color: "#969696"
+          border-radius: 50%
+          text-align: center
+          background-color: "rgba(255, 255, 255, 0.3)"
+      - type: state-icon
+        entity: binary_sensor.kitchen_table_motion_sensor
+        icon: 'mdi:run'
+        style:
+          top: 65%
+          left: 70%
+          --iron-icon-stroke-color: "#969696"
+          border-radius: 50%
+          text-align: center
+          background-color: "rgba(255, 255, 255, 0.3)"
+
+      #Kids room
+      - type: state-icon
+        entity: light.sonoff_kids_light
+        title: Kid's ceiling light
+        tap_action:
+          action: toggle
+        style:
+          top: 20.5%
+          left: 21.4%
+          --iron-icon-height: 30px
+          --iron-icon-width: 30px

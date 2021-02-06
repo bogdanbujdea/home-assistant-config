@@ -1,0 +1,197 @@
+path: mobile
+title: Mobile Dashboard
+icon: mdi:cellphone
+badges:
+  - person.bogdan_bujdea
+  - person.elena_bujdea
+  - input_select.bujdea_family
+  - sensor.average_temperature
+  - sensor.netatmo_outdoor_station_temperature
+  - sensor.shelly_current_consumption
+  - sensor.um_apartment_power_daily
+  - sensor.um_daily_steps
+  - sensor.database_size
+cards:
+  - type: vertical-stack
+    cards:
+      
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            entity: switch.bedroom_cooling
+            icon: mdi:air-conditioner
+            color: rgb(28, 128, 199)
+            state:
+              - value: "off"
+                color: gray
+            styles:
+          - type: "custom:button-card"
+            entity: switch.living_room_cooling
+            icon: mdi:air-conditioner
+            color: rgb(28, 128, 199)
+            state:
+              - value: "off"
+                color: gray
+          - type: "custom:button-card"
+            entity: cover.bedroom_curtain
+            icon: mdi:blinds
+            color: rgb(28, 128, 199)
+            hold_action:
+              action: more-info
+            state:
+              - value: "off"
+                color: gray
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            entity: shell_command.toggle_garage_door
+            icon: mdi:car
+            color: rgb(28, 128, 199)
+            state:
+              - value: "off"
+                color: gray
+          
+          - type: "custom:button-card"
+            entity: switch.colina_gate   
+            icon: mdi:gate
+            color: rgb(28, 128, 199)
+            state:
+              - value: "off"
+                color: gray
+          - type: picture
+            image: !secret bedroom_camera_snapshot
+            tap_action:
+              action: navigate
+              navigation_path: /elena-dashboard/camera
+          
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            entity: group.all_lights
+            name: All
+            color_type: card
+            color: rgb(66, 134, 244)
+            icon: mdi:ceiling-light
+            state:
+              - value: "off"
+                color: gray
+          - type: "custom:button-card"
+            entity: light.office_lightstrip
+            name: Office
+            color_type: card
+            color: rgb(66, 134, 244)
+            icon: mdi:led-strip
+            state:
+              - value: "off"
+                color: gray
+          - type: "custom:button-card"
+            entity: light.sonoffofficelight
+            name: Office
+            color_type: card
+            color: rgb(66, 134, 244)
+            icon: mdi:ceiling-light
+            state:
+              - value: "off"
+                color: gray
+          - type: "custom:button-card"
+            entity: light.living_room_dining_table
+            color_type: card
+            name: Living room
+            color: rgb(66, 134, 244)
+            icon: mdi:ceiling-light
+            state:
+              - value: "off"
+                color: gray
+          - type: "custom:button-card"
+            entity: light.living_room_couch_light
+            name: Living room
+            color_type: card
+            color: rgb(66, 134, 244)
+            icon: mdi:ceiling-light
+            state:
+              - value: "off"
+                color: gray
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            entity: light.front_hallway
+            name: Hallway front
+            color_type: card
+            color: rgb(66, 134, 244)
+            icon: mdi:ceiling-light
+            state:
+              - value: "off"
+                color: gray
+          - type: "custom:button-card"
+            entity: light.back_hallway
+            name: Hallway back
+            color_type: card
+            color: rgb(66, 134, 244)
+            icon: mdi:ceiling-light
+            state:
+              - value: "off"
+                color: gray
+          - type: "custom:button-card"
+            entity: light.kitchen_light
+            name: Kitchen
+            color_type: card
+            color: rgb(66, 134, 244)
+            icon: mdi:ceiling-light
+            state:
+              - value: "off"
+                color: gray
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            entity: light.bathroom_ceiling_light
+            color_type: card
+            color: rgb(66, 134, 244)
+            icon: mdi:ceiling-light
+            state:
+              - value: "off"
+                color: gray
+          - type: "custom:button-card"
+            entity: light.sonoff_kids_light
+            color_type: card
+            color: rgb(66, 134, 244)
+            icon: mdi:ceiling-light
+            state:
+              - value: "off"
+                color: gray
+          - type: "custom:button-card"
+            entity: light.bedroom_light
+            name: Bedroom
+            color_type: card
+            color: rgb(66, 134, 244)
+            icon: mdi:ceiling-light
+            state:
+              - value: "off"
+                color: gray
+          - type: "custom:button-card"
+            entity: light.bedroom_lightstrip
+            name: Bedroom
+            color_type: card
+            color: rgb(66, 134, 244)
+            icon: mdi:led-strip
+            state:
+              - value: "off"
+                color: gray
+            
+  - type: vertical-stack
+    cards:      
+      - type: custom:auto-entities      
+        card:
+          type: entities
+          title: Opened windows
+          show_header_toggle: false
+        entities:
+        filter:
+          include:
+            - name: /window/   
+              state: "on"
+      - type: entities
+        entities:
+          - scene.living_room_power_saving
+          - scene.living_room_power_on

@@ -1,0 +1,83 @@
+  type: entities
+  entities:
+    - sensor.dryer_2
+    - switch.washer
+    - sensor.washer_job_state
+    - sensor.washer_completion_time
+    - fan.xiaomi_miio_device    
+    - type: custom:xiaomi-vacuum-card
+      entity: vacuum.xiaomi_vacuum_cleaner
+      name: false
+    - type: custom:xiaomi-vacuum-map-card
+      entity: vacuum.xiaomi_vacuum_cleaner
+      map_image: '/local/custom_lovelace/xiaomi_vacuum_map_card/xmap.png'
+      calibration_points:
+      - vacuum:
+          x: 25500
+          y: 25500
+        map:
+          x: 760
+          y: 185
+      - vacuum:
+          x: 26500
+          y: 26500
+        map:
+          x: 877
+          y: 85
+      - vacuum:
+          x: 25500
+          y: 26500
+        map:
+          x: 760
+          y: 85
+      zones:  
+        - [[28156,20492,31456,26842]] #living room
+        - [[26185,19178,28085,24078]] #kitchen
+        - [[23884,20587,26184,24087]] #bathroom
+        - [[26142,24168,28092,26868]] #front hallway
+        - [[26142,24168,28092,26868], [22894,24060,28144,25160]] #hallway
+        - [[22843,25095,26043,26845]] #office
+        - [[18997,24020,22947,26820]] #kids room
+        - [[19089,20790,23789,23990]] #bedroom   
+    - type: 'custom:vacuum-card'
+      entity: vacuum.xiaomi_vacuum_cleaner
+      #image: '/local/custom_lovelace/xiaomi_vacuum_map_card/xmap.png'
+      stats:
+        default:
+          - attribute: filter_left
+            unit: hours
+            subtitle: Filter
+          - attribute: side_brush_left
+            unit: hours
+            subtitle: Side brush
+          - attribute: main_brush_left
+            unit: hours
+            subtitle: Main brush
+          - attribute: sensor_dirty_left
+            unit: hours
+            subtitle: Sensors
+        cleaning:
+          - attribute: cleaned_area
+            unit: m2
+            subtitle: Cleaning area
+          - attribute: cleaning_time
+            unit: minutes
+            subtitle: Cleaning time
+      actions:
+        - name: Clean apartment
+          service: script.1584623199887
+          icon: 'mdi:home'
+        - name: Clean living room
+          service: script.1584736860542
+          icon: 'mdi:sofa'
+        - name: Clean bedroom
+          service: script.1584735991442
+          icon: 'mdi:bed-empty'
+        - name: Clean kitchen
+          service: script.1584737101724
+          icon: 'mdi:silverware-fork-knife'
+        - name: Clean hallway
+          service: script.1584735527658
+          icon: 'mdi:floor-plan'
+  show_header_toggle: false
+  title: Cleaning

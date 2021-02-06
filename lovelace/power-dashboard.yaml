@@ -1,0 +1,104 @@
+path: power-dashboard
+title: Electricity
+icon: mdi:flash-outline
+cards:
+  - cards:
+    - type: custom:mini-graph-card
+      show:
+        graph: bar
+      hours_to_show: 168
+      aggregate_func: max
+      group_by: date
+      name: Daily power usage
+      icon: mdi:power
+      entities:
+      - entity: sensor.um_apartment_power_daily
+        name: Daily power consumption
+    - type: custom:mini-graph-card
+      show:
+        graph: bar
+      hours_to_show: 168
+      aggregate_func: max
+      group_by: date
+      name: Daily gas usage
+      icon: mdi:power
+      entities:
+      - entity: sensor.um_daily_gas_meter
+        name: Daily gas consumption
+    - type: custom:mini-graph-card
+      show:
+        labels: true
+      hours_to_show: 24
+      aggregate_func: avg
+      name: Total power consumption
+      points_per_hour: 1
+      icon: mdi:power
+      color_thresholds:
+      - value: 0
+        color: "#FFFFFF"
+      - value: 10
+        color: "#38B2FF"
+      - value: 100
+        color: "#FFEE38"
+      - value: 300
+        color: "#FF4D11"
+      - value: 1000
+        color: "#FF0000"
+      entities:
+      - entity: sensor.shelly_current_consumption
+        name: Total power consumption
+      - entity: sensor.power_consumption_summed
+        name: Plugs
+      - entity: sensor.gosund_office_energy_power
+        name: Office
+      - entity: sensor.living_room_power
+        name: Living room
+      - entity: sensor.power_1
+        name: Heating
+      - entity: sensor.power_2
+        name: Washer
+      - entity: sensor.power_3
+        name: Fridge
+      - entity: sensor.office_desk_plug_energy_power
+        name: Office desk
+      - entity: sensor.unmeasured_power
+        name: Unmeasured power
+    - type: custom:mini-graph-card
+      show:
+        labels: true
+      hours_to_show: 168
+      aggregate_func: avg
+      name: Gas consumption
+      points_per_hour: 0.1
+      icon: mdi:gas-cylinder
+      entities:
+      - entity: var.gas_index
+        name: Gas consumption
+    - type: glance
+      title: Power
+      show_state: false
+      entities:
+        - switch.power_1
+        - switch.power_2
+        - switch.power_3
+        - switch.office_switch_1
+        - switch.office_switch_2
+        - switch.office_switch_3
+        - switch.office_switch_usb
+        - switch.office_desk_usb_ports
+        - switch.office_desk_laptop
+        - switch.office_desk_phone_charger
+        - switch.office_desk_plug_3
+        - switch.laptop_power_switch
+        - switch.office_power
+        - switch.living_room_power_1
+        - switch.living_room_power_2
+        - switch.lidl_plug
+        - switch.tellur_plug
+    type: vertical-stack
+  - cards:
+    - !include consumers.yaml
+    type: vertical-stack
+  - cards:
+    - !include power.yaml
+    type: vertical-stack

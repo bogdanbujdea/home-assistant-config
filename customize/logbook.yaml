@@ -1,0 +1,10 @@
+include:
+  domains:
+    - switch
+    - light
+    - var
+    - person
+    - input_boolean
+    - automation
+    - script
+    - binary_sensor

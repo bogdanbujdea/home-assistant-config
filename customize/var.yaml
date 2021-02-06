@@ -1,0 +1,139 @@
+alexa_bedroom_volume:
+  friendly_name: "Alexa bedroom volume"
+  initial_value: 0.5
+alexa_kitchen_volume:
+  friendly_name: "Alexa kitchen volume"
+  initial_value: 0.5
+alexa_hallway_volume:
+  friendly_name: "Alexa hallway volume"
+  initial_value: 0.5
+alexa_office_volume:
+  friendly_name: "Alexa office volume"
+  initial_value: 0.5
+apartment_state:
+  friendly_name: "Apartment"
+  initial_value: "family"
+
+# Hashnode
+latest_hashnode_article_id:
+  friendly_name: "Latest article ID"
+  initial_value: ""
+  icon: "mdi:blogger"
+
+# RescueTime
+focus_mode:
+  friendly_name: "Focus mode state"
+  icon: "mdi:worker"
+
+# Fasting
+fasting:
+  friendly_name: "Fasting"
+  icon: "mdi:food-off"
+
+# Todoist
+
+all_tasks_count:
+  friendly_name: "All tasks"
+  initial_value: ""
+  unit_of_measurement: tasks
+  icon: "mdi:progress-upload"
+
+tasks_for_today:
+  friendly_name: "Unfinished tasks for today"
+  initial_value: ""
+  unit_of_measurement: tasks
+  icon: "mdi:progress-clock"
+
+initial_recurrent_tasks:
+  friendly_name: "Total recurrent tasks for today"
+  initial_value: ""
+  unit_of_measurement: tasks
+  icon: "mdi:redo-variant"
+
+recurrent_tasks_for_today:
+  friendly_name: "Unfinished recurrent tasks for today"
+  initial_value: ""
+  unit_of_measurement: tasks
+  icon: "mdi:redo-variant"
+
+completed_tasks_today:
+  friendly_name: "Completed tasks today"
+  initial_value: ""
+  unit_of_measurement: tasks
+  icon: "mdi:progress-check"
+
+completed_tasks_for_today:
+  friendly_name: "Completed tasks for today"
+  initial_value: ""
+  unit_of_measurement: tasks
+  icon: "mdi:progress-clock"
+
+important_unfinished_today:
+  friendly_name: "Important tasks unfinished"
+  initial_value: ""
+  unit_of_measurement: tasks
+  icon: "mdi:progress-clock"
+
+gas_index:
+  friendly_name: "Gas"
+  initial_value: ""
+  unit_of_measurement: mc
+  icon: "mdi:thermometer-lines"
+
+power_index:
+  friendly_name: "Power"
+  initial_value: ""
+  unit_of_measurement: kWh
+  icon: "mdi:flash"
+
+# Me
+
+bogdan_status:
+  friendly_name: "Bogdan's status"
+  icon: "mdi:human-greeting"
+
+bogdan_location:
+  friendly_name: "Bogdan's location"
+  icon: "mdi:map-marker"
+
+bogdan_steps:
+  friendly_name: "Bogdan's steps"
+  unit_of_measurement: steps
+  icon: "mdi:walk"
+
+bogdan_weight:
+  friendly_name: "Bogdan's weight"
+  unit_of_measurement: kg
+  icon: "mdi:weight-kilogram"
+
+bogdan_fat:
+  friendly_name: "Bogdan's fat %"
+  unit_of_measurement: "%"
+  icon: "mdi:human-child"
+
+bogdan_water:
+  friendly_name: "Bogdan's water %"
+  unit_of_measurement: "%"
+  icon: "mdi:water-percent"
+
+bogdan_muscle:
+  friendly_name: "Bogdan's muscle %"
+  unit_of_measurement: "%"
+  icon: "mdi:human"
+
+bogdan_bmr:
+  friendly_name: "Bogdan's BMR"
+  unit_of_measurement: calories/day
+  icon: "mdi:human-male"
+
+bogdan_waist:
+  friendly_name: "Bogdan's waist"
+  unit_of_measurement: cm
+  icon: "mdi:diameter"
+
+# Finance
+
+card_expenses:
+  friendly_name: "Card expenses"
+  unit_of_measurement: RON
+  icon: "mdi:cash-usd"

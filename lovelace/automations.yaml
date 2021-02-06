@@ -1,0 +1,12 @@
+  type: entities
+  entities:
+    - automation.turn_off_bedroom_lightstrip
+    - automation.trigger_notification_when_there_s_motion_in_the_bedroom
+
+    - automation.turn_kitchen_lights_off_when_there_s_no_movement
+    - automation.turn_on_the_kitchen_lightstrip
+    - automation.open_the_gate
+    - automation.turn_off_all_the_lights_when_we_leave_home
+    - automation.turn_off_all_lights_with_long_press_on_4th_button_of_hallway_switch
+    - automation.turn_on_kitchen_lighstrip_on_1st_button_press
+  title: Automations

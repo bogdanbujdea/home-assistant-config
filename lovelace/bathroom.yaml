@@ -1,0 +1,8 @@
+  type: entities
+  entities:
+    - light.bathroom_ceiling_light
+    - sensor.bathroom_light_level
+    - sensor.bathroom_temperature
+    - binary_sensor.bathroom_motion_sensor
+    - media_player.bathroom_echo_dot
+  title: Bathroom

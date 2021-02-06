@@ -1,0 +1,18 @@
+  type: entities
+  entities:
+    - light.bedroom_lightstrip
+    - light.bedroom_light
+    - sensor.bedroom_light_level
+    - sensor.bedroom_temperature
+    - binary_sensor.bedroom_motion_sensor      
+    - cover.bedroom_curtain
+    - binary_sensor.bedroom_window
+    - media_player.bedroom_echo_dot
+    - group.bedroom_lights
+    - sensor.netatmo_indoor_humidity
+    - sensor.netatmo_indoor_noise
+    - sensor.netatmo_indoor_pressure
+    - sensor.netatmo_indoor_temperature
+    #- image_processing.bedroom_identity_camera
+    #- image_processing.bedroom_face_camera
+  title: Bedroom

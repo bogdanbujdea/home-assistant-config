@@ -1,0 +1,1 @@
+ /usr/bin/ssh pi@192.168.1.101 'nohup python /home/python-host/switchbot.py D4:20:02:BA:9A:FF Press'

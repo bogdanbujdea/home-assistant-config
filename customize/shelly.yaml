@@ -1,0 +1,3 @@
+cloud_auth_key: !secret shelly_cloud_auth_key
+cloud_server: !secret shelly_cloud_server
+discovery: true
