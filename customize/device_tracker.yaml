@@ -1,6 +1,6 @@
-- platform: bluetooth_tracker
-  request_rssi: true
-  interval_seconds: 30
-  consider_home: 180
-  new_device_defaults:
-    track_new_devices: false
+#- platform: bluetooth_tracker
+#  request_rssi: true
+#  interval_seconds: 30
+#  consider_home: 180
+#  new_device_defaults:
+#    track_new_devices: false
