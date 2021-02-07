@@ -5,3 +5,89 @@ username: homeassistant
 password: !secret influxdb_password
 max_retries: 10
 default_measurement: state
+include:
+  domains:
+    - group
+    - input_boolean
+    - person
+    - var
+  entities:
+    - var.pluralsight_minutes
+    - var.pluralsight_weekly_goal
+    - sensor.um_apartment_power_hourly
+    - sensor.um_apartment_power_daily
+    - sensor.um_apartment_power_monthly
+    - sensor.netatmo_indoor_co2
+    - sensor.shelly_current_consumption
+    - sensor.xiaomi_airpurifier_air_quality_pm25
+    - binary_sensor.fridge_door
+    - binary_sensor.heating
+    - binary_sensor.msi_power_status
+    - binary_sensor.office_chair
+    - binary_sensor.office_desk_sensor
+    - binary_sensor.office_presence
+    - cover.bedroom_curtain
+    - light.back_hallway
+    - light.bathroom_ceiling_light
+    - light.bedroom_light
+    - light.bedroom_lightstrip
+    - light.front_hallway
+    - light.hallway
+    - light.kitchen
+    - light.kitchen_light
+    - light.kitchen_lightstrip
+    - light.living_room
+    - light.living_room_couch_light
+    - light.living_room_dining_table
+    - light.office_lightstrip
+    - light.office_touchscreen
+    - light.range_extender_12
+    - light.range_extender_9
+    - light.sonoff_kids_light
+    - light.sonoffofficelight
+    - sensor.daily_gas_cost
+    - sensor.daily_gas_usage
+    - sensor.database_size
+    - sensor.dryer_2
+    - sensor.elena_status
+    - sensor.fasting_query
+    - sensor.fasting_time
+    - sensor.fridge_opened_count
+    - sensor.gas_cost
+    - binary_sensor.zigbee_garage_door_sensor_contact
+    - sensor.garage_temperature
+    - sensor.hallway_temperature
+    - sensor.heating_power
+    - sensor.host_cpu_temperature
+    - sensor.power_cost
+    - sensor.predicted_steps_for_current_week
+    - sensor.productivity_score
+    - sensor.productivity_score_work_hours
+    - sensor.raspberry_cpu_temperature
+    - switch.fasting
+    - switch.focus_mode
+    - sensor.sitting_on_chair_today
+    - sensor.sitting_on_chair_this_month
+    - sensor.standing_up_today
+    - sensor.standing_up_time_today
+    - sensor.sitting_down_time_today
+    - sensor.office_position
+    - sensor.galaxy_s9_last_notification
+  entity_globs:
+    - sensor.*temperature*
+    - sensor.*humidity*
+    - sensor.adguard*
+    - sensor.*today*
+    - sensor.*this_month*
+    - sensor.*steps*
+    - sensor.*fridge*
+    - sensor.*todoist*
+    - sensor.um_*
+    - sensor.*power*
+    - sensor.*energy*
+    - sensor.*gas*
+    - sensor.*consumption*
+exclude:
+  entity_globs:
+    - sensor.*voltage*
+    - sensor.*5rf0t10*

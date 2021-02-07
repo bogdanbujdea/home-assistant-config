@@ -114,35 +114,30 @@ include:
     - sensor.*todoist*
     - sensor.um_*
 
-exclude:
-  event_types:
-    - component_loaded
-    - service_registered
-    - device_registry_updated
-    - entity_registry_updated
+
 #  entities:
 #    - sensor.power_diff
 #    - sensor.power_consumption_summed
 #    - sensor.apartment_power_total
 #    - sensor.apartment_power_adjusted
-#    #- sensor.bathroom_motion_query
-#    #- sensor.bedroom_motion_query
-#    #- sensor.living_room_motion_query
-#    #- sensor.kids_room_motion_query
-#    #- sensor.hallway_motion_query
-#    #- sensor.kitchen_hue_motion_query
-#    #- sensor.kitchen_tradfri_motion_query
-#    #- sensor.kitchen_motion_query
-#    #- sensor.office_motion_query
-#    #- sensor.office_motion_last_detected
-#    #- sensor.kids_room_motion_last_detected
-#    #- sensor.hallway_motion_last_detected
-#    #- sensor.living_room_motion_last_detected
-#    #- sensor.bedroom_motion_last_detected
-#    #- sensor.bathroom_motion_last_detected
-#    #- sensor.kitchen_hue_motion_last_detected
-#    #- sensor.kitchen_tradfri_motion_last_detected
-#    #- sensor.kitchen_motion_last_detected
+#    - sensor.bathroom_motion_query
+#    - sensor.bedroom_motion_query
+#    - sensor.living_room_motion_query
+#    - sensor.kids_room_motion_query
+#    - sensor.hallway_motion_query
+#    - sensor.kitchen_hue_motion_query
+#    - sensor.kitchen_tradfri_motion_query
+#    - sensor.kitchen_motion_query
+#    - sensor.office_motion_query
+#    - sensor.office_motion_last_detected
+#    - sensor.kids_room_motion_last_detected
+#    - sensor.hallway_motion_last_detected
+#    - sensor.living_room_motion_last_detected
+#    - sensor.bedroom_motion_last_detected
+#    - sensor.bathroom_motion_last_detected
+#    - sensor.kitchen_hue_motion_last_detected
+#    - sensor.kitchen_tradfri_motion_last_detected
+#    - sensor.kitchen_motion_last_detected
 #    - sensor.gosund_office_status
 #    - sensor.gosund2_status
 #    - sensor.shelly_current_consumption
