@@ -8,3 +8,5 @@ include:
     - automation
     - script
     - binary_sensor
+  entities:
+    - sensor.galaxy_s9_last_notification
