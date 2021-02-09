@@ -53,3 +53,7 @@ notify_family_status:
 living_tv_auto_shutdown:
   name: Living TV auto shutdown
   icon: mdi:youtube-tv
+
+show_fasting_card:
+  name: Show fasting card
+  icon: mdi:food
