@@ -25,4 +25,12 @@ productivity_score_work_hours:
   icon: mdi:worker
   min: 1
   max: 100
-  step: 1  
+  step: 1 
+
+
+pluralsight_goal_percent:
+  name: Pluralsight goal
+  icon: mdi:book
+  min: 0
+  max: 100
+  step: 1
