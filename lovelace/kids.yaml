@@ -2,4 +2,6 @@
   entities:
     - light.sonoff_kids_light
     - binary_sensor.kids_room_motion_sensor
+    - sensor.kids_room_temperature
+    - sensor.kids_room_humidity
   title: Kids

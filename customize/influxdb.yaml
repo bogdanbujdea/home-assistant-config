@@ -64,6 +64,7 @@ include:
     - sensor.productivity_score
     - sensor.productivity_score_work_hours
     - sensor.raspberry_cpu_temperature
+    - sensor.msi_laptop_temperature
     - switch.fasting
     - switch.focus_mode
     - sensor.sitting_on_chair_today

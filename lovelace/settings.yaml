@@ -37,10 +37,6 @@ cards:
       - input_boolean.phone_call_notifications_bogdan
       - input_boolean.garage_door_opened
       - input_boolean.show_fasting_card
-      - switch.garage_door_switch
-      - switch.garage_remote
-      - sensor.productivity_score
-      - sensor.productivity_score_work_hours
       show_header_toggle: true
       title: Devices
     type: vertical-stack

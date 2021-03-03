@@ -6,5 +6,5 @@ homeassistant:
   time_zone: Europe/Bucharest
 
 
-
-
+http:
+  server_port: 8124

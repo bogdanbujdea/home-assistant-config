@@ -839,23 +839,6 @@
             }
         }
     },
-    "node-red-contrib-state-machine": {
-        "name": "node-red-contrib-state-machine",
-        "version": "1.2.0",
-        "local": false,
-        "nodes": {
-            "state-machine": {
-                "name": "state-machine",
-                "types": [
-                    "state-machine"
-                ],
-                "enabled": true,
-                "local": false,
-                "module": "node-red-contrib-state-machine",
-                "file": "/opt/node_modules/node-red-contrib-state-machine/state-machine.js"
-            }
-        }
-    },
     "node-red-contrib-statistics": {
         "name": "node-red-contrib-statistics",
         "version": "2.2.2",
@@ -1540,6 +1523,23 @@
                 "local": false,
                 "module": "node-red-contrib-persistent-fsm",
                 "file": "/opt/node_modules/node-red-contrib-persistent-fsm/state-machine.js"
+            }
+        }
+    },
+    "node-red-contrib-edge": {
+        "name": "node-red-contrib-edge",
+        "version": "0.1.1",
+        "local": false,
+        "nodes": {
+            "edge": {
+                "name": "edge",
+                "types": [
+                    "edge"
+                ],
+                "enabled": true,
+                "local": true,
+                "module": "node-red-contrib-edge",
+                "file": "/config/node-red/node_modules/node-red-contrib-edge/edge.js"
             }
         }
     }

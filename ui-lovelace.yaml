@@ -6,7 +6,7 @@ title: Home
 show_in_sidebar: true
 views:
   - !include lovelace/home.yaml
-  - !include lovelace/dashboard.yaml
+  #- !include lovelace/dashboard.yaml
   - !include lovelace/devices.yaml
   - !include lovelace/floorplan.yaml
   - !include lovelace/power-dashboard.yaml

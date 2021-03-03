@@ -5,6 +5,7 @@
     "private": true,
     "dependencies": {
         "node-red-contrib-credentials": "~0.2.1",
+        "node-red-contrib-edge": "~0.1.1",
         "node-red-contrib-graphql": "~0.2.5",
         "node-red-contrib-home-assistant-websocket": "~0.22.3",
         "node-red-contrib-stoptimer3": "~0.1.2",

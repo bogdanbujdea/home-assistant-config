@@ -1,11 +1,6 @@
 include:
   entities:
     - sensor.office_position
-    - sensor.sitting_on_chair_today
-    - sensor.sitting_on_chair_this_month
-    - sensor.standing_up_today
-    - sensor.standing_up_time_today
-    - sensor.sitting_down_time_today
     - sensor.galaxy_s9_last_notification
   domains:
     - var

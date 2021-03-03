@@ -1,7 +1,7 @@
 - id: '1567289422720'
   alias: Turn kitchen lights off when there's no movement
   trigger:
-  - entity_id: group.kitchen_motion
+  - entity_id: group.all_lights
     for: 0:05:00
     platform: state
     to: 'off'
@@ -146,7 +146,7 @@
   description: ''
   trigger:
   - platform: template
-    value_template: '{{ state_attr(''fan.xiaomi_miio_device'', ''aqi'') < 10}}'
+    value_template: '{{ state_attr(''fan.xiaomi_miio_device'', ''aqi'') < 5}}'
   condition:
   - condition: state
     entity_id: fan.xiaomi_miio_device
@@ -347,7 +347,7 @@
       transition: '1'
     entity_id: light.office_lightstrip
     service: light.turn_on
-- alias: Office CO2 too high
+- alias: Summary of the day
   trigger:
   - entity_id: sensor.netatmo_indoor_co2
     for: 00:01:00
@@ -356,16 +356,16 @@
   action:
   - service: script.activate_alexa_actionable_notification
     data_template:
-      text: Welcome back home, would you like me to give you a status?
-      event_id: actionable_notification_welcome_home_status
-      alexa_device: media_player.hallway_echo_dot
+      text: Good morning Bogdan, do you want a summary of the day?
+      event_id: actionable_notification_office_summary
+      alexa_device: media_player.office_echo_dot
   id: ffc31db11cf645f5a638f83ecfa555ee
 - alias: Turn on lights when CO2 is high
   trigger:
     platform: event
     event_type: alexa_actionable_notification
     event_data:
-      event_id: actionable_notification_welcome_home_status
+      event_id: actionable_notification_office_summary
       event_response_type: ResponseYes
   action:
   - service: light.toggle

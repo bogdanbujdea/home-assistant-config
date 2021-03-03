@@ -5,18 +5,10 @@ badges:
   - person.bogdan_bujdea
   - person.elena_bujdea
   - input_select.bujdea_family
-  - sensor.average_temperature
   - sensor.netatmo_outdoor_station_temperature
-  - sensor.netatmo_indoor_co2
-  - sensor.shelly_current_consumption
-  - sensor.um_daily_steps
   - binary_sensor.heating
-  - switch.heating
   - sensor.gas_cost
   - sensor.power_cost
-  - switch.lidl_plug
-  - switch.living_room_power_2
-  #- climate.apartment_thermostat
 cards:
   - cards:
       - type: custom:mini-graph-card
@@ -85,17 +77,6 @@ cards:
           - switch.adguard_filtering
           - sensor.wifi_connected_devices
           - sensor.database_size
-          - sensor.kids_room_temperature
-          - sensor.living_room_temperature
-          - sensor.office_temperature
-          - sensor.bedroom_temperature
-          - sensor.kitchen_temperature
-          - sensor.bathroom_temperature
-          - sensor.hallway_temperature
-          - sensor.heating_on_today
-          - sensor.heating_on_this_month
-          - sensor.sitting_on_chair_today
-          - sensor.sitting_on_chair_this_month
         show_header_toggle: false
         title: Home Assistant
     type: vertical-stack
@@ -211,6 +192,8 @@ cards:
             name: Garage HA host temperature
           - entity: sensor.bedroom_camera_temperature
             name: Bedroom camera temperature
+          - entity: sensor.msi_laptop_temperature
+            name: MSI Laptop temperature
       - !include doors.yaml
-      - !include consumers.yaml
+      #- !include consumers.yaml
     type: vertical-stack

@@ -1,5 +1,9 @@
 db_url: !secret mariadb_url
 purge_keep_days: 15
+exclude:
+  entity_globs:
+    - sensor.*motion_last_detected*
+    - sensor.*motion_query*
 include:
   domains:
     - group
@@ -58,6 +62,7 @@ include:
     - sensor.productivity_score
     - sensor.productivity_score_work_hours
     - sensor.raspberry_cpu_temperature
+    - sensor.msi_laptop_temperature
     - switch.adguard_filtering
     - switch.adguard_parental_control
     - switch.adguard_protection
@@ -98,6 +103,7 @@ include:
     - sensor.sitting_down_time_today
     - sensor.office_position
     - sensor.galaxy_s9_last_notification
+    - binary_sensor.vibration_sensor
   entity_globs:
     - sensor.*temperature*
     - sensor.*detected*

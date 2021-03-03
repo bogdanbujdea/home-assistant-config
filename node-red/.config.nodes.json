@@ -943,7 +943,7 @@
     },
     "node-red-dashboard": {
         "name": "node-red-dashboard",
-        "version": "2.27.0",
+        "version": "2.28.1",
         "local": false,
         "nodes": {
             "ui_base": {
@@ -1523,6 +1523,23 @@
                 "local": false,
                 "module": "node-red-contrib-persistent-fsm",
                 "file": "/opt/node_modules/node-red-contrib-persistent-fsm/state-machine.js"
+            }
+        }
+    },
+    "node-red-contrib-edge": {
+        "name": "node-red-contrib-edge",
+        "version": "0.1.1",
+        "local": true,
+        "nodes": {
+            "edge": {
+                "name": "edge",
+                "types": [
+                    "edge"
+                ],
+                "enabled": true,
+                "local": true,
+                "module": "node-red-contrib-edge",
+                "file": "/config/node-red/node_modules/node-red-contrib-edge/edge.js"
             }
         }
     }

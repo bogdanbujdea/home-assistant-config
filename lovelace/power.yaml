@@ -11,11 +11,7 @@ entities:
   - sensor.gas_cost
   - sensor.monthly_gas_cost
   - sensor.daily_gas_cost
-  - sensor.um_daily_gas_meter
-  - sensor.daily_gas_usage
   - sensor.monthly_gas_usage
-  - scene.living_room_power_saving
-  - scene.living_room_power_on
 
   - type: custom:battery-entity
     entity: sensor.galaxy_s9_battery_level

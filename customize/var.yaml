@@ -137,3 +137,33 @@ card_expenses:
   friendly_name: "Card expenses"
   unit_of_measurement: RON
   icon: "mdi:cash-usd"
+
+office_person:
+  friendly_name: Office person
+  icon: "mdi:human"
+
+office_people_count:
+  friendly_name: Office people count
+  icon: "mdi:human"
+
+standing_up_7_days_ago:
+  friendly_name: Standing up 7 days ago
+  icon: "mdi:human-handsup"
+standing_up_6_days_ago:
+  friendly_name: Standing up 6 days ago
+  icon: "mdi:human-handsup"
+standing_up_5_days_ago:
+  friendly_name: Standing up 5 days ago
+  icon: "mdi:human-handsup"
+standing_up_4_days_ago:
+  friendly_name: Standing up 4 days ago
+  icon: "mdi:human-handsup"
+standing_up_3_days_ago:
+  friendly_name: Standing up 3 days ago
+  icon: "mdi:human-handsup"
+standing_up_2_days_ago:
+  friendly_name: Standing up 2 days ago
+  icon: "mdi:human-handsup"
+standing_up_1_days_ago:
+  friendly_name: Standing up 1 day ago
+  icon: "mdi:human-handsup"

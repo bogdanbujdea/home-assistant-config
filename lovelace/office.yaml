@@ -10,7 +10,6 @@
     - switch.office_switch_2
     - switch.office_switch_3
     - switch.office_switch_usb
-    - switch.laptop_power_switch
     - switch.office_power
     - switch.office_fan
     - sensor.netatmo_indoor_co2

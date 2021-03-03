@@ -34,3 +34,10 @@ pluralsight_goal_percent:
   min: 0
   max: 100
   step: 1
+
+abs_count:
+  name: Abs
+  icon: mdi:human
+  min: 0
+  max: 10000
+  step: 1

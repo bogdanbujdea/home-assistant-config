@@ -89,7 +89,6 @@ cards:
         - switch.office_desk_laptop
         - switch.office_desk_phone_charger
         - switch.office_desk_plug_3
-        - switch.laptop_power_switch
         - switch.office_power
         - switch.living_room_power_1
         - switch.living_room_power_2

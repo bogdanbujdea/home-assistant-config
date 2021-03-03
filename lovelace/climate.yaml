@@ -3,13 +3,12 @@ entities:
   #- climate.apartment_thermostat
   - binary_sensor.heating
   - switch.heating
-  - sensor.power_1
+  #- sensor.power_1
   #- switch.apartment_cooling
   #- switch.living_room_cooling
   #- switch.bedroom_cooling
   #- switch.apartment_ventilation
   #- switch.living_room_ventilation
   #- switch.bedroom_ventilation
-  - switch.power_1
 show_header_toggle: false
 title: Climate

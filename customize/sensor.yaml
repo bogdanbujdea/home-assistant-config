@@ -76,7 +76,7 @@
       unit_of_measurement: RON
       friendly_name: "Current gas cost"
       value_template: >-
-        {{ ((float(states.var.gas_index.state) - 939.2 ) * 1.8 )| round(2) }}
+        {{ ((float(states.var.gas_index.state) - 1010 ) * 1.8 )| round(2) }}
     daily_gas_usage:
       icon_template: mdi:thermometer-lines
       unit_of_measurement: mc
@@ -378,7 +378,12 @@
     todoist_tasks_completion_percentage:
       friendly_name: "Daily % of tasks completed"
       unit_of_measurement: "%"
-      value_template: "{{ ((float(states.sensor.all_completed_tasks.state) / float(states.sensor.all_initial_tasks.state)) * 100) | round(0) }}"
+      value_template: >-
+        {% if float(states.var.initial_recurrent_tasks.state) != 0 %}
+          {{ ((float(states.sensor.all_completed_tasks.state) / float(states.sensor.all_initial_tasks.state)) * 100) | round(0) }}
+        {% else %}
+          0
+        {% endif %}
       icon_template: >-
         {% if ((float(states.sensor.all_completed_tasks.state) / float(states.sensor.all_initial_tasks.state)) * 100) | round(0) < 10 %}
           mdi:gauge-empty
@@ -393,7 +398,12 @@
     todoist_tasks_recurrent_completion_percentage:
       friendly_name: "Daily % of recurrent tasks completed"
       unit_of_measurement: "%"
-      value_template: "{{ ((float(states.var.initial_recurrent_tasks.state) - float(states.var.recurrent_tasks_for_today.state)) / (float(states.var.initial_recurrent_tasks.state)) * 100) | round(0) }}"
+      value_template: >-
+        {% if float(states.var.initial_recurrent_tasks.state) != 0 %}
+          {{ ((float(states.var.initial_recurrent_tasks.state) - float(states.var.recurrent_tasks_for_today.state)) / (float(states.var.initial_recurrent_tasks.state)) * 100) | round(0) }}
+        {% else %}
+          0
+        {% endif %}
       icon_template: >-
         {% if ((float(states.var.initial_recurrent_tasks.state) - float(states.var.recurrent_tasks_for_today.state)) / (float(states.var.initial_recurrent_tasks.state)) * 100) | round(0) < 10 %}
           mdi:gauge-empty
@@ -408,7 +418,12 @@
     todoist_tasks_important_completion_percentage:
       friendly_name: "Daily % of important tasks completed"
       unit_of_measurement: "%"
-      value_template: "{{ (float(states.var.completed_tasks_for_today.state) / (float(states.var.completed_tasks_for_today.state) + (float(states.var.tasks_for_today.state))) * 100) | round(0) }} "
+      value_template: >-
+        {% if float(states.var.tasks_for_today.state) != 0 %}
+          {{ (float(states.var.completed_tasks_for_today.state) / (float(states.var.completed_tasks_for_today.state) + (float(states.var.tasks_for_today.state))) * 100) | round(0) }}
+        {% else %}
+          0
+        {% endif %}
       icon_template: >-
         {% if (float(states.var.completed_tasks_for_today.state) / (float(states.var.completed_tasks_for_today.state) + (float(states.var.tasks_for_today.state))) * 100) | round(0) < 10 %}
           mdi:gauge-empty
@@ -622,7 +637,7 @@
     office_position:
       friendly_name: "Office position"
       value_template: >-
-        {% if states.binary_sensor.office_chair.state == 'on' and states.binary_sensor.office_desk_sensor.state == 'off' and states.var.bogdan_location.state == 'Office'  %}
+        {% if states.sensor.msi_laptop_current_username.state == 'bogda' and states.binary_sensor.office_chair.state == 'on' and states.binary_sensor.office_desk_sensor.state == 'off' and states.var.bogdan_location.state == 'Office'  %}
           Standing up
         {%- elif states.binary_sensor.office_chair.state == 'off' -%}
           Sitting down
@@ -630,7 +645,7 @@
           AFK
         {% endif %}
       icon_template: >-
-        {% if states.binary_sensor.office_chair.state == 'on' and states.binary_sensor.office_desk_sensor.state == 'off' %}
+        {% if states.sensor.msi_laptop_current_username.state == 'bogda' and states.binary_sensor.office_chair.state == 'on' and states.binary_sensor.office_desk_sensor.state == 'off' and states.var.bogdan_location.state == 'Office'  %}
           mdi:human-handsup
         {%- elif states.binary_sensor.office_chair.state == 'off' -%}
           mdi:seat-recline-normal
@@ -647,13 +662,13 @@
       friendly_name: "Standing up today"
       unit_of_measurement: "%"
       value_template: >-
-        {{ ((float(states.sensor.standing_up_today.state) / ((float(states.sensor.sitting_on_chair_today.state)) + (float(states.sensor.standing_up_today.state)))) * 100) | round(3)}}
+        {{ ((float(states.sensor.standing_up_today.state) / ((float(states.sensor.sitting_on_chair_today.state)) + (float(states.sensor.standing_up_today.state)))) * 100) | round(1) }}
       icon_template: "mdi:human-handsup"
     sitting_down_time_today:
       friendly_name: "Sitting down today"
       unit_of_measurement: "%"
       value_template: >-
-        {{ ((float(states.sensor.sitting_on_chair_today.state) / ((float(states.sensor.sitting_on_chair_today.state)) + (float(states.sensor.standing_up_today.state)))) * 100) | round(3)}}
+        {{ ((float(states.sensor.sitting_on_chair_today.state) / ((float(states.sensor.sitting_on_chair_today.state)) + (float(states.sensor.standing_up_today.state)))) * 100) | round(1) }}
       icon_template: "mdi:human-handsup"
 
 - platform: sql

@@ -10,6 +10,6 @@
                 "view-show-tips": false
             }
         },
-        "menu-menu-item-sidebar": false
+        "menu-menu-item-sidebar": true
     }
 }
