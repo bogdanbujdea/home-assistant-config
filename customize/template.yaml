@@ -34,6 +34,10 @@
       {% set battery_used_kwh = (battery_percentage_used / 100) * battery_capacity %}
       {{ (battery_used_kwh * 1) | round(2) }}
       
+  - name: "Volvo Total Fuel Consumption"
+    state_class: measurement
+    unit_of_measurement: 'L'
+    state: "{{ states('var.volvo_fuel_total_consumption') }}"
   - name: "Volvo Last Refuel Range Left"
     state_class: measurement
     unit_of_measurement: 'km'
@@ -46,6 +50,10 @@
     state_class: measurement
     unit_of_measurement: 'RON'
     state: "{{ states('var.volvo_electricity_total_consumption') | float * states('var.kwh_price') | float }}"
+  - name: "Volvo Total Battery Consumption"
+    state_class: measurement
+    unit_of_measurement: 'kWh'
+    state: "{{ (states('var.volvo_total_battery_consumption') | float) | round(2) }}"
   - name: "Volvo Overall Price Per Kilometer"
     unit_of_measurement: 'RON/km'
     state_class: measurement
@@ -98,19 +106,6 @@
         0
       {% endif %}
 
-  - name: "Volvo Electricity vs Fuel Usage"
-    unit_of_measurement: '%'
-    state_class: measurement
-    icon: 'mdi:gas-station'
-    state: >-
-      {% set total_distance = states('sensor.volvo_xc60_yv1uzh5v4p1357593_odometer') | float - states('var.volvo_odometer_at_last_charge') | float %}
-      {% set electricity_distance = states('sensor.volvo_xc60_yv1uzh5v4p1357593_odometer') | float - states('var.volvo_odometer_at_last_charge') | float %}
-      {% set fuel_distance = total_distance - electricity_distance %}
-      {% if total_distance > 0 %}
-        {{ ((electricity_distance / total_distance) * 100) | round(2) }}
-      {% else %}
-        0
-      {% endif %}
   - name: "Volvo Fuel consumption"
     state_class: measurement
     unit_of_measurement: 'L/100km'
@@ -123,4 +118,3 @@
        {% else %}
           0
        {% endif %}
-

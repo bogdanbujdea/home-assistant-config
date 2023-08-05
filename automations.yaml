@@ -252,7 +252,7 @@
   - data:
       message: The CO2 levels are too high
       title: CO2 alert
-    service: notify.mobile_app_galaxy_s9
+    service: notify.mobile_app_s22ultra
 - id: '1590191419164'
   alias: Turn off hallway lights when there's no movement
   description: ''
@@ -435,7 +435,7 @@
     tag_id: a937d2a9-aa51-47d1-a7e9-44fdfd062764
   condition: []
   action:
-  - service: notify.mobile_app_galaxy_s9
+  - service: notify.mobile_app_s22ultra
     data:
       title: bedroom
       message:

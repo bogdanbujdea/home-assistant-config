@@ -9,6 +9,8 @@ include:
   domains:
     - group
     - input_boolean
+    - climate
+    - utility_meter
     - person
     - var
   entities:

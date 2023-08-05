@@ -12,6 +12,8 @@ include:
     - group
     - input_boolean
     - person
+    - climate
+    - utility_meter
     - var
   entities:
     - switch.shelly_office_pc_plug

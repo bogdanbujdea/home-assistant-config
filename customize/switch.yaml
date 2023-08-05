@@ -216,7 +216,3 @@
       turn_off:
         service: script.turn_off_focus_mode        
       icon_template: "mdi:worker"
-
-- platform: switchbot
-  mac: 'D4:20:02:BA:9A:FF'
-  name: 'SwitchBot'

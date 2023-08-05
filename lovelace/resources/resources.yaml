@@ -24,3 +24,5 @@
   type: module
 - url: /local/community/car-card/car-card.js
   type: module
+- url: /local/community/scheduler-card/scheduler-card.js
+  type: module

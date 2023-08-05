@@ -113,3 +113,29 @@ um_monthly_card_expenses:
 um_daily_gas_meter:
   source: sensor.daily_gas_usage
   cycle: daily
+
+# Car
+
+um_volvo_daily_electricity_cost:
+  source: sensor.volvo_battery_consumption_until_now
+  cycle: daily
+
+um_volvo_monthly_electricity_cost:
+  source: sensor.volvo_battery_consumption_until_now
+  cycle: monthly
+
+um_volvo_daily_fuel:
+  source: sensor.volvo_total_fuel_consumption
+  cycle: daily
+
+um_volvo_monthly_fuel:
+  source: sensor.volvo_total_fuel_consumption
+  cycle: monthly
+
+um_volvo_daily_km:
+  source: sensor.volvo_xc60_yv1uzh5v4p1357593_odometer
+  cycle: daily
+
+um_volvo_monthly_km:
+  source: sensor.volvo_xc60_yv1uzh5v4p1357593_odometer
+  cycle: monthly

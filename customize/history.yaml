@@ -33,6 +33,9 @@ include:
     - switch.bedroom_motion_detection
     - sensor.um_garage_power_monthly
   domains:
+    - climate
+    - utility_meter
+    - climate
     - var
     - light
   entity_globs:

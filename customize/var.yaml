@@ -257,6 +257,10 @@ volvo_electricity_total_consumption:
   friendly_name: "Electricity Total Consumption"
   unit_of_measurement: kWh
   icon: "mdi:wallet"
+volvo_total_battery_consumption:
+  friendly_name: "Total Battery Consumption"
+  unit_of_measurement: kWh
+  icon: "mdi:wallet"
 volvo_odometer_at_last_charge:
   friendly_name: "Odometer At Last Full Charge"
   unit_of_measurement: RON
