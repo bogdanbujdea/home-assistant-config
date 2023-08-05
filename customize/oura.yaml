@@ -1,0 +1,15 @@
+name: sleep_quality
+client_id: !secret oura_client_id
+client_secret: !secret oura_client_secret
+scan_interval: 7200 # 2h = 2h * 60min * 60 seconds
+max_backfill: 3
+monitored_variables:
+  - yesterday
+  - monday
+  - tuesday
+  - wednesday
+  - thursday
+  - friday
+  - saturday
+  - sunday
+  - 8d_ago # Last week, +1 to compare to yesterday.

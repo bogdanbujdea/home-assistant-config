@@ -42,6 +42,13 @@ all_motion_sensors:
     - binary_sensor.office_motion_sensor
     - binary_sensor.living_room_motion_sensor
 
+
+living_room_curtain:
+  name: Living room curtain
+  entities:
+    - curtain.living_room_left
+    - curtain.living_room_right
+
 hallway_lights:
   name: Hallway lights
   entities:
@@ -60,14 +67,50 @@ kitchen_lights:
     - light.kitchen_light
     - light.kitchen_light_strip
 
+office_hue_lamps:
+ name: Office lamps
+ entities:
+    - light.office_lamp_left
+    - light.office_lamp_right
+
 office_lights:
   name: Office lights
   entities:
     - light.office_lightstrip
     - light.sonoffofficelight
-    
+    - light.office_closet_wled
+    - light.office_lamp_left
+    - light.office_lamp_right
+
+office_focus_lights:
+  name: Office lights
+  entities:
+    - light.sonoffofficelight
+    - light.office_lamp_left
+    - light.office_lamp_right
+
+office_leds:
+  name: Office LEDs
+  entities:
+    - light.office_lightstrip
+    - light.office_closet_wled
+    - light.office_lamp_left
+    - light.office_lamp_right
 living_room_lights:
   name: Living room lights
+  entities:
+    - light.living_room_dining_table
+    - light.living_room_couch_light
+    - light.wled_living_room_1
+    - light.wled_living_room_2
+
+living_room_wled:
+  name: Living room strips
+  entities:
+    - light.wled_living_room_1
+    - light.wled_living_room_2
+living_room_ceiling_lights:
+  name: Living room ceiling lights
   entities:
     - light.living_room_dining_table
     - light.living_room_couch_light

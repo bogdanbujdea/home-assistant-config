@@ -13,13 +13,24 @@
     heating:
       friendly_name: 'Thermostats'
       value_template: >-
-        {{ states.sensor.power_1.state | float > 70 }}
+        {{ states.sensor.gas_heating_unit_current_power.state | float > 70 }}
       icon_template: >-
-        {% if states.sensor.power_1.state| float > 70 %}
+        {% if states.sensor.gas_heating_unit_current_power.state| float > 70 %}
           mdi:fire
         {% else %}
           mdi:power-sleep
         {% endif %}
+    treadmill:
+      friendly_name: 'Treadmill'
+      value_template: >-
+        {{ states.sensor.treadmill_current_power.state | float > 30 }}
+      icon_template: >-
+        {% if states.sensor.treadmill_current_power.state| float > 30 %}
+          mdi:run-fast
+        {% else %}
+          mdi:human
+        {% endif %}
+    
 
     office_presence:
       friendly_name: "Office presence"

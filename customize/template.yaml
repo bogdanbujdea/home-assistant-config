@@ -1,0 +1,126 @@
+- sensor:
+  - name: "Volvo Last Refuel Level"
+    unit_of_measurement: 'liters'
+    state_class: measurement
+    state: "{{ states('var.volvo_last_refuel_level') }}"
+  - name: "Volvo Last Refuel Odometer"
+    state_class: total_increasing
+    unit_of_measurement: 'km'
+    state: "{{ states('var.volvo_odometer_at_last_refuel') }}"
+  - name: "Volvo Last Refuel Price Per Liter"
+    state_class: measurement
+    unit_of_measurement: 'RON'
+    state: "{{ states('var.volvo_last_refuel_price_per_liter') }}"
+  - name: "Volvo Last Refuel Date"
+    state: "{{ states('var.volvo_last_refuel_date') }}"
+  - name: "Volvo Overall Consumption Cost"
+    unit_of_measurement: 'RON'
+    icon: mdi:cash-fast
+    state: "{{ states('sensor.volvo_energy_total_cost') | float + states('var.volvo_fuel_total_cost') | float }}"
+  - name: "Volvo Last Trip Fuel Cost"
+    state_class: measurement
+    state: >-
+      {% set fuel_consumed = states('var.volvo_last_trip_fuel') | float %}
+      {% if fuel_consumed < 0 %}
+        {% set fuel_consumed = 0 %}
+        {% set fuel_cost = 0 %}
+      {% endif %}
+      {{ (states('var.volvo_last_trip_fuel') | float * states('var.volvo_last_refuel_price_per_liter') | float ) | round(2) }}
+  - name: "Volvo Last Trip Energy Cost"
+    state_class: measurement
+    state: >-
+      {% set battery_capacity = 18.8 %}
+      {% set battery_percentage_used = states('var.volvo_last_trip_battery') | float %}
+      {% set battery_used_kwh = (battery_percentage_used / 100) * battery_capacity %}
+      {{ (battery_used_kwh * 1) | round(2) }}
+      
+  - name: "Volvo Last Refuel Range Left"
+    state_class: measurement
+    unit_of_measurement: 'km'
+    state: "{{ states('var.volvo_last_refuel_range_left') }}"
+  - name: "Volvo Last Refuel Total Cost"
+    state_class: measurement
+    unit_of_measurement: 'RON'
+    state: "{{ states('var.volvo_last_refuel_total_cost') }}"
+  - name: "Volvo Energy Total Cost"
+    state_class: measurement
+    unit_of_measurement: 'RON'
+    state: "{{ states('var.volvo_electricity_total_consumption') | float * states('var.kwh_price') | float }}"
+  - name: "Volvo Overall Price Per Kilometer"
+    unit_of_measurement: 'RON/km'
+    state_class: measurement
+    state: >-
+      {% set total_cost = states('var.volvo_fuel_total_cost') | float + states('sensor.volvo_energy_total_cost') | float %}
+      {% set total_distance = states('sensor.volvo_xc60_yv1uzh5v4p1357593_odometer') | float + states('sensor.volvo_remaining_km_summed_up') | float %}
+      {% if total_distance > 0 %}
+        {{ (total_cost / total_distance) | round(2) }}
+      {% else %}
+        0
+      {% endif %}
+  - name: "Volvo Cost Per Kilometer Since Last Charge"
+    unit_of_measurement: 'RON/km'
+    icon: 'mdi:cash-fast'
+    state_class: measurement
+    state: "{{ states('var.volvo_price_per_km_since_last_charge') | round(2) }}"
+
+  - name: "Volvo Overall Costs Since Battery Charge"
+    unit_of_measurement: 'RON'
+    icon: 'mdi:cash-fast'
+    state_class: measurement
+    state: >-
+      {% set fuel_consumed = states('var.volvo_fuel_at_last_charge') | float - states('sensor.volvo_xc60_yv1uzh5v4p1357593_fuel_level') | float %}
+      {% set total_distance = states('sensor.volvo_xc60_yv1uzh5v4p1357593_odometer') | float - states('var.volvo_odometer_at_last_charge') | float %}
+      {% set fuel_cost = fuel_consumed * states('var.volvo_last_refuel_price_per_liter') | float %}
+      {% if fuel_consumed < 0 %}
+        {% set fuel_consumed = 0 %}
+        {% set fuel_cost = 0 %}
+      {% endif %}
+      {% set kwh_used = (100 - states('var.volvo_last_battery_charge_level') | float) * 18.8 / 100 %}
+      {% set electricity_cost = kwh_used * 1 | float %} 
+      {% set total_cost = fuel_cost + electricity_cost %}
+      {% if total_distance > 0 %}
+        {{ (total_cost) | round(2) }}
+      {% else %}
+        0
+      {% endif %}
+  - name: "Volvo Latest Trip Cost Per Kilmoeter"
+    unit_of_measurement: 'RON/km'
+    state_class: measurement
+    icon: 'mdi:cash-fast'
+    state: >-
+      {% set distance = states('var.volvo_last_trip_km') | float %}
+      {% set battery_charge = states('var.volvo_stop_trip_battery') | float %}
+      {% if distance < 20 and battery_charge < 3 %}
+        {{ ((states('sensor.volvo_last_trip_fuel_cost') | float + states('sensor.volvo_last_trip_energy_cost') | float) / distance) | round(2) }}
+      {% elif distance > 0 %}
+        {{ (states('sensor.volvo_last_trip_energy_cost') | float / distance) | round(2) }}
+      {% else %}
+        0
+      {% endif %}
+
+  - name: "Volvo Electricity vs Fuel Usage"
+    unit_of_measurement: '%'
+    state_class: measurement
+    icon: 'mdi:gas-station'
+    state: >-
+      {% set total_distance = states('sensor.volvo_xc60_yv1uzh5v4p1357593_odometer') | float - states('var.volvo_odometer_at_last_charge') | float %}
+      {% set electricity_distance = states('sensor.volvo_xc60_yv1uzh5v4p1357593_odometer') | float - states('var.volvo_odometer_at_last_charge') | float %}
+      {% set fuel_distance = total_distance - electricity_distance %}
+      {% if total_distance > 0 %}
+        {{ ((electricity_distance / total_distance) * 100) | round(2) }}
+      {% else %}
+        0
+      {% endif %}
+  - name: "Volvo Fuel consumption"
+    state_class: measurement
+    unit_of_measurement: 'L/100km'
+    icon: 'mdi:gas-station'
+    state: >-
+       {% set total_distance = states('sensor.volvo_xc60_yv1uzh5v4p1357593_odometer') | float %}
+       {% set total_fuel_used = states('var.volvo_fuel_total_consumption') | float %}
+       {% if total_distance > 0 %}
+          {{ ((total_fuel_used / total_distance) * 100) | round(2) }}
+       {% else %}
+          0
+       {% endif %}
+

@@ -7,6 +7,9 @@ alexa_broadcast:
 alexa_global_whisper:
   name: Whisper
   icon: mdi:volume-medium
+volvo_xc60_alarm:
+  name: Volvo car alarm
+  icon: mdi:alarm
 sleep_mode:
   name: Sleep mode
   icon: mdi:sleep
@@ -19,6 +22,9 @@ fridge_notification:
 alexa_notifications:
   name: Alexa notifications
   icon: mdi:newspaper
+vacation_mode:
+  name: Vacation mode
+  icon: mdi:palm-tree
 auto_temperature:
   name: Maintain avg temperature around 25
   icon: mdi:thermometer
@@ -28,6 +34,9 @@ front_door_state_notifications:
 office_door_state_notifications:
   name: Office door notifications
   icon: mdi:door
+living_room_theater_mode:
+  name: Movie mode
+  icon: mdi:movie
 
 windows_state_notifications:
   name: Windows notifications
@@ -57,3 +66,15 @@ living_tv_auto_shutdown:
 show_fasting_card:
   name: Show fasting card
   icon: mdi:food
+
+volvo_is_on_a_trip:
+  name: Volvo is on a trip
+  icon: mdi:car
+
+fuel_fill:
+  name: Fuel fill
+  icon: mdi:car
+
+volvo_trip_in_progress:
+  name: "Trip in progress"  
+  icon: "mdi:car"

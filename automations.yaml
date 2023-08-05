@@ -1,15 +1,22 @@
 - id: '1567289422720'
   alias: Turn kitchen lights off when there's no movement
   trigger:
-  - entity_id: group.all_lights
-    for: 0:05:00
+  - entity_id:
+    - group.kitchen_motion
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
     platform: state
     to: 'off'
   condition: []
   action:
-  - data:
-      entity_id: light.kitchen_light, light.kitchen_lightstrip
+  - data: {}
     service: homeassistant.turn_off
+    target:
+      entity_id:
+      - light.kitchen_light
+      - light.kitchen_hue_lightstrip
   mode: single
 - id: '1567300664723'
   alias: Turn on bedroom light when it's off and movement is detected
@@ -450,3 +457,119 @@
     data: {}
     entity_id: switch.office_switch_usb,switch.office_desk_usb_ports
   mode: single
+- id: '1640296335927'
+  alias: Open the garage door after 10 minutes
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.zigbee_garage_door_sensor_contact
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+      milliseconds: 0
+  condition:
+  - condition: state
+    entity_id: binary_sensor.zigbee_garage_door_sensor_contact
+    state: 'on'
+  action:
+  - service: script.close_garage_door_with_switchbot
+  mode: restart
+- id: '1688236616126'
+  alias: HA start notification
+  description: Send notification on Home Assistant start
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition: []
+  action:
+  - service: notify.mobile_app_s22ultra
+    data:
+      title: Home Assistant is starting
+      message: Home Assistant is starting
+  mode: single
+- id: '1688251089569'
+  alias: Volvo XC60 arrived home
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - device_tracker.volvo_xc60_yv1uzh5v4p1357593_location
+    to: home
+  condition: []
+  action:
+  - service: notify.mobile_app_s22ultra
+    data:
+      message: Volvo XC60 is back home
+      title: Volvo XC60 is back home
+  - condition: numeric_state
+    entity_id: sensor.volvo_xc60_battery_charge_level
+    below: '50'
+  - service: notify.mobile_app_s22ultra
+    data:
+      title: You should charge the car
+      message: You should charge the car
+  mode: single
+- id: '1688251137924'
+  alias: Volvo XC60 left home
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - device_tracker.volvo_xc60_yv1uzh5v4p1357593_location
+    to: not_home
+  condition: []
+  action:
+  - service: notify.mobile_app_s22ultra
+    data:
+      title: Volvo XC60 left home
+      message: Volvo XC60 left home
+  mode: single
+- id: '1688251228765'
+  alias: Notify when Volvo XC60 finished charging
+  description: ''
+  trigger:
+  - type: value
+    platform: device
+    device_id: 2b06598981dafb417b11af2255143e0a
+    entity_id: sensor.volvo_xc60_battery_charge_level
+    domain: sensor
+    above: 99
+  condition: []
+  action:
+  - service: notify.mobile_app_s22ultra
+    data:
+      message: Volvo XC60 finished charging
+      title: Volvo XC60 finished charging
+  mode: single
+- id: '1688251128764'
+  alias: Update total electricity consumption
+  trigger:
+  - platform: time_pattern
+    minutes: 59
+    seconds: 59
+  action:
+  - service: var.set
+    target:
+      entity_id: var.volvo_electricity_total_consumption
+    data:
+      value: '{{ states(''var.volvo_electricity_total_consumption'') | float
+        + states(''sensor.um_garage_power_hourly'') | float }}'
+  mode: single
+- id: '1689251128764'
+  alias: Notify when car is unlocked for more than 2 minutes
+  trigger:
+    - platform: state
+      entity_id: lock.volvo_xc60_yv1uzh5v4p1357593_lock_status  # Replace with your car lock entity
+      to: 'unlocked'
+      for:
+        minutes: 2
+  action:
+    - service: notify.mobile_app_s22ultra  # Replace with your notifier name
+      data:
+        message: "Car has been unlocked for more than 2 minutes"
+        data:
+          actions:
+            - action: "LOCK_CAR"
+              title: "Lock Car"

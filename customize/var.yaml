@@ -29,6 +29,9 @@ focus_mode:
 fasting:
   friendly_name: "Fasting"
   icon: "mdi:food-off"
+last_meal_time:
+  friendly_name: "Last meal time"
+  icon: "mdi:food-off"
 
 # Todoist
 
@@ -167,3 +170,106 @@ standing_up_2_days_ago:
 standing_up_1_days_ago:
   friendly_name: Standing up 1 day ago
   icon: "mdi:human-handsup"
+
+
+# Volvo
+volvo_last_tank_fill:
+  friendly_name: Last tank fill
+  icon: "mdi:gas-station"
+volvo_last_battery_charge:
+  friendly_name: Last battery charge
+  icon: "mdi:battery-charging-high"
+volvo_last_battery_discharge:
+  friendly_name: Last battery discharge
+  icon: "mdi:battery-charging-low"
+volvo_last_trip_km:
+  friendly_name: Last trip km
+  icon: "mdi:road"
+volvo_last_trip_battery:
+  friendly_name: Last trip battery
+  icon: "mdi:battery"
+volvo_last_trip_fuel:
+  friendly_name: Last trip fuel
+  icon: "mdi:road"
+volvo_start_trip_km:
+  friendly_name: Start trip km
+  icon: "mdi:road"
+volvo_stop_trip_km:
+  friendly_name: Stop trip km
+  icon: "mdi:road"
+volvo_is_on_a_trip:
+  friendly_name: Car is on a trip
+  icon: "mdi:car"
+volvo_start_trip_fuel:
+  friendly_name: Start trip fuel
+  icon: "mdi:gas-station"
+volvo_stop_trip_fuel:
+  friendly_name: Stop trip fuel
+  icon: "mdi:gas-station"
+volvo_start_trip_battery:
+  friendly_name: Start trip battery
+  icon: "mdi:battery"
+volvo_stop_trip_battery:
+  friendly_name: Stop trip battery
+  icon: "mdi:battery"
+
+volvo_last_battery_charge_level:
+  friendly_name: Last battery charge level
+  icon: "mdi:battery"
+
+kwh_price:
+  friendly_name: "Price per kwh"
+  icon: "mdi:lightning-bolt"
+volvo_last_refuel_level:
+  friendly_name: "Last Refuel Level"
+  icon: "mdi:gas-station"
+volvo_odometer_at_last_refuel:
+  friendly_name: "Last Refuel Odometer"
+  unit_of_measurement: km
+  icon: "mdi:car-info"
+volvo_last_refuel_price_per_liter:
+  friendly_name: "Last Refuel Price Per Liter"
+  unit_of_measurement: RON/L
+  icon: "mdi:cash-usd"
+volvo_last_refuel_date:
+  friendly_name: "Last Refuel Date"
+  icon: "mdi:calendar"
+volvo_last_refuel_range_left:
+  friendly_name: "Last Refuel Range Left"
+  unit_of_measurement: km
+  icon: "mdi:road-variant"
+volvo_last_refuel_total_cost:
+  friendly_name: "Last Refuel Total Cost"
+  unit_of_measurement: RON
+  icon: "mdi:wallet"
+volvo_fuel_total_cost:
+  friendly_name: "Volvo Fuel Total Cost"
+  unit_of_measurement: RON
+  icon: "mdi:wallet"
+volvo_fuel_total_consumption:
+  friendly_name: "Fuel Total Consumption Until Now"
+  unit_of_measurement: L
+volvo_fuel_total_refill:
+  friendly_name: "Fuel Total Refill"
+  unit_of_measurement: L
+  icon: "mdi:gas-station"
+volvo_electricity_total_consumption:
+  friendly_name: "Electricity Total Consumption"
+  unit_of_measurement: kWh
+  icon: "mdi:wallet"
+volvo_odometer_at_last_charge:
+  friendly_name: "Odometer At Last Full Charge"
+  unit_of_measurement: RON
+  icon: "mdi:wallet"
+volvo_fuel_at_last_charge:
+  friendly_name: "Fuel Level At Last Full Charge"
+  unit_of_measurement: L
+  icon: "mdi:wallet"
+volvo_price_per_km_since_last_charge:
+  friendly_name: "Price Per Km Since Last Charge"
+  unit_of_measurement: L
+  icon: "mdi:wallet"
+volvo_price_per_km_overall:
+  friendly_name: "Price Per Km Overall"
+  unit_of_measurement: L
+  icon: "mdi:wallet"

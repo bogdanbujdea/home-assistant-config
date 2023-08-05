@@ -7,3 +7,7 @@ last_meal:
   name: Last meal
   has_date: true
   has_time: true
+gas_fill:
+    name: Gas fill
+    has_date: true
+    has_time: true

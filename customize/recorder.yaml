@@ -1,6 +1,9 @@
 db_url: !secret mariadb_url
 purge_keep_days: 15
 exclude:
+  entities:
+    - sensor.volvo_xc60_yv1uzh5v4p1357593_estimated_charging_finish_time
+    - sensor.volvo_xc60_yv1uzh5v4p1357593_last_data_update
   entity_globs:
     - sensor.*motion_last_detected*
     - sensor.*motion_query*
@@ -11,14 +14,43 @@ include:
     - person
     - var
   entities:
+    - switch.shelly_office_pc_plug
+    - switch.shelly_office_desk_power
+    - sensor.shelly_desk_energy
+    - sensor.shelly_desk_power
+    - sensor.shelly_desk_power
+    - camera.garage_camera
+    - sensor.s22bogdan_last_notification
+    - sensor.shelly_office_desk_power
+    - sensor.shelly_office_pc_plug
+    - sensor.shelly_pc_energy
+    - sensor.shelly_pc_power
+    - sensor.gosund_office_energy_power
+    - sensor.galaxy_s9_phone_state
+    - sensor.garage_power_strip_energy_power
+    - switch.bedroom_motion_detection
     - sensor.um_apartment_power_hourly
     - sensor.um_apartment_power_daily
     - sensor.um_apartment_power_monthly
+    - sensor.um_garage_power_hourly
+    - sensor.um_garage_power_daily
+    - sensor.um_garage_power_monthly
+    - sensor.total_sleep_yesterday
+    - sensor.withings_weight_kg_bogdan
+    - sensor.withings_fat_ratio_pct_bogdan
+    - sensor.withings_muscle_mass_kg_bogdan
+    - sensor.withings_fat_mass_kg_bogdan
+    - sensor.withings_fat_free_mass_kg_bogdan
+    - sensor.withings_bone_mass_kg_bogdan
+    - sensor.sleep_quality
     - sensor.netatmo_indoor_co2
     - sensor.shelly_current_consumption
     - sensor.xiaomi_airpurifier_air_quality_pm25
     - binary_sensor.fridge_door
+    - sensor.office_desk_plug_energy_power
     - binary_sensor.heating
+    - binary_sensor.treadmill
+    - sensor.car_charger_power
     - binary_sensor.msi_power_status
     - binary_sensor.office_chair
     - binary_sensor.office_desk_sensor
@@ -48,13 +80,14 @@ include:
     - sensor.dryer_2
     - sensor.elena_status
     - sensor.fasting_query
-    - sensor.fasting_time
+    - sensor.intermittent_fasting_time
     - sensor.fridge_opened_count
     - sensor.gas_cost
     - binary_sensor.zigbee_garage_door_sensor_contact
     - sensor.garage_temperature
     - sensor.hallway_temperature
     - sensor.heating_power
+    - sensor.power_1
     - sensor.host_cpu_temperature
     - sensor.last_expense
     - sensor.power_cost
@@ -84,6 +117,7 @@ include:
     - switch.office_desk_phone_charger
     - switch.office_desk_plug_3
     - switch.office_desk_usb_ports
+    - sensor.power_2
     - switch.office_odorizer
     - switch.office_power
     - switch.office_switch_1
@@ -103,10 +137,15 @@ include:
     - sensor.sitting_down_time_today
     - sensor.office_position
     - sensor.galaxy_s9_last_notification
+    - sensor.last_trip_fuel_price
     - binary_sensor.vibration_sensor
+    - device_tracker.volvo
   entity_globs:
     - sensor.*temperature*
+    - lock.*volvo*
+    - device_tracker.*volvo*
     - sensor.*detected*
+    - switch.*philips*
     - sensor.*humidity*
     - sensor.adguard*
     - sensor.*today*
@@ -119,6 +158,10 @@ include:
     - sensor.*fridge*
     - sensor.*todoist*
     - sensor.um_*
+    - sensor.*volvo*
+    - sensor.*elena*
+    - switch.*volvo*
+    - binary_sensor.*volvo*
 
 
 #  entities:
@@ -187,13 +230,12 @@ include:
 #    - sensor.date_time_iso
 #    - sensor.date_time_utc
 #    - sensor.time
-#    - sensor.fasting_time
+#    - sensor.intermittent_fasting_time
 #    - switch.power_3
 #    - switch.power_2
 #    - switch.power_1
 #    - sensor.memory_use_percent
 #    - binary_sensor.fire_hd_tablet
-#    - sensor.power_1
 #    - sensor.power_2
 #    - sensor.power_3
 #    - sensor.curve_email

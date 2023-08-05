@@ -1,13 +1,56 @@
 include:
   entities:
+    - sensor.gosund_office_energy_power
     - sensor.office_position
-    - sensor.galaxy_s9_last_notification
+    - sensor.s22bogdan_last_notification
+    - sensor.power_1
+    - sensor.power_2
+    - sensor.treadmill_current_power
+    - sensor.sleep_quality
+    - sensor.car_charger_power
+    - sensor.heating_power
+    - sensor.withings_weight_kg_bogdan
+    - sensor.withings_fat_ratio_pct_bogdan
+    - sensor.withings_muscle_mass_kg_bogdan
+    - sensor.withings_fat_mass_kg_bogdan
+    - sensor.withings_fat_free_mass_kg_bogdan
+    - sensor.withings_bone_mass_kg_bogdan
+    - sensor.total_sleep_yesterday
+    - sensor.treadmill
+    - sensor.office_desk_plug_energy_power
+    - switch.shelly_office_pc_plug
+    - switch.shelly_office_desk_power
+    - sensor.shelly_desk_energy
+    - sensor.shelly_desk_power
+    - sensor.shelly_office_desk_power
+    - sensor.shelly_office_pc_plug
+    - sensor.shelly_pc_energy
+    - sensor.shelly_pc_power
+    - sensor.um_garage_power_hourly
+    - camera.garage_camera
+    - sensor.um_garage_power_daily
+    - sensor.um_garage_power_monthly
+    - switch.bedroom_motion_detection
+    - sensor.um_garage_power_monthly
   domains:
     - var
     - light
   entity_globs:
     - binary_sensor.*_door*
+    - lock.*volvo*
     - binary_sensor.*_window*
     - binary_sensor.*motion*
+    - device_tracker.*volvo*
     - sensor.*today*
+    - sensor.*elena*
+    - sensor.*volvo*
+    - sensor.last_trip*
+    - switch.*volvo*
+    - switch.*philips*
+    - binary_sensor.*volvo*
     - sensor.*this_month*
+
+exclude:
+  entities:
+    - sensor.volvo_xc60_yv1uzh5v4p1357593_last_data_update
+    - sensor.volvo_xc60_yv1uzh5v4p1357593_estimated_charging_finish_time

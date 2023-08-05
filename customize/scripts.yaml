@@ -151,7 +151,7 @@ living_room_cooling:
     entity_id: climate.living_room_ac
     service: climate.set_hvac_mode
   - data:
-      fan_mode: Turbo
+      fan_mode: Boost
     entity_id: climate.living_room_ac
     service: climate.set_fan_mode
   - data:
@@ -285,6 +285,16 @@ open_gate:
   mode: single
   sequence:
   - service: rest_command.open_the_gate
+open_garage_door:
+  alias: Open garage door
+  mode: single
+  sequence:
+  - service: rest_command.open_garage_door
+close_garage_door:
+  alias: Close garage door
+  mode: single
+  sequence:
+  - service: rest_command.close_garage_door
 turn_on_power_saver:
   alias: Turn on power saver
   mode: single
@@ -385,3 +395,38 @@ my_computer_lock:
         of notification using IOT Link", "launchParams": "toast://open/https://iotlink.gitlab.io"
         }'
   mode: single
+focus_lights:
+  alias: Office focus
+  sequence:
+  - service: light.turn_on
+    data:
+      color_name: white
+      brightness: 255
+      entity_id: group.office_focus_lights
+
+update_fuel_fill_vars:
+  sequence:
+    - service: var.set
+      data:
+        entity_id: var.volvo_last_refuel_level
+        value: "{{ states('input_number.fuel_bought') }}"
+    - service: var.set
+      data:
+        entity_id: var.volvo_odometer_at_last_refuel
+        value: "{{ states('input_number.fuel_fill_odometer') }}"
+    - service: var.set
+      data:
+        entity_id: var.volvo_last_refuel_price_per_liter
+        value: "{{ states('input_number.price_per_liter') }}"
+    - service: var.set
+      data:
+        entity_id: var.volvo_last_refuel_date
+        value: "{{ states('input_datetime.gas_fill') }}"
+    - service: var.set
+      data:
+        entity_id: var.volvo_last_refuel_range_left
+        value: "{{ states('input_number.distance_to_empty') }}"
+    - service: var.set
+      data:
+        entity_id: var.volvo_last_refuel_total_cost
+        value: "{{ states('input_number.fuel_bought')|float * states('input_number.price_per_liter')|float }}"

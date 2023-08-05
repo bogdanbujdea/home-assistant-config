@@ -1,12 +1,23 @@
-include:
-  domains:
-    - switch
-    - light
-    - var
-    - person
-    - input_boolean
-    - automation
-    - script
-    - binary_sensor
-  entities:
-    - sensor.galaxy_s9_last_notification
+#include:
+#  domains:
+#    - switch
+#    - light
+#    - var
+#    - person
+#    - input_boolean
+#    - automation
+#    - script
+#    - binary_sensor
+#  entities:
+#    - sensor.sleep_quality
+#    - sensor.withings_weight_kg_bogdan
+#    - switch.shelly_office_pc_plug
+#    - switch.shelly_office_desk_power
+#    - sensor.shelly_desk_energy
+#    - sensor.shelly_desk_power
+#    - sensor.shelly_office_desk_power
+#    - sensor.shelly_office_pc_plug
+#    - sensor.shelly_pc_energy
+#    - sensor.shelly_pc_power
+
+

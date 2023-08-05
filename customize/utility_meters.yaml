@@ -3,12 +3,12 @@ um_power_heating_monthly:
   source: sensor.heating_power
   cycle: monthly
 
-# Washer
-um_power_washer_daily:
-  source: sensor.washer_power
+# Treadmill
+um_power_treadmill_daily:
+  source: sensor.treadmill_current_power
   cycle: daily
-um_power_washer_monthly:
-  source: sensor.washer_power
+um_power_treadmill_monthly:
+  source: sensor.treadmill_current_power
   cycle: monthly
 
 # Office
@@ -22,6 +22,28 @@ um_office_monthly:
   source: sensor.office_power_sensor
   cycle: monthly
 
+# Office PC
+um_pc_office_hourly:
+  source: sensor.shelly_pc_power_sensor
+  cycle: hourly
+um_pc_office_daily:
+  source: sensor.shelly_pc_power_sensor
+  cycle: daily
+um_pc_office_monthly:
+  source: sensor.shelly_pc_power_sensor
+  cycle: monthly
+
+# Office Desk
+um_desk_office_hourly:
+  source: sensor.shelly_desk_power_sensor
+  cycle: hourly
+um_desk_office_daily:
+  source: sensor.shelly_desk_power_sensor
+  cycle: daily
+um_desk_office_monthly:
+  source: sensor.shelly_desk_power_sensor
+  cycle: monthly
+
 um_fridge_daily_power:
   source: sensor.fridge_power_sensor
   cycle: daily
@@ -29,15 +51,15 @@ um_fridge_monthly_power:
   source: sensor.fridge_power_sensor
   cycle: monthly
 
-# Living room
-um_living_room_hourly:
-  source: sensor.living_room_power_sensor
+# Garage
+um_garage_power_hourly:
+  source: sensor.garage_power_sensor
   cycle: hourly
-um_living_room_daily:
-  source: sensor.living_room_power_sensor
+um_garage_power_daily:
+  source: sensor.garage_power_sensor
   cycle: daily
-um_living_room_monthly:
-  source: sensor.living_room_power_sensor
+um_garage_power_monthly:
+  source: sensor.garage_power_sensor
   cycle: monthly
 
 # Apartment

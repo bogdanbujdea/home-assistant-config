@@ -1,0 +1,29 @@
+focus_light:
+  alias: Focus Light
+  sequence:
+  - service: light.turn_on
+    data:
+      color_name: white
+      brightness: 255
+    target:
+      device_id:
+      - 6a12c1c6f786280abeca7859ba176cd4
+      - dd6213053626ca382a76137e8a6c3706
+      - b96e853f219a589126789459ba38a13b
+  mode: single
+  icon: mdi:alarm-light
+focus_lights:
+  alias: Focus lights
+  sequence:
+  - service: light.turn_on
+    data:
+      color_name: white
+      brightness: 255
+    target:
+      device_id:
+      - 6a12c1c6f786280abeca7859ba176cd4
+      - dd6213053626ca382a76137e8a6c3706
+      - b96e853f219a589126789459ba38a13b
+      - d6425afa9d0c4d0c825bc31105706a84
+  mode: single
+  icon: mdi:alarm-light

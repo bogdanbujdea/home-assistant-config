@@ -32,7 +32,7 @@ pluralsight_goal_percent:
   name: Pluralsight goal
   icon: mdi:book
   min: 0
-  max: 100
+  max: 1000
   step: 1
 
 abs_count:
@@ -40,4 +40,33 @@ abs_count:
   icon: mdi:human
   min: 0
   max: 10000
+  step: 1
+
+price_per_liter:
+  name: Gas price
+  icon: mdi:gas
+  min: 6
+  max: 9
+  step: 0.01
+
+fuel_bought:
+  name: Fuel
+  icon: mdi:gas
+  min: 5
+  max: 71
+  step: 0.1
+
+fuel_fill_odometer:
+  name: Fuel fill odometer
+  icon: mdi:gas
+  min: 0
+  max: 10000
+  step: 1
+
+
+distance_to_empty:
+  name: Range left km
+  icon: mdi:gas
+  min: 0
+  max: 600
   step: 1

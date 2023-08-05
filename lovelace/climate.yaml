@@ -3,7 +3,7 @@ entities:
   #- climate.apartment_thermostat
   - binary_sensor.heating
   - switch.heating
-  #- sensor.power_1
+  #- sensor.car_charger_power
   #- switch.apartment_cooling
   #- switch.living_room_cooling
   #- switch.bedroom_cooling

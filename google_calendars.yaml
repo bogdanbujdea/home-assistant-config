@@ -1,0 +1,49 @@
+
+- cal_id: en.romanian#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: holidays_in_romania
+    ignore_availability: true
+    name: Holidays in Romania
+    track: true
+
+- cal_id: 3l3q7uinn1avu57v7vb10k7cck@group.calendar.google.com
+  entities:
+  - device_id: daily_tasks
+    ignore_availability: true
+    name: Daily tasks
+    track: true
+
+- cal_id: ro.romanian#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: sarbatori_in_romania
+    ignore_availability: true
+    name: "S\u0103rb\u0103tori \xEEn Rom\xE2nia"
+    track: true
+
+- cal_id: bujdeabogdan@gmail.com
+  entities:
+  - device_id: bujdeabogdan_gmail_com
+    ignore_availability: true
+    name: bujdeabogdan@gmail.com
+    track: true
+
+- cal_id: g1lduksq7mdolq0geq2fr1bikc@group.calendar.google.com
+  entities:
+  - device_id: skedpal
+    ignore_availability: true
+    name: SkedPal
+    track: true
+
+- cal_id: 2qi17qfff16r3hhkosrn659eio@group.calendar.google.com
+  entities:
+  - device_id: bogdan_elena
+    ignore_availability: true
+    name: Bogdan-Elena
+    track: true
+
+- cal_id: family10032656481953179053@group.calendar.google.com
+  entities:
+  - device_id: family
+    ignore_availability: true
+    name: Family
+    track: true

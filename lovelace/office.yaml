@@ -5,7 +5,7 @@
     - binary_sensor.office_chair
     - light.office_lightstrip
     - light.sonoffofficelight  
-    - switch.msi_laptop
+    - switch.bogdanpc
     - switch.office_switch_1
     - switch.office_switch_2
     - switch.office_switch_3

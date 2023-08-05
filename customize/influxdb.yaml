@@ -12,6 +12,31 @@ include:
     - person
     - var
   entities:
+    - sensor.um_garage_power_hourly
+    - sensor.um_garage_power_daily
+    - sensor.um_garage_power_monthly
+    - switch.shelly_office_pc_plug
+    - sensor.withings_weight_kg_bogdan
+    - sensor.withings_fat_ratio_pct_bogdan
+    - sensor.withings_muscle_mass_kg_bogdan
+    - sensor.withings_fat_mass_kg_bogdan
+    - sensor.withings_fat_free_mass_kg_bogdan
+    - sensor.withings_bone_mass_kg_bogdan
+    - switch.shelly_office_desk_power
+    - sensor.sleep_quality
+    - sensor.total_sleep_yesterday
+    - sensor.shelly_desk_energy
+    - sensor.shelly_desk_power
+    - sensor.shelly_office_desk_power
+    - sensor.shelly_office_pc_plug
+    - sensor.shelly_pc_energy
+    - sensor.shelly_pc_power
+    - sensor.gosund_office_energy_power
+    - sensor.garage_power_strip_energy_power
+    - sensor.last_trip_fuel_price
+    - sensor.car_charger_power
+    - sensor.power_2
+    - sensor.treadmill_current_power
     - var.pluralsight_minutes
     - var.pluralsight_weekly_goal
     - sensor.um_apartment_power_hourly
@@ -22,6 +47,7 @@ include:
     - sensor.xiaomi_airpurifier_air_quality_pm25
     - binary_sensor.fridge_door
     - binary_sensor.heating
+    - binary_sensor.treadmill
     - binary_sensor.msi_power_status
     - binary_sensor.office_chair
     - binary_sensor.office_desk_sensor
@@ -51,12 +77,13 @@ include:
     - sensor.dryer_2
     - sensor.elena_status
     - sensor.fasting_query
-    - sensor.fasting_time
+    - sensor.intermittent_fasting_time
     - sensor.fridge_opened_count
     - sensor.gas_cost
     - binary_sensor.zigbee_garage_door_sensor_contact
     - sensor.garage_temperature
     - sensor.hallway_temperature
+    - sensor.power_1
     - sensor.heating_power
     - sensor.host_cpu_temperature
     - sensor.power_cost
@@ -74,21 +101,33 @@ include:
     - sensor.sitting_down_time_today
     - sensor.office_position
     - sensor.galaxy_s9_last_notification
+    - device_tracker.volvo
   entity_globs:
     - sensor.*temperature*
+    - lock.*volvo*
     - sensor.*humidity*
     - sensor.adguard*
     - sensor.*today*
     - sensor.*this_month*
     - sensor.*steps*
+    - switch.*philips*
     - sensor.*fridge*
     - sensor.*todoist*
     - sensor.um_*
+    - sensor.last_trip*
     - sensor.*power*
     - sensor.*energy*
     - sensor.*gas*
     - sensor.*consumption*
+    - switch.*volvo*
+    - sensor.*elena*
+    - sensor.*volvo*
+    - binary_sensor.*volvo*
+    - device_tracker.*volvo*
 exclude:
+  entities:
+    - sensor.volvo_xc60_yv1uzh5v4p1357593_estimated_charging_finish_time
+    - sensor.volvo_xc60_yv1uzh5v4p1357593_last_data_update
   entity_globs:
     - sensor.*voltage*
     - sensor.*5rf0t10*

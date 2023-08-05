@@ -1,0 +1,10 @@
+CA:DA:A4:C1:38:8C:BA:A3:
+  set_brightness_max: 100
+  get_brightness_max: 100
+  before_set_brightness_turn_on: false
+  config_offline_is_off: false
+F8:6F:A4:C1:38:A5:94:82:
+  set_brightness_max:
+  get_brightness_max: 100
+  before_set_brightness_turn_on: false
+  config_offline_is_off: false

@@ -9,3 +9,12 @@ turn_on_focus_mode:
 turn_off_focus_mode:
   method: POST
   url: !secret focus_mode_off_url
+
+open_garage_door:
+  url: 'http://bbchome.duckdns.org:8123/api/webhook/open-garage-door'
+  method: POST
+
+
+close_garage_door:
+  url: 'http://bbchome.duckdns.org:8123/api/webhook/garage-door-closed'
+  method: POST

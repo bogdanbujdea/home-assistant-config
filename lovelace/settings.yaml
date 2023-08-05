@@ -7,9 +7,11 @@ cards:
       entities:
       - input_boolean.alexa_global_whisper
       - input_boolean.sleep_mode
+      - input_boolean.vacation_mode
       - input_boolean.guest_mode
       - input_boolean.fridge_notification
       - input_boolean.alexa_notifications
+      - input_boolean.front_door_state_notifications
       show_header_toggle: false
       title: Alexa
     type: vertical-stack

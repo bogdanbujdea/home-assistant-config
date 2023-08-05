@@ -109,10 +109,10 @@ cards:
             name: Office
           - entity: sensor.living_room_power
             name: Living room
-          - entity: sensor.power_1
+          - entity: sensor.car_charger_power
             name: Heating
-          - entity: sensor.power_2
-            name: Washer
+          - entity: sensor.treadmill_current_power
+            name: Treadmill
           - entity: sensor.power_3
             name: Fridge
           - entity: sensor.unmeasured_power
@@ -192,6 +192,8 @@ cards:
             name: Garage HA host temperature
           - entity: sensor.bedroom_camera_temperature
             name: Bedroom camera temperature
+          - entity: sensor.asusworklaptop_temperature
+            name: Asus Laptop temperature
           - entity: sensor.msi_laptop_temperature
             name: MSI Laptop temperature
       - !include doors.yaml

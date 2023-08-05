@@ -18,7 +18,7 @@
       entities:
       - entity: sensor.power_consumption_summed
         name: Total power consumption
-      - entity: sensor.power_1
+      - entity: sensor.car_charger_power
         name: Power 1
       - entity: sensor.power_2
         name: Power 2
@@ -27,7 +27,7 @@
     - switch.power_1
     - switch.power_2
     - switch.power_3
-    - sensor.power_1
+    - sensor.car_charger_power
     - sensor.power_2
     - sensor.power_3
     - sensor.current_power_consumption

@@ -53,10 +53,10 @@ cards:
         name: Office
       - entity: sensor.living_room_power
         name: Living room
-      - entity: sensor.power_1
+      - entity: sensor.car_charger_power
         name: Heating
-      - entity: sensor.power_2
-        name: Washer
+      - entity: sensor.treadmill_current_power
+        name: Treadmill
       - entity: sensor.power_3
         name: Fridge
       - entity: sensor.office_desk_plug_energy_power
@@ -79,7 +79,7 @@ cards:
       show_state: false
       entities:
         - switch.power_1
-        - switch.power_2
+        - switch.treadmill_current_power
         - switch.power_3
         - switch.office_switch_1
         - switch.office_switch_2
