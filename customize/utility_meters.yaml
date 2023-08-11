@@ -116,12 +116,12 @@ um_daily_gas_meter:
 
 # Car
 
-um_volvo_daily_electricity_cost:
-  source: sensor.volvo_battery_consumption_until_now
+um_volvo_daily_battery_usage:
+  source: sensor.volvo_overall_battery_consumption
   cycle: daily
 
-um_volvo_monthly_electricity_cost:
-  source: sensor.volvo_battery_consumption_until_now
+um_volvo_monthly_battery_usage:
+  source: sensor.volvo_overall_battery_consumption
   cycle: monthly
 
 um_volvo_daily_fuel:

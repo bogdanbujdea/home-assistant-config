@@ -54,6 +54,10 @@
     state_class: measurement
     unit_of_measurement: 'kWh'
     state: "{{ (states('var.volvo_total_battery_consumption') | float) | round(2) }}"
+  - name: "Volvo Overall Battery Consumption"
+    state_class: measurement
+    unit_of_measurement: 'kWh'
+    state: "{{ (states('var.volvo_total_battery_consumption') | float) | round(2) }}"
   - name: "Volvo Overall Price Per Kilometer"
     unit_of_measurement: 'RON/km'
     state_class: measurement
